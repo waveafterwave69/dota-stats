@@ -1,0 +1,17 @@
+:root {
+    --container-width: 1405px;
+    --container-padding-x: 24px;
+    --container-padding-mobile-x: 16px;
+
+    --font-family: 'Inter', sans-serif;
+
+    --color-white: #ffffff;
+    --color-red-dark: #A31010;
+    --color-red: #FE3030;
+    --color-grey: #262626;
+    --color-green: #3EC347;
+    --color-black-light: #101010;
+    --color-black: #090909;
+
+    --transition-duration: 0.2s;
+}
