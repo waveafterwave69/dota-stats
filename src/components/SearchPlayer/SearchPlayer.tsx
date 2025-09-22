@@ -3,10 +3,12 @@ import dotaLogo from '../../assets/dota-logo.svg'
 import searchImg from '../../assets/search.svg'
 import { useState } from 'react'
 import usePlayer from '../../hooks/usePlayer'
+import { useNavigate } from 'react-router'
 
 const SearchPlayer: React.FC = () => {
     const [searchValue, setSearchValue] = useState<string>('')
     const { getPlayerInfo, error } = usePlayer()
+    const navigate = useNavigate()
 
     const handleValue = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.target.value)
@@ -18,7 +20,11 @@ const SearchPlayer: React.FC = () => {
             return
         }
 
-        await getPlayerInfo(searchValue)
+        const success = await getPlayerInfo(searchValue)
+
+        if (success) {
+            navigate(`/player/${searchValue}`)
+        }
     }
 
     return (

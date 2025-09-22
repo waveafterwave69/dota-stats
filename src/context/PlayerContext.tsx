@@ -6,7 +6,7 @@ interface PlayerContextValue {
     playerInfo: PlayerInfo | null
     loading: boolean
     error: string | null
-    getPlayerInfo: (playerId: string) => Promise<void>
+    getPlayerInfo: (playerId: string) => Promise<any>
 }
 
 export const PlayerContext = createContext<PlayerContextValue | null>(null)
@@ -33,6 +33,7 @@ const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
             }
 
             setPlayerInfo(response.data)
+            return response
         } catch (error: any) {
             console.error(error.message)
             setError(error.message)

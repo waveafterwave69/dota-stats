@@ -1,0 +1,17 @@
+.header {
+    background-color: var(--color-black);
+    padding: 30px 0px;
+}
+
+.header__logo {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    font-weight: 600;
+    font-size: 32px;
+    color: var(--color-white);
+}
+
+.header__logo img {
+    width: 50px;
+}

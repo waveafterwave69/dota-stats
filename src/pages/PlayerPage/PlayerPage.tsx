@@ -1,5 +1,11 @@
+import PlayerPromo from '../../components/PlayerPromo/PlayerPromo'
+
 const PlayerPage: React.FC = () => {
-    return <></>
+    return (
+        <>
+            <PlayerPromo />
+        </>
+    )
 }
 
 export default PlayerPage

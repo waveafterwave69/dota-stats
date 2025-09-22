@@ -8,6 +8,6 @@ export const routesConfig = [
     },
     {
         page: <PlayerPage />,
-        url: '/player:id',
+        url: '/player/:id',
     },
 ]
