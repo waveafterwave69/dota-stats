@@ -1,6 +1,6 @@
 .promo {
     background-color: rgba(38, 38, 38, 0.356);
-    padding: 30px 30px 50px;
+    padding: 30px 50px 50px;
 }
 
 .promo__row {
@@ -64,4 +64,159 @@
 .winrate {
     margin-top: 10px;
     font-size: 18px;
+}
+
+@media (max-width: 1024px) {
+    .promo {
+        padding: 30px 30px 40px;
+    }
+
+    .promo__profile {
+        column-gap: 20px;
+    }
+
+    .text__contet {
+        row-gap: 5px;
+    }
+
+    .text {
+        font-size: 18px;
+    }
+
+    .text__name {
+        margin-bottom: 5px;
+        font-size: 36px;
+    }
+
+    .ifno {
+        row-gap: 10px;
+    }
+
+    .rank {
+        row-gap: 10px;
+        font-size: 20px;
+    }
+
+    .rank__img {
+        width: 80px;
+    }
+
+    .win__lose {
+        font-size: 18px;
+    }
+
+    .winrate {
+        margin-top: 10px;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    .promo {
+        padding: 20px 20px 30px;
+    }
+
+    .promo__profile {
+        column-gap: 20px;
+    }
+
+    .promo__profile img {
+        width: 120px;
+    }
+
+    .text__contet {
+        row-gap: 5px;
+    }
+
+    .text {
+        font-size: 16px;
+    }
+
+    .text__name {
+        margin-bottom: 5px;
+        font-size: 32px;
+    }
+
+    .promo__row {
+        row-gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .ifno {
+        row-gap: 10px;
+        align-items: flex-start;
+    }
+
+    .rank {
+        row-gap: 10px;
+        font-size: 18px;
+    }
+
+    .rank__img {
+        width: 70px;
+    }
+
+    .win__lose {
+        font-size: 16px;
+    }
+
+    .winrate {
+        margin-top: 10px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 425px) {
+    .promo {
+        padding: 15px 15px 25px;
+    }
+
+    .promo__profile {
+        column-gap: 15px;
+    }
+
+    .promo__profile img {
+        width: 100px;
+    }
+
+    .text__contet {
+        row-gap: 5px;
+    }
+
+    .text {
+        font-size: 16px;
+    }
+
+    .text__name {
+        margin-bottom: 5px;
+        font-size: 28px;
+    }
+
+    .promo__row {
+        row-gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .ifno {
+        row-gap: 10px;
+        align-items: flex-start;
+    }
+
+    .rank {
+        row-gap: 5px;
+        font-size: 18px;
+    }
+
+    .rank__img {
+        width: 65px;
+    }
+
+    .win__lose {
+        font-size: 16px;
+    }
+
+    .winrate {
+        margin-top: 0px;
+        font-size: 16px;
+    }
 }

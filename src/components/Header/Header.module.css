@@ -16,3 +16,48 @@
 .header__logo img {
     width: 50px;
 }
+
+@media (max-width: 1024px) {
+    .header {
+        padding: 20px 0px;
+    }
+
+    .header__logo {
+        column-gap: 10px;
+        font-size: 32px;
+    }
+
+    .header__logo img {
+        width: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 20px 0px;
+    }
+
+    .header__logo {
+        column-gap: 6px;
+        font-size: 30px;
+    }
+
+    .header__logo img {
+        width: 35px;
+    }
+}
+
+@media (max-width: 425px) {
+    .header {
+        padding: 20px 0px;
+    }
+
+    .header__logo {
+        column-gap: 5px;
+        font-size: 22px;
+    }
+
+    .header__logo img {
+        width: 30px;
+    }
+}

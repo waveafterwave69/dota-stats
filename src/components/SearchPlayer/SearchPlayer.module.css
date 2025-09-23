@@ -68,4 +68,142 @@
 .error {
     margin-top: 20px;
     color: var(--color-red);
+    text-align: center;
+}
+
+@media (max-width: 1024px) {
+    .search {
+        margin-top: 100px;
+    }
+
+    .search__logo {
+        column-gap: 10px;
+        margin-bottom: 25px;
+    }
+
+    .search__logo h1 {
+        font-size: 54px;
+    }
+
+    .search__logo img {
+        width: 55px;
+    }
+
+    .search__input {
+        width: 600px;
+        padding: 12px 22px;
+        margin-bottom: 25px;
+    }
+
+    .search__input input {
+        width: 100%;
+        font-size: 20px;
+    }
+
+    .search__input input::placeholder {
+        font-size: 20px;
+    }
+
+    .search__button {
+        padding: 10px;
+        width: 270px;
+        font-size: 26px;
+    }
+
+    .error {
+        margin-top: 20px;
+        color: var(--color-red);
+    }
+}
+
+@media (max-width: 768px) {
+    .search {
+        margin-top: 80px;
+    }
+
+    .search__logo {
+        column-gap: 8px;
+        margin-bottom: 25px;
+    }
+
+    .search__logo h1 {
+        font-size: 42px;
+    }
+
+    .search__logo img {
+        width: 40px;
+    }
+
+    .search__input {
+        width: 380px;
+        padding: 10px 20px;
+        margin-bottom: 20px;
+    }
+
+    .search__input input {
+        width: 100%;
+        font-size: 20px;
+    }
+
+    .search__input input::placeholder {
+        font-size: 20px;
+    }
+
+    .search__button {
+        padding: 10px;
+        width: 250px;
+        font-size: 24px;
+    }
+
+    .error {
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 425px) {
+    .search {
+        margin-top: 70px;
+    }
+
+    .search__logo {
+        column-gap: 8px;
+        margin-bottom: 20px;
+    }
+
+    .search__logo h1 {
+        font-size: 38px;
+    }
+
+    .search__logo img {
+        width: 40px;
+    }
+
+    .search__input {
+        width: 300px;
+        padding: 10px 15px;
+        margin-bottom: 20px;
+    }
+
+    .search__input img {
+        width: 30px;
+    }
+
+    .search__input input {
+        width: 100%;
+        font-size: 18px;
+    }
+
+    .search__input input::placeholder {
+        font-size: 18px;
+    }
+
+    .search__button {
+        padding: 7px;
+        width: 200px;
+        font-size: 20px;
+    }
+
+    .error {
+        margin-top: 15px;
+    }
 }
