@@ -1,55 +1,8 @@
-import { useEffect, useState } from 'react'
-import usePlayer from '../../hooks/usePlayer'
+import useRank from '../../hooks/useRank'
 import styles from './PlayerPromo.module.css'
-import { getWinAndLose } from '../../helpers/playerHelpers'
-import type { WinLose } from '../../types/playerTypes'
-import { medals, unrankedMedal } from '../../data/medalsData'
 
 const PlayerPromo: React.FC = () => {
-    const { playerInfo } = usePlayer()
-    const [winLose, setWinLose] = useState<WinLose>()
-    const [winRate, setWinRate] = useState<number>()
-    const [tier, setTier] = useState<number>(0)
-    const [stars, setStars] = useState<number>(0)
-    const [rankMedal, setRankMedal] = useState<string>('')
-    const [rankName, setRankName] = useState<string>('')
-
-    const profile = playerInfo?.profile
-    const rankTier: number | null | undefined = playerInfo?.rank_tier
-    const rankMmr: number | undefined = playerInfo?.computed_rating
-
-    useEffect(() => {
-        const winAndLose = async () => {
-            const data = await getWinAndLose(profile?.account_id)
-
-            setWinLose(data)
-        }
-
-        winAndLose()
-
-        if (rankTier && rankMmr) {
-            setTier(Math.floor(rankTier / 10) - 1)
-            setStars(Math.floor(rankTier % 10))
-        }
-    }, [])
-
-    useEffect(() => {
-        if (tier === 0) {
-            setRankName(unrankedMedal.name)
-            setRankMedal(unrankedMedal.img)
-        } else {
-            setRankName(medals[tier][stars]?.name)
-            setRankMedal(medals[tier][stars]?.img)
-        }
-    }, [tier, stars])
-
-    useEffect(() => {
-        if (winLose) {
-            const currWinRate =
-                (winLose.win / (winLose.win + winLose.lose)) * 100
-            setWinRate(Number(String(currWinRate).slice(0, 5)))
-        }
-    }, [winLose])
+    const { profile, rankMedal, rankName, winRate, winLose } = useRank()
 
     return (
         <>
