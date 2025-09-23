@@ -14,7 +14,9 @@ const SearchPlayer: React.FC = () => {
         setSearchValue(e.target.value)
     }
 
-    const onSubmit = async () => {
+    const onSubmit = async (e: any) => {
+        e.preventDefault()
+
         if (!/^\d+$/.test(searchValue)) {
             alert('Пожалуйста, введите числовой Steam ID.')
             return
@@ -34,7 +36,7 @@ const SearchPlayer: React.FC = () => {
                     <h1>DOTA STATS</h1>
                     <img src={dotaLogo} alt="dota2" />
                 </div>
-                <form className={styles.search__form}>
+                <form className={styles.search__form} onSubmit={onSubmit}>
                     <div className={styles.search__input}>
                         <input
                             type="text"

@@ -1,92 +1,104 @@
+import { useEffect, useState } from 'react'
 import usePlayer from '../../hooks/usePlayer'
 import styles from './PlayerPromo.module.css'
+import { getWinAndLose } from '../../helpers/playerHelpers'
+import type { WinLose } from '../../types/playerTypes'
+import { medals } from '../../data/medalsData'
 
 const PlayerPromo: React.FC = () => {
-    const { playerInfo, loading, error } = usePlayer()
-
-    console.log(playerInfo)
+    const { playerInfo } = usePlayer()
+    const [winLose, setWinLose] = useState<WinLose>()
+    const [winRate, setWinRate] = useState<number>()
+    const [tier, setTier] = useState<number>(0)
+    const [stars, setStars] = useState<number>(0)
+    const [rankMedal, setRankMedal] = useState<string>('')
+    const [rankName, setRankName] = useState<string>('')
 
     const profile = playerInfo?.profile
-    const rankTier = playerInfo?.rank_tier
+    const rankTier: number | null | undefined = playerInfo?.rank_tier
+    const rankMmr: number | undefined = playerInfo?.computed_rating
 
-    let rankDisplay
+    useEffect(() => {
+        const winAndLose = async () => {
+            const data = await getWinAndLose(profile?.account_id)
 
-    if (loading) {
-        rankDisplay = <p>Загрузка ранга...</p>
-    } else if (error) {
-        rankDisplay = <p>Ошибка: {error}</p>
-    } else if (rankTier) {
-        // Логика отображения ранга (пример)
-        let medal = ''
-        let star = ''
-
-        const tier = Math.floor(rankTier / 10) // 1-8 соответствуют медалям Herald, Guardian, Crusader и т.д.
-        const starNum = rankTier % 10 // 1-5 звезды внутри каждой медали
-
-        switch (tier) {
-            case 1:
-                medal = 'Herald'
-                break
-            case 2:
-                medal = 'Guardian'
-                break
-            case 3:
-                medal = 'Crusader'
-                break
-            case 4:
-                medal = 'Archon'
-                break
-            case 5:
-                medal = 'Legend'
-                break
-            case 6:
-                medal = 'Ancient'
-                break
-            case 7:
-                medal = 'Divine'
-                break
-            case 8:
-                medal = 'Immortal'
-                break
-            default:
-                medal = 'Unranked'
+            setWinLose(data)
         }
 
-        if (medal !== 'Unranked' && medal !== 'Immortal') {
-            star = ` (Звезда ${starNum})`
+        winAndLose()
+
+        if (rankTier && rankMmr) {
+            setTier(Math.floor(rankTier / 10) - 1)
+            setStars(Math.floor(rankTier % 10))
         }
+    }, [])
 
-        rankDisplay = (
-            <p>
-                Ранг: {medal}
-                {star}
-            </p>
-        )
+    useEffect(() => {
+        setRankName(medals[tier][stars]?.name)
+        setRankMedal(medals[tier][stars]?.img)
+    }, [tier, stars])
 
-        // Альтернативный вариант: можно использовать изображения медалей и звезд
-        // rankDisplay = (
-        //   <div>
-        //     <img src={`/images/medals/${medal.toLowerCase()}.png`} alt={medal} />
-        //     {star && <img src={`/images/stars/${starNum}.png`} alt={`Звезда ${starNum}`} />}
-        //   </div>
-        // );
-    } else {
-        rankDisplay = <p>Ранг не найден.</p>
-    }
+    useEffect(() => {
+        if (winLose) {
+            const currWinRate =
+                (winLose.win / (winLose.win + winLose.lose)) * 100
+            setWinRate(Number(String(currWinRate).slice(0, 5)))
+        }
+    }, [winLose])
 
     return (
         <>
             <section className={styles.promo}>
                 <div className={styles.promo__row}>
                     <div className={styles.promo__profile}>
-                        <img src={profile?.avatarfull} alt="" />
+                        <img
+                            src={profile?.avatarfull}
+                            alt={profile?.personaname}
+                        />
                         <div className={styles.text__contet}>
-                            <p>Имя: {profile?.personaname}</p>
-                            <p>Аккаунт ID: {profile?.account_id}</p>
-                            <p>Регион: {profile?.loccountrycode}</p>
+                            <p className={styles.text__name}>
+                                {profile?.personaname}
+                            </p>
+                            <p className={styles.text}>
+                                Аккаунт ID: {profile?.account_id}
+                            </p>
+                            {profile?.loccountrycode && (
+                                <p className={styles.text}>
+                                    Регион: {profile.loccountrycode}
+                                </p>
+                            )}
                         </div>
                     </div>
-                    <div className={styles.rank}>{rankDisplay}</div>
+                    <div className={styles.ifno}>
+                        <div className={styles.rank}>
+                            {tier && stars && (
+                                <img
+                                    src={rankMedal}
+                                    alt={rankMedal}
+                                    className={styles.rank__img}
+                                />
+                            )}
+                            {rankName && (
+                                <p className={styles.rank__name}>{rankName}</p>
+                            )}
+                        </div>
+                        {winRate ? (
+                            <p className={styles.winrate}>
+                                Винрейт: {winRate}%
+                            </p>
+                        ) : (
+                            <p className={styles.winrate}>Загрузка...</p>
+                        )}
+                        <div className={styles.win__lose}>
+                            <span className={styles.win}>
+                                {winLose?.win} побед
+                            </span>{' '}
+                            -{' '}
+                            <span className={styles.lose}>
+                                {winLose?.lose} поражений
+                            </span>{' '}
+                        </div>
+                    </div>
                 </div>
             </section>
         </>
