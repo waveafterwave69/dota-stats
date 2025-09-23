@@ -3,7 +3,7 @@ import usePlayer from '../../hooks/usePlayer'
 import styles from './PlayerPromo.module.css'
 import { getWinAndLose } from '../../helpers/playerHelpers'
 import type { WinLose } from '../../types/playerTypes'
-import { medals } from '../../data/medalsData'
+import { medals, unrankedMedal } from '../../data/medalsData'
 
 const PlayerPromo: React.FC = () => {
     const { playerInfo } = usePlayer()
@@ -34,8 +34,13 @@ const PlayerPromo: React.FC = () => {
     }, [])
 
     useEffect(() => {
-        setRankName(medals[tier][stars]?.name)
-        setRankMedal(medals[tier][stars]?.img)
+        if (tier === 0) {
+            setRankName(unrankedMedal.name)
+            setRankMedal(unrankedMedal.img)
+        } else {
+            setRankName(medals[tier][stars]?.name)
+            setRankMedal(medals[tier][stars]?.img)
+        }
     }, [tier, stars])
 
     useEffect(() => {
@@ -71,16 +76,15 @@ const PlayerPromo: React.FC = () => {
                     </div>
                     <div className={styles.ifno}>
                         <div className={styles.rank}>
-                            {tier && stars && (
+                            {rankMedal && (
                                 <img
                                     src={rankMedal}
                                     alt={rankMedal}
                                     className={styles.rank__img}
                                 />
                             )}
-                            {rankName && (
-                                <p className={styles.rank__name}>{rankName}</p>
-                            )}
+
+                            <p className={styles.rank__name}>{rankName}</p>
                         </div>
                         {winRate ? (
                             <p className={styles.winrate}>

@@ -7,6 +7,7 @@ interface PlayerContextValue {
     loading: boolean
     error: string | null
     getPlayerInfo: (playerId: string) => Promise<any>
+    setError: (err: string) => void
 }
 
 export const PlayerContext = createContext<PlayerContextValue | null>(null)
@@ -28,6 +29,8 @@ const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
                 `https://api.opendota.com/api/players/${playerId}`
             )
 
+            console.log(response)
+
             if (response.status !== 200) {
                 throw new Error('Аккаунт не найден!')
             }
@@ -36,7 +39,7 @@ const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
             return response
         } catch (error: any) {
             console.error(error.message)
-            setError(error.message)
+            setError('Аккаунт не найден!')
         } finally {
             setLoading(false)
         }
@@ -47,6 +50,7 @@ const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
         loading,
         error,
         getPlayerInfo,
+        setError,
     }
 
     return (

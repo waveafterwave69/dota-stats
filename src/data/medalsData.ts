@@ -43,7 +43,10 @@ interface Medals {
     5: MedalContent
 }
 
-export const unrankedMedal: string = unranked
+export const unrankedMedal = {
+    img: unranked,
+    name: 'Не откалиброван',
+}
 
 export const medals: Medals[] | any = [
     {

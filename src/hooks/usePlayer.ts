@@ -7,6 +7,7 @@ interface PlayerContextValue {
     loading: boolean
     error: string | null
     getPlayerInfo: (playerId: string) => Promise<any>
+    setError: (err: string) => void
 }
 
 const usePlayer = (): PlayerContextValue => {

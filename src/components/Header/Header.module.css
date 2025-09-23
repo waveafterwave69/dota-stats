@@ -1,6 +1,7 @@
 .header {
     background-color: var(--color-black);
     padding: 30px 0px;
+    display: flex;
 }
 
 .header__logo {

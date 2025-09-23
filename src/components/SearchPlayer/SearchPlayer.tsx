@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router'
 
 const SearchPlayer: React.FC = () => {
     const [searchValue, setSearchValue] = useState<string>('')
-    const { getPlayerInfo, error } = usePlayer()
+    const { getPlayerInfo, error, setError } = usePlayer()
     const navigate = useNavigate()
 
     const handleValue = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,7 +18,7 @@ const SearchPlayer: React.FC = () => {
         e.preventDefault()
 
         if (!/^\d+$/.test(searchValue)) {
-            alert('Пожалуйста, введите числовой Steam ID.')
+            setError('Пожалуйста, введите числовой Steam ID.')
             return
         }
 

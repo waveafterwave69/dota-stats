@@ -6,14 +6,14 @@ import { Link } from 'react-router'
 const Header: React.FC = () => {
     return (
         <>
-            <header className={styles.header}>
-                <div className="container">
+            <div className="container">
+                <header className={styles.header}>
                     <Link to={'/'} className={styles.header__logo}>
-                        <span>DOTA STATS</span>
+                        <p>DOTA STATS</p>
                         <img src={dotaLogo} alt="dota2" />
                     </Link>
-                </div>
-            </header>
+                </header>
+            </div>
         </>
     )
 }
