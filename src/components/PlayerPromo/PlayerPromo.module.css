@@ -1,18 +1,24 @@
 .promo {
     background-color: rgba(38, 38, 38, 0.356);
-    padding: 30px 50px 50px;
+
 }
 
 .promo__row {
+    padding: 40px 50px 0px;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
 }
 
 .promo__profile {
-    column-gap: 20px;
+    column-gap: 30px;
     display: flex;
     align-items: flex-start;
+}
+
+.promo__profile img {
+    width: 210px;
+    border-radius: 100%;
 }
 
 .text__contet {
@@ -28,6 +34,7 @@
 .text__name {
     margin-bottom: 5px;
     font-size: 36px;
+    font-weight: 500;
 }
 
 .ifno {
@@ -66,8 +73,30 @@
     font-size: 18px;
 }
 
+.promo__nav {
+    padding: 15px 65px;
+    margin-top: 50px;
+    background-color: #0f0f0f;
+}
+
+.nav__list {
+    display: flex;
+    column-gap: 5px;
+}
+
+.list__item {
+    color: #c4c4c4;
+    font-size: 18px;
+    padding: 15px 20px;
+}
+
+.active {
+    color: var(--color-white);
+    background-color: var(--color-black);
+}
+
 @media (max-width: 1024px) {
-    .promo {
+    .promo__row {
         padding: 30px 30px 40px;
     }
 
@@ -109,10 +138,25 @@
         margin-top: 10px;
         font-size: 18px;
     }
+
+    .promo__nav {
+        padding: 15px 40px;
+        margin-top: 20px;
+    }
+
+    .nav__list {
+        display: flex;
+        column-gap: 5px;
+    }
+
+    .list__item {
+        font-size: 18px;
+        padding: 15px 20px;
+    }
 }
 
 @media (max-width: 768px) {
-    .promo {
+    .promo__row {
         padding: 20px 20px 30px;
     }
 
@@ -164,10 +208,25 @@
         margin-top: 10px;
         font-size: 16px;
     }
+
+    .promo__nav {
+        padding: 12px 40px;
+        margin-top: 10px;
+    }
+
+    .nav__list {
+        display: flex;
+        column-gap: 5px;
+    }
+
+    .list__item {
+        font-size: 16px;
+        padding: 12px 20px;
+    }
 }
 
 @media (max-width: 425px) {
-    .promo {
+    .promo__row {
         padding: 15px 15px 25px;
     }
 
@@ -218,5 +277,20 @@
     .winrate {
         margin-top: 0px;
         font-size: 16px;
+    }
+
+    .promo__nav {
+        padding: 10px 15px;
+        margin-top: 5px;
+    }
+
+    .nav__list {
+        display: flex;
+        column-gap: 5px;
+    }
+
+    .list__item {
+        font-size: 16px;
+        padding: 10px 16px;
     }
 }

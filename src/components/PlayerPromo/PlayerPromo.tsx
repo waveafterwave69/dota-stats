@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router'
 import useRank from '../../hooks/useRank'
 import styles from './PlayerPromo.module.css'
 
@@ -56,6 +57,34 @@ const PlayerPromo: React.FC = () => {
                             </span>{' '}
                         </div>
                     </div>
+                </div>
+                <div className={styles.promo__nav}>
+                    <ul className={styles.nav__list}>
+                        <li>
+                            <NavLink
+                                to={`/player/${profile?.account_id}`}
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? `${styles.list__item} ${styles.active}`
+                                        : styles.list__item
+                                }
+                            >
+                                Обзор
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                to={`/player/${profile?.account_id}/matches`}
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? `${styles.list__item} ${styles.active}`
+                                        : styles.list__item
+                                }
+                            >
+                                Матчи
+                            </NavLink>
+                        </li>
+                    </ul>
                 </div>
             </section>
         </>
