@@ -11,8 +11,6 @@ const MatchList: React.FC = () => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
 
-    console.log(matches)
-
     useEffect(() => {
         const fetchMatches = async () => {
             try {

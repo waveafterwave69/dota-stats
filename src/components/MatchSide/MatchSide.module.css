@@ -1,0 +1,50 @@
+.side {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.items {
+    width: 325px;
+}
+
+
+.table__item {
+    width: 30px;
+}
+
+.table__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.side__title {
+    font-weight: 400;
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.green {
+    color: #70e446;
+}
+
+.red {
+    color: #d84242;
+}
+
+.side__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 30px;
+    padding: 25px;
+}
+
+.radiant__content {
+    background-color: #394735;
+}
+
+.dire__content {
+    background-color: #473535;
+}

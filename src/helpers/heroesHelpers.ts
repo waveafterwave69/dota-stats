@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-export const getMatches = async (playerId: number | undefined) => {
+export const getHeroes = async () => {
     try {
         const response = await axios.get(
-            `https://api.opendota.com/api/players/${playerId}/recentMatches`
+            'https://api.opendota.com/api/constants/heroes'
         )
 
         return response.data
@@ -13,10 +13,10 @@ export const getMatches = async (playerId: number | undefined) => {
     }
 }
 
-export const getOneMatch = async (matchId: string | undefined) => {
+export const getItems = async () => {
     try {
         const response = await axios.get(
-            `https://api.opendota.com/api/matches/${matchId}`
+            'https://api.opendota.com/api/constants/items'
         )
 
         return response.data

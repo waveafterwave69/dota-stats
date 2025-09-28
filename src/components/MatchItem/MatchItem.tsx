@@ -1,8 +1,7 @@
 import styles from './MatchItem.module.css'
-import { heroData } from '../../data/heroData'
-import { medals, unrankedMedal } from '../../data/medalsData'
 import type { MatchData } from '../../types/matchTypes'
 import { Link } from 'react-router'
+import { getHeroImage, getHeroName, getMedal } from '../../utils/utils'
 
 const getMode = (gameMode: number): string => {
     switch (gameMode) {
@@ -21,23 +20,6 @@ const getMode = (gameMode: number): string => {
     }
 }
 
-const getHeroName = (heroId: number) => {
-    const currHero = heroData.find((hero) => hero.id === heroId)
-    return currHero?.name
-}
-
-const getHeroImage = (heroId: number) => {
-    const currHero = heroData.find((hero) => hero.id === heroId)
-    return currHero?.img
-}
-
-const getMedal = (tier: number | null) => {
-    if (tier === null) return unrankedMedal
-    const tierNum = Math.floor(tier / 10) - 1
-    const starNum = Math.floor(tier % 10)
-    return medals[tierNum]?.[starNum] || unrankedMedal
-}
-
 interface MatchItemProps {
     match: MatchData
 }
@@ -45,7 +27,7 @@ interface MatchItemProps {
 const MatchItem: React.FC<MatchItemProps> = ({ match }) => {
     return (
         <li>
-            <Link to={''} className={styles.match}>
+            <Link to={`/match/${match.match_id}`} className={styles.match}>
                 <div className={styles.match__hero}>
                     <img
                         src={getHeroImage(match.hero_id)}
@@ -55,6 +37,7 @@ const MatchItem: React.FC<MatchItemProps> = ({ match }) => {
                         <span className={styles.hero__name}>
                             {getHeroName(match.hero_id)}
                         </span>
+
                         <p className={styles.match__win}>
                             {match.radiant_win
                                 ? 'Победа сил света'

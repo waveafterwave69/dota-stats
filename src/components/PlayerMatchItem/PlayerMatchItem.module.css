@@ -1,0 +1,40 @@
+.player__card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.anon {
+    color: #cacaca;
+    cursor: auto;
+}
+
+.player__hero {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    width: 180px;
+}
+
+.player__hero img {
+    width: 80px;
+}
+
+.player__hero p {
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.mathc__td {
+    width: 40px;
+}
+
+.items {
+    display: flex;
+    flex-wrap: wrap;
+    width: 300px;
+}
+
+.item__img {
+    width: 50px;
+}

@@ -1,0 +1,50 @@
+.match {
+    margin-top: 20px;
+    margin-bottom: 200px;
+}
+
+.win__text {
+    text-align: center;
+    font-weight: 400;
+    font-size: 36px;
+    margin-bottom: 32px;
+}
+
+.red {
+    color: #fc2f2f;
+}
+
+.green {
+    color: #5ffc2f;
+}
+
+.match__info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 40px;
+}
+
+.radian__score {
+    font-weight: 400;
+    font-size: 26px;
+    color: #46e44e;
+}
+
+.dire__score {
+    font-weight: 400;
+    font-size: 26px;
+    color: #d84242;
+}
+
+.duration {
+    font-weight: 400;
+    font-size: 28px;
+}
+
+.sides {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 60px;
+}
