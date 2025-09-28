@@ -9,8 +9,14 @@ export const secondsToHMS = (seconds: number | undefined): string => {
     const remainingSeconds = seconds % 60
 
     const hoursStr = hours > 0 ? `${hours}:` : ''
-    const minutesStr = minutes > 0 ? `${minutes}:` : ''
-    const secondsStr = remainingSeconds > 0 ? `${remainingSeconds}` : ''
+    const minutesStr =
+        minutes > 0 ? (minutes < 10 ? `0${minutes}:` : `${minutes}:`) : ''
+    const secondsStr =
+        remainingSeconds > 0
+            ? remainingSeconds < 10
+                ? `0${remainingSeconds}`
+                : `${remainingSeconds}`
+            : ''
 
     return `${hoursStr}${minutesStr}${secondsStr}`
 }

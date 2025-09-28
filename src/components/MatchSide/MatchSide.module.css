@@ -48,3 +48,78 @@
 .dire__content {
     background-color: #473535;
 }
+
+@media (max-width: 1024px) {
+    .items {
+        width: 135px;
+    }
+
+    .table__header {
+        font-size: 14px;
+    }
+
+    .table__item {
+        width: 25px;
+    }
+
+    .side__title {
+        font-weight: 400;
+        width: 200px;
+        text-align: left;
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
+    .side__content {
+        row-gap: 25px;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .items {
+        width: 105px;
+    }
+
+    .table__header {
+        font-size: 12px;
+    }
+
+    .table__xp,
+    .table__gpm {
+        display: none;
+    }
+
+    .table__item {
+        width: 15px;
+    }
+
+    .side__title {
+        width: 100px;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .side__content {
+        row-gap: 15px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 425px) {
+
+    .items {
+        width: 115px;
+    }
+
+    .side__title {
+        width: 120px;
+    }
+
+    .table__xp,
+    .table__gpm,
+    .table__creeps,
+    .table__gold {
+        display: none;
+    }
+}

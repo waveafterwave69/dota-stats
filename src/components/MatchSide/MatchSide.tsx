@@ -30,11 +30,31 @@ const MatchSide: React.FC<MatchSideProps> = ({ match, side }) => {
                         >
                             {isRadiant ? 'СИЛЫ СВЕТА' : 'СИЛЫ ТЬМЫ'}
                         </th>
-                        <th className={styles.table__item}>УСП</th>
-                        <th className={styles.table__item}>золото</th>
-                        <th className={styles.table__item}>крипы</th>
-                        <th className={styles.table__item}>з/м</th>
-                        <th className={styles.table__item}>о/м</th>
+                        <th
+                            className={`${styles.table__item} ${styles.table__kda}`}
+                        >
+                            УСП
+                        </th>
+                        <th
+                            className={`${styles.table__item} ${styles.table__gold}`}
+                        >
+                            золото
+                        </th>
+                        <th
+                            className={`${styles.table__item} ${styles.table__creeps}`}
+                        >
+                            крипы
+                        </th>
+                        <th
+                            className={`${styles.table__item} ${styles.table__gpm}`}
+                        >
+                            з/м
+                        </th>
+                        <th
+                            className={`${styles.table__item} ${styles.table__xp}`}
+                        >
+                            о/м
+                        </th>
                         <th className={styles.items}>предметы</th>
                     </tr>
                 </thead>

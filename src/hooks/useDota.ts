@@ -1,13 +1,19 @@
 import { getItems } from '../helpers/heroesHelpers'
 import { useEffect, useState } from 'react'
 
+interface Item {
+    name: string
+    id: number
+    img: string
+}
+
 interface PlayerContextValue {
-    items: any[]
+    items: Item[] | null
     isLoading: boolean
 }
 
 const useDota = (): PlayerContextValue => {
-    const [items, setItems] = useState<any>()
+    const [items, setItems] = useState<Item[] | null>(null)
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
     useEffect(() => {

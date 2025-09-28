@@ -37,4 +37,103 @@
 
 .item__img {
     width: 50px;
+    background-color: #272727;
+    border: 1px solid #313131;
+}
+
+.itemsContainer {
+    display: flex;
+}
+
+@media (max-width: 1024px) {
+    .player__hero {
+        column-gap: 8px;
+        width: 180px;
+    }
+
+    .player__hero img {
+        width: 60px;
+    }
+
+    .player__hero p {
+        font-size: 14px;
+    }
+
+    td {
+        font-size: 14px;
+    }
+
+    .mathc__td {
+        width: 30px;
+    }
+
+    .items {
+        width: 120px;
+        justify-content: right;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .item__img {
+        width: 40px;
+    }
+
+    .itemsContainer {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 768px) {
+    .player__hero {
+        column-gap: 8px;
+        width: 120px;
+    }
+
+    .player__hero img {
+        width: 50px;
+    }
+
+    .player__hero p {
+        font-size: 12px;
+    }
+
+    td {
+        font-size: 12px;
+    }
+
+    .mathc__td {
+        width: 25px;
+    }
+
+    .items {
+        width: 100px;
+        justify-content: right;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .item__img {
+        width: 30px;
+    }
+
+    .itemsContainer {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .gpm,
+    .xpm {
+        display: none;
+    }
+}
+
+@media (max-width: 425px) {
+
+    .gpm,
+    .xpm,
+    .creeps,
+    .gold {
+        display: none;
+    }
 }

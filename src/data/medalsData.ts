@@ -30,17 +30,13 @@ import ancient3 from '../assets/ancient3.png'
 import ancient4 from '../assets/ancient4.png'
 import ancient5 from '../assets/ancient5.png'
 
-interface MedalContent {
+interface MedalInfo {
     img: string
     name: string
 }
 
 interface Medals {
-    1: MedalContent
-    2: MedalContent
-    3: MedalContent
-    4: MedalContent
-    5: MedalContent
+    [key: number]: MedalInfo
 }
 
 export const unrankedMedal = {
@@ -48,7 +44,7 @@ export const unrankedMedal = {
     name: 'Не откалиброван',
 }
 
-export const medals: Medals[] | any = [
+export const medals: Medals[] = [
     {
         1: {
             img: herald1,

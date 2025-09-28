@@ -24,7 +24,9 @@ const PlayerMatchItem: React.FC<PlayerMatchItemProps> = ({ player }) => {
 
     const navigate = useNavigate()
 
-    const onClick = async (e: any) => {
+    const onClick = async (
+        e: React.MouseEvent<HTMLParagraphElement, MouseEvent>
+    ) => {
         e.preventDefault()
 
         const success = await getPlayerInfo(String(player.account_id))
@@ -50,9 +52,11 @@ const PlayerMatchItem: React.FC<PlayerMatchItemProps> = ({ player }) => {
             <td className={styles.player__kda}>
                 {player.kills}/{player.deaths}/{player.assists}
             </td>
-            <td className={styles.gold}>{player.gold_per_min}</td>
-            <td className={styles.creeps}>{player.last_hits}</td>
-            <td className={styles.denies}>{player.denies}</td>
+            <td className={styles.gold}>{player.net_worth}</td>
+            <td className={styles.creeps}>
+                {player.last_hits}/{player.denies}
+            </td>
+            <td className={styles.gpm}>{player.gold_per_min}</td>
             <td className={styles.xpm}>{player.xp_per_min}</td>
             <td className={styles.items}>
                 <div className={styles.itemsContainer}>

@@ -14,7 +14,11 @@ const SearchPlayer: React.FC = () => {
         setSearchValue(e.target.value)
     }
 
-    const onSubmit = async (e: any) => {
+    const onSubmit = async (
+        e:
+            | React.FormEvent<HTMLFormElement>
+            | React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
         e.preventDefault()
 
         if (!/^\d+$/.test(searchValue)) {
