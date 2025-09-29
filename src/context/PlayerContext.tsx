@@ -8,6 +8,8 @@ interface PlayerContextValue {
     error: string | null
     getPlayerInfo: (playerId: string) => Promise<any>
     setError: (err: string) => void
+    winLose: number | null
+    setWinLose: (winLose: 1 | 0 | null) => void
 }
 
 export const PlayerContext = createContext<PlayerContextValue | null>(null)
@@ -20,6 +22,7 @@ const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
     const [playerInfo, setPlayerInfo] = useState<PlayerInfo | null>(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
+    const [winLose, setWinLose] = useState<number | null>(null)
 
     const getPlayerInfo = async (playerId: string) => {
         setLoading(true)
@@ -28,8 +31,6 @@ const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
             const response = await axios.get<PlayerInfo>(
                 `https://api.opendota.com/api/players/${playerId}`
             )
-
-            console.log(response)
 
             if (response.status !== 200) {
                 throw new Error('Аккаунт не найден!')
@@ -51,6 +52,8 @@ const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
         error,
         getPlayerInfo,
         setError,
+        setWinLose,
+        winLose,
     }
 
     return (

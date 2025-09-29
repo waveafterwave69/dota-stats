@@ -26,44 +26,42 @@ interface MatchItemProps {
 
 const MatchItem: React.FC<MatchItemProps> = ({ match }) => {
     return (
-        <li>
-            <Link to={`/match/${match.match_id}`} className={styles.match}>
-                <div className={styles.match__hero}>
-                    <img
-                        src={getHeroImage(match.hero_id)}
-                        alt={getHeroName(match.hero_id)}
-                    />
-                    <div className={styles.text__content}>
-                        <span className={styles.hero__name}>
-                            {getHeroName(match.hero_id)}
-                        </span>
-
-                        <p className={styles.match__win}>
-                            {match.radiant_win
-                                ? 'Победа сил света'
-                                : 'Победа сил тьмы'}
-                        </p>
-                        <p className={styles.match__mode}>
-                            Режим игры: {getMode(match.game_mode)}
-                        </p>
-                    </div>
-                </div>
-                <div className={styles.match__res}>
-                    <span className={styles.match__kda}>
-                        KDA: {match.kills}/{match.deaths}/{match.assists}
+        <Link to={`/match/${match.match_id}`} className={styles.match}>
+            <div className={styles.match__hero}>
+                <img
+                    src={getHeroImage(match.hero_id)}
+                    alt={getHeroName(match.hero_id)}
+                />
+                <div className={styles.text__content}>
+                    <span className={styles.hero__name}>
+                        {getHeroName(match.hero_id)}
                     </span>
+
+                    <p className={styles.match__win}>
+                        {match.radiant_win
+                            ? 'Победа сил света'
+                            : 'Победа сил тьмы'}
+                    </p>
+                    <p className={styles.match__mode}>
+                        Режим игры: {getMode(match.game_mode)}
+                    </p>
                 </div>
-                {match.average_rank !== null && (
-                    <div className={styles.match__rank}>
-                        <span>Средний ранг:</span>
-                        <img
-                            src={getMedal(match.average_rank).img}
-                            alt={getMedal(match.average_rank).name}
-                        />
-                    </div>
-                )}
-            </Link>
-        </li>
+            </div>
+            <div className={styles.match__res}>
+                <span className={styles.match__kda}>
+                    KDA: {match.kills}/{match.deaths}/{match.assists}
+                </span>
+            </div>
+            {match.average_rank !== null && (
+                <div className={styles.match__rank}>
+                    <span>Средний ранг:</span>
+                    <img
+                        src={getMedal(match.average_rank).img}
+                        alt={getMedal(match.average_rank).name}
+                    />
+                </div>
+            )}
+        </Link>
     )
 }
 

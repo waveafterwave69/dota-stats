@@ -473,7 +473,7 @@ export const heroData: HeroData[] = [
     {
         id: 96,
         name: 'Centaur Warrunner',
-        img: 'https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/hero_centaur.png',
+        img: 'https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/centaur.png',
     },
     {
         id: 97,

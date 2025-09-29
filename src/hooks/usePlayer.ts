@@ -8,6 +8,8 @@ interface PlayerContextValue {
     error: string | null
     getPlayerInfo: (playerId: string) => Promise<any>
     setError: (err: string) => void
+    winLose: number | null
+    setWinLose: (winLose: 1 | 0 | null) => void
 }
 
 const usePlayer = (): PlayerContextValue => {

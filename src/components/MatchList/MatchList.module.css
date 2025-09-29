@@ -16,6 +16,31 @@
     margin-bottom: 30px;
 }
 
+.winlose__list {
+    display: flex;
+    column-gap: 10px;
+    margin-bottom: 30px;
+
+}
+
+.winlose__item {
+    background-color: #0c0c0c;
+    padding: 10px 15px;
+    opacity: 0.6;
+}
+
+.active {
+    opacity: 1;
+}
+
+.win {
+    color: var(--color-green);
+}
+
+.lose {
+    color: var(--color-red);
+}
+
 @media (max-width: 1024px) {
     .list {
         margin-top: 20px;
@@ -55,6 +80,16 @@
 }
 
 @media (max-width: 425px) {
+    .winlose__list {
+        margin-bottom: 30px;
+    }
+
+
+    .winlose__item {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
     .list {
         margin-top: 15px;
         padding: 20px 10px;

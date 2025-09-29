@@ -74,7 +74,7 @@ const PlayerPromo: React.FC = () => {
                         </li>
                         <li>
                             <NavLink
-                                to={`/player/${profile?.account_id}/matches`}
+                                to={`/player/matches/${profile?.account_id}`}
                                 className={({ isActive }) =>
                                     isActive
                                         ? `${styles.list__item} ${styles.active}`
