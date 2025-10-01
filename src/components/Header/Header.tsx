@@ -11,6 +11,9 @@ const Header: React.FC = () => {
                     <p>DOTA STATS</p>
                     <img src={dotaLogo} alt="dota2" />
                 </Link>
+                <Link to={'/pro'} className={styles.header__item}>
+                    <p>Про-Игроки</p>
+                </Link>
             </header>
         </>
     )

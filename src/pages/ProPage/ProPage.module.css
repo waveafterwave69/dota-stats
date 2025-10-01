@@ -1,0 +1,26 @@
+.pro__title {
+    font-weight: 600;
+    font-size: 44px;
+    margin-top: 20px;
+}
+
+@media (max-width: 1024px) {
+    .pro__title {
+        font-size: 34px;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .pro__title {
+        font-size: 28px;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 425px) {
+    .pro__title {
+        font-size: 24px;
+        margin-top: 10px;
+    }
+}

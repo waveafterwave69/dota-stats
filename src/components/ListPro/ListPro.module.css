@@ -1,0 +1,21 @@
+.pro {
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+.pro__list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+
+@media (max-width: 1024px) {
+    .pro {
+        margin-top: 30px;
+        margin-bottom: 70px;
+    }
+
+    .pro__list {
+        row-gap: 10px;
+    }
+}

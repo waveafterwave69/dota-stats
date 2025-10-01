@@ -29,6 +29,16 @@ import ancient2 from '../assets/ancient2.png'
 import ancient3 from '../assets/ancient3.png'
 import ancient4 from '../assets/ancient4.png'
 import ancient5 from '../assets/ancient5.png'
+import divine1 from '../assets/divine1.png'
+import divine2 from '../assets/divine2.png'
+import divine3 from '../assets/divine3.png'
+import divine4 from '../assets/divine4.png'
+import divine5 from '../assets/divine5.png'
+import immortal1 from '../assets/immortal1.png'
+import immortal2 from '../assets/immortal2.png'
+import immortal3 from '../assets/immortal3.png'
+import immortal4 from '../assets/immortal4.png'
+import immortal5 from '../assets/immortal5.png'
 
 interface MedalInfo {
     img: string
@@ -175,6 +185,50 @@ export const medals: Medals[] = [
         5: {
             img: ancient5,
             name: 'Властелин 5',
+        },
+    },
+    {
+        1: {
+            img: divine1,
+            name: 'Божество 1',
+        },
+        2: {
+            img: divine2,
+            name: 'Божество 2',
+        },
+        3: {
+            img: divine3,
+            name: 'Божество 3',
+        },
+        4: {
+            img: divine4,
+            name: 'Божество 4',
+        },
+        5: {
+            img: divine5,
+            name: 'Божество 5',
+        },
+    },
+    {
+        0: {
+            img: immortal1,
+            name: 'Титан',
+        },
+        1: {
+            img: immortal2,
+            name: 'Титан',
+        },
+        2: {
+            img: immortal3,
+            name: 'Титан',
+        },
+        3: {
+            img: immortal4,
+            name: 'Титан',
+        },
+        4: {
+            img: immortal5,
+            name: 'Титан',
         },
     },
 ]

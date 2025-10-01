@@ -30,7 +30,6 @@ const useRank = (): PlayerContextValue => {
 
     const profile = playerInfo?.profile
     const rankTier: number | null | undefined = playerInfo?.rank_tier
-    const rankMmr: number | undefined = playerInfo?.computed_rating
 
     useEffect(() => {
         const winAndLose = async () => {
@@ -41,7 +40,7 @@ const useRank = (): PlayerContextValue => {
 
         winAndLose()
 
-        if (rankTier && rankMmr) {
+        if (rankTier) {
             setTier(Math.floor(rankTier / 10) - 1)
             setStars(Math.floor(rankTier % 10))
         }
