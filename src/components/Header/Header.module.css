@@ -1,14 +1,71 @@
 .header {
-    background-color: var(--color-black);
     padding: 30px 24px;
-    display: flex;
-    align-items: center;
-    column-gap: 50px;
     position: sticky;
     max-width: 1550px;
     margin: 0 auto;
     top: 0;
     z-index: 10;
+}
+
+.header__content {
+    display: flex;
+    align-items: center;
+    column-gap: 100px;
+    background-color: var(--color-black);
+}
+
+.burger__img {
+    position: relative;
+    top: 20px;
+    right: 25px;
+}
+
+.burger {
+    display: none;
+    right: 0;
+    top: 0;
+    position: absolute;
+}
+
+.burger__open {
+    display: block;
+}
+
+.burger__close__button {
+    position: relative;
+    z-index: 100;
+    color: var(--color-white);
+}
+
+.burger__close {
+    display: none;
+}
+
+.burger__menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: black;
+    height: 110vh;
+    width: 200px;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    padding: 0px 20px 20px 20px;
+    padding-top: 120px;
+    align-items: center;
+    row-gap: 25px;
+}
+
+.burger__item {
+    font-size: 18px;
+    color: var(--color-white);
+}
+
+.nav {
+    display: flex;
+    column-gap: 50px;
+    justify-content: center;
 }
 
 .header__item {
@@ -27,6 +84,15 @@
 
 .header__logo img {
     width: 50px;
+}
+
+.overlay {
+    position: fixed;
+    width: 100%;
+    background-color: #0000005e;
+    height: 110vh;
+    z-index: 9;
+    backdrop-filter: blur(3px);
 }
 
 @media (max-width: 1024px) {
@@ -48,7 +114,7 @@
     .header {
         padding: 20px 24px;
         align-items: center;
-        column-gap: 20px;
+        justify-content: space-between;
     }
 
     .header__logo {
@@ -63,11 +129,20 @@
     .header__item {
         font-size: 18px;
     }
+
+    .nav {
+        display: none;
+    }
+
+    .burger {
+        display: block;
+    }
 }
 
 @media (max-width: 425px) {
     .header {
         padding: 20px 24px;
+        height: 70px;
     }
 
     .header__logo {
@@ -77,5 +152,16 @@
 
     .header__logo img {
         width: 30px;
+    }
+
+    .burger__img {
+        width: 35px;
+        top: 25px;
+    }
+
+    .burger__close__img {
+        width: 28px;
+        top: 1px;
+        right: 20px;
     }
 }

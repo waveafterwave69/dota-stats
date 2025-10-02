@@ -46,6 +46,5 @@ export const getOneMatch = async (matchId: string | undefined) => {
         return response.data
     } catch (error: any) {
         console.log(error.message)
-        return error.message
     }
 }

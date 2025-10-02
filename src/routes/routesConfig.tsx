@@ -3,11 +3,16 @@ import PlayerPage from '../pages/PlayerPage/PlayerPage'
 import PlayerPageMatches from '../pages/PlayerPageMatches/PlayerPageMatches'
 import ProPage from '../pages/ProPage/ProPage'
 import SearchPage from '../pages/SearchPage/SearchPage'
+import SearchMatchesPage from '../pages/SearchMatchesPage/SearchMatchesPage'
 
 export const routesConfig = [
     {
         page: <SearchPage />,
         url: '/',
+    },
+    {
+        page: <SearchMatchesPage />,
+        url: '/searchMatches',
     },
     {
         page: <PlayerPage />,

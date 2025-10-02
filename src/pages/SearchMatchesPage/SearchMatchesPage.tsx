@@ -1,17 +1,18 @@
-import styles from './SearchPlayer.module.css'
+import styles from './SearchMatchesPage.module.css'
 import dotaLogo from '../../assets/dota-logo.svg'
 import searchImg from '../../assets/search.svg'
 import { useState } from 'react'
-import usePlayer from '../../hooks/usePlayer'
 import { useNavigate } from 'react-router'
+import { getOneMatch } from '../../helpers/matchesHelpers'
 
-const SearchPlayer: React.FC = () => {
+const SearchMatchesPage: React.FC = () => {
+    const [error, setError] = useState<string>('')
     const [searchValue, setSearchValue] = useState<string>('')
-    const { getPlayerInfo, error, setError } = usePlayer()
     const navigate = useNavigate()
 
     const handleValue = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.target.value)
+        setError('')
     }
 
     const onSubmit = async (
@@ -22,14 +23,21 @@ const SearchPlayer: React.FC = () => {
         e.preventDefault()
 
         if (!/^\d+$/.test(searchValue)) {
-            setError('Пожалуйста, введите числовой Steam ID.')
+            setError('Пожалуйста, введите числовой ID.')
             return
         }
 
-        const success = await getPlayerInfo(searchValue)
+        try {
+            const data = await getOneMatch(searchValue)
 
-        if (success) {
-            navigate(`/player/${searchValue}`)
+            if (!data) {
+                setError('Матч не найден.')
+                return
+            }
+
+            navigate(`/match/${searchValue}`)
+        } catch (err: any) {
+            setError('Произошла ошибка при поиске матча.')
         }
     }
 
@@ -44,27 +52,26 @@ const SearchPlayer: React.FC = () => {
                     <div className={styles.search__input}>
                         <input
                             type="text"
-                            placeholder="найти игрока(steam id)"
+                            placeholder="найти матч(id)"
                             value={searchValue}
                             onChange={handleValue}
                         />
-                        <button type="button" onClick={onSubmit}>
+                        <button type="submit">
                             <img src={searchImg} alt="поиск" />
                         </button>
                     </div>
                     <button
                         disabled={searchValue.length < 1}
-                        type="button"
-                        onClick={onSubmit}
+                        type="submit"
                         className={styles.search__button}
                     >
                         найти
                     </button>
-                    {error && <div className={styles.error}>{error}</div>}{' '}
+                    {error && <div className={styles.error}>{error}</div>}
                 </form>
             </section>
         </>
     )
 }
 
-export default SearchPlayer
+export default SearchMatchesPage

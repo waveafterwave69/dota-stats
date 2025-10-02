@@ -171,17 +171,18 @@
     }
 
     .search__logo h1 {
-        font-size: 38px;
+        font-size: 32px;
     }
 
     .search__logo img {
-        width: 40px;
+        width: 35px;
     }
 
     .search__input {
         width: 300px;
-        padding: 10px 15px;
+        padding: 8px 15px;
         margin-bottom: 20px;
+        font-size: 14px;
     }
 
     .search__input img {
@@ -198,7 +199,7 @@
     }
 
     .search__button {
-        padding: 7px;
+        padding: 6px;
         width: 200px;
         font-size: 20px;
     }
