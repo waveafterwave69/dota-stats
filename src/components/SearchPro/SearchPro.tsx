@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import type { Team } from '../../types/proTypes'
 import styles from './SearchPro.module.css'
+import Spinner from '../../UI/Spinner/Spinner'
 
 interface SearchProProps {
     teams: Team[]
@@ -118,7 +119,7 @@ const SearchPro: React.FC<SearchProProps> = ({
                                 ?
                             </button>
                             {isLoading ? (
-                                <p>Загрузка...</p>
+                                <Spinner />
                             ) : (
                                 team.map((team) => (
                                     <li

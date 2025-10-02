@@ -3,6 +3,7 @@ import MatchItem from '../MatchItem/MatchItem'
 import styles from './MatchList.module.css'
 import usePlayer from '../../hooks/usePlayer'
 import React from 'react'
+import Spinner from '../../UI/Spinner/Spinner'
 
 interface MatchListProps {
     error: string | null
@@ -71,7 +72,7 @@ const MatchList: React.FC<MatchListProps> = ({
             {error && error}
             <ul className={styles.list__games}>
                 {themeLoading ? (
-                    <p>Загрузка...</p>
+                    <Spinner />
                 ) : (
                     matches &&
                     matches.map((match, index) => (

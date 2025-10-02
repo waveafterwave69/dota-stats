@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import type { ProPlayer, Team } from '../../types/proTypes'
 import styles from './ListPro.module.css'
 import ProItem from '../ProItem/ProItem'
+import Spinner from '../../UI/Spinner/Spinner'
 
 interface ListProProps {
     players: ProPlayer[]
@@ -67,7 +68,7 @@ const ListPro: React.FC<ListProProps> = ({
                             />
                         ))}
                 </ul>
-                {isLoading && <p>Загрузка...</p>}
+                {isLoading && <Spinner />}
                 {!searchTeam && (
                     <ul className={styles.pro__list}>
                         {pro &&

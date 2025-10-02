@@ -5,6 +5,7 @@ import { useParams } from 'react-router'
 import type { OneMatch } from '../../types/matchTypes'
 import { secondsToHMS } from '../../utils/utils'
 import MatchSide from '../../components/MatchSide/MatchSide'
+import Spinner from '../../UI/Spinner/Spinner'
 
 const MatchPage: React.FC = () => {
     const params = useParams()
@@ -58,7 +59,7 @@ const MatchPage: React.FC = () => {
                         </div>
                     </>
                 ) : (
-                    <p>Загрузка...</p>
+                    <Spinner />
                 )}
             </section>
         </>
