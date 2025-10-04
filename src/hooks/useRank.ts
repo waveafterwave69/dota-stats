@@ -1,8 +1,8 @@
 import type { WinLose } from '../types/playerTypes'
 import { useEffect, useState } from 'react'
-import usePlayer from './usePlayer'
 import { getWinAndLose } from '../helpers/playerHelpers'
 import { medals, unrankedMedal } from '../data/medalsData'
+import { useAppSelector } from './hooks'
 
 interface PlayerContextValue {
     profile:
@@ -20,7 +20,7 @@ interface PlayerContextValue {
 }
 
 const useRank = (): PlayerContextValue => {
-    const { playerInfo } = usePlayer()
+    const playerInfo = useAppSelector((state) => state.player.playerInfo)
     const [winLose, setWinLose] = useState<WinLose>()
     const [winRate, setWinRate] = useState<number>()
     const [tier, setTier] = useState<number>(0)

@@ -4,10 +4,10 @@ import { getAllMatches } from '../../helpers/matchesHelpers'
 import { type MatchData } from '../../types/matchTypes'
 import MatchList from '../../components/MatchList/MatchList'
 import PlayerPromo from '../../components/PlayerPromo/PlayerPromo'
-import usePlayer from '../../hooks/usePlayer'
+import { useAppSelector } from '../../hooks/hooks'
 
 const PlayerPageMatches: React.FC = () => {
-    const { winLose } = usePlayer()
+    const winLose = useAppSelector((state) => state.player.winLose)
     const [matches, setMatches] = useState<MatchData[]>([])
     const [loading, setLoading] = useState<boolean>(false)
     const [themeLoading, setThemeLoading] = useState<boolean>(false)

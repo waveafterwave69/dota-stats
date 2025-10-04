@@ -2,8 +2,9 @@ import { useNavigate } from 'react-router'
 import type { Player } from '../../types/matchTypes'
 import { getHeroImage, getHeroName } from '../../utils/utils'
 import styles from './PlayerMatchItem.module.css'
-import usePlayer from '../../hooks/usePlayer'
 import useDota from '../../hooks/useDota'
+import { useAppDispatch } from '../../hooks/hooks'
+import { fetchPlayerInfo } from '../../store/player/playerSlice'
 
 interface PlayerMatchItemProps {
     player: Player
@@ -11,7 +12,7 @@ interface PlayerMatchItemProps {
 
 const PlayerMatchItem: React.FC<PlayerMatchItemProps> = ({ player }) => {
     const { items } = useDota()
-    const { getPlayerInfo } = usePlayer()
+    const dispatch = useAppDispatch()
 
     const itemIds = [
         player.item_0,
@@ -29,7 +30,9 @@ const PlayerMatchItem: React.FC<PlayerMatchItemProps> = ({ player }) => {
     ) => {
         e.preventDefault()
 
-        const success = await getPlayerInfo(String(player.account_id))
+        const success = await dispatch(
+            fetchPlayerInfo(String(player.account_id))
+        )
 
         if (success) {
             navigate(`/player/${player.account_id}`)

@@ -2,11 +2,11 @@ import MatchList from '../../components/MatchList/MatchList'
 import PlayerPromo from '../../components/PlayerPromo/PlayerPromo'
 import React, { useEffect, useState } from 'react'
 import { getMatches } from '../../helpers/matchesHelpers'
-import usePlayer from '../../hooks/usePlayer'
 import type { MatchData } from '../../types/matchTypes'
+import { useAppSelector } from '../../hooks/hooks'
 
 const PlayerPage: React.FC = () => {
-    const { playerInfo } = usePlayer()
+    const playerInfo = useAppSelector((state) => state.player.playerInfo)
     const [matches, setMatches] = useState<MatchData[]>([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)

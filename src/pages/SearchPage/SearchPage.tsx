@@ -2,12 +2,14 @@ import styles from './SearchPage.module.css'
 import dotaLogo from '../../assets/dota-logo.svg'
 import searchImg from '../../assets/search.svg'
 import { useState } from 'react'
-import usePlayer from '../../hooks/usePlayer'
 import { useNavigate } from 'react-router'
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
+import { fetchPlayerInfo, setError } from '../../store/player/playerSlice'
 
 const SearchPage: React.FC = () => {
     const [searchValue, setSearchValue] = useState<string>('')
-    const { getPlayerInfo, error, setError } = usePlayer()
+    const dispatch = useAppDispatch()
+    const error = useAppSelector((state) => state.player.error)
     const navigate = useNavigate()
 
     const handleValue = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,11 +24,11 @@ const SearchPage: React.FC = () => {
         e.preventDefault()
 
         if (!/^\d+$/.test(searchValue)) {
-            setError('Пожалуйста, введите числовой Steam ID.')
+            dispatch(setError('Пожалуйста, введите числовой Steam ID.'))
             return
         }
 
-        const success = await getPlayerInfo(searchValue)
+        const success = await dispatch(fetchPlayerInfo(searchValue))
 
         if (success) {
             navigate(`/player/${searchValue}`)

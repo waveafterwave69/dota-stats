@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router'
 import type { ProPlayer, Team } from '../../types/proTypes'
 import styles from './ProItem.module.css'
-import usePlayer from '../../hooks/usePlayer'
 import { useEffect, useState } from 'react'
+import { useAppDispatch } from '../../hooks/hooks'
+import { fetchPlayerInfo } from '../../store/player/playerSlice'
 
 interface ProItemProps {
     player: ProPlayer
@@ -15,8 +16,10 @@ const ProItem: React.FC<ProItemProps> = ({
     teams,
     lastMatchElementRef,
 }) => {
+    const dispatch = useAppDispatch()
+
     const [currTeam, setCurrTeam] = useState<string>('')
-    const { getPlayerInfo } = usePlayer()
+
     const navigate = useNavigate()
 
     const onClick = async (
@@ -24,7 +27,9 @@ const ProItem: React.FC<ProItemProps> = ({
     ) => {
         e.preventDefault()
 
-        const success = await getPlayerInfo(String(player.account_id))
+        const success = await dispatch(
+            fetchPlayerInfo(String(player.account_id))
+        )
 
         if (success) {
             navigate(`/player/${player.account_id}`)

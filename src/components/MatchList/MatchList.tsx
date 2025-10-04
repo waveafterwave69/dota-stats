@@ -1,9 +1,10 @@
 import type { MatchData } from '../../types/matchTypes'
 import MatchItem from '../MatchItem/MatchItem'
 import styles from './MatchList.module.css'
-import usePlayer from '../../hooks/usePlayer'
 import React from 'react'
 import Spinner from '../../UI/Spinner/Spinner'
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
+import { setWinLose } from '../../store/player/playerSlice'
 
 interface MatchListProps {
     error: string | null
@@ -24,21 +25,22 @@ const MatchList: React.FC<MatchListProps> = ({
     lastMatchElementRef,
     themeLoading,
 }) => {
-    const { setWinLose, winLose } = usePlayer()
+    const dispatch = useAppDispatch()
+    const winLose = useAppSelector((state) => state.player.winLose)
 
     const handleWin = () => {
         if (winLose === 1) {
-            setWinLose(null)
+            dispatch(setWinLose(null))
         } else {
-            setWinLose(1)
+            dispatch(setWinLose(1))
         }
     }
 
     const handleLose = () => {
         if (winLose === 0) {
-            setWinLose(null)
+            dispatch(setWinLose(null))
         } else {
-            setWinLose(0)
+            dispatch(setWinLose(0))
         }
     }
 
