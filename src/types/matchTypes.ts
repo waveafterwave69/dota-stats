@@ -29,6 +29,7 @@ export interface Player {
     gold_per_min: number
     net_worth: number
     xp_per_min: number
+    win: number
 }
 
 export interface OneMatch {

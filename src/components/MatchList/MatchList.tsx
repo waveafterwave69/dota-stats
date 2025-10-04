@@ -1,7 +1,7 @@
+import { useCallback } from 'react'
 import type { MatchData } from '../../types/matchTypes'
 import MatchItem from '../MatchItem/MatchItem'
 import styles from './MatchList.module.css'
-import React from 'react'
 import Spinner from '../../UI/Spinner/Spinner'
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
 import { setWinLose } from '../../store/player/playerSlice'
@@ -28,21 +28,13 @@ const MatchList: React.FC<MatchListProps> = ({
     const dispatch = useAppDispatch()
     const winLose = useAppSelector((state) => state.player.winLose)
 
-    const handleWin = () => {
-        if (winLose === 1) {
-            dispatch(setWinLose(null))
-        } else {
-            dispatch(setWinLose(1))
-        }
-    }
+    const handleWin = useCallback(() => {
+        dispatch(setWinLose(winLose === 1 ? null : 1))
+    }, [dispatch, winLose])
 
-    const handleLose = () => {
-        if (winLose === 0) {
-            dispatch(setWinLose(null))
-        } else {
-            dispatch(setWinLose(0))
-        }
-    }
+    const handleLose = useCallback(() => {
+        dispatch(setWinLose(winLose === 0 ? null : 0))
+    }, [dispatch, winLose])
 
     return (
         <section className={styles.list}>
