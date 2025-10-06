@@ -14,3 +14,10 @@ export interface WinLose {
     win: number
     lose: number
 }
+
+export interface PlayerHeroesI {
+    games: number
+    hero_id: number
+    last_played: number
+    win: number
+}

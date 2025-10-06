@@ -1,0 +1,47 @@
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 5px;
+}
+
+.item__hero {
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+    width: 300px;
+}
+
+.item__img {
+    width: 90px;
+}
+
+.item__games {
+    border-bottom: 2px solid var(--color-red);
+}
+
+.item__win {
+    border-bottom: 2px solid var(--color-green);
+}
+
+@media (max-width: 768px) {
+    .item__hero {
+        column-gap: 12px;
+        width: 220px;
+    }
+
+    .item__img {
+        width: 70px;
+    }
+}
+
+@media (max-width: 425px) {
+    .item__hero {
+        column-gap: 10px;
+        width: 130px;
+    }
+
+    .item__img {
+        width: 60px;
+    }
+}

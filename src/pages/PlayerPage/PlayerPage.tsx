@@ -4,10 +4,14 @@ import React, { useEffect, useState } from 'react'
 import { getMatches } from '../../helpers/matchesHelpers'
 import type { MatchData } from '../../types/matchTypes'
 import { useAppSelector } from '../../hooks/hooks'
+import PlayerHeroes from '../../components/PlayerHeroes/PlayerHeroes'
+import { getPlayerHeroes } from '../../helpers/playerHelpers'
+import type { PlayerHeroesI } from '../../types/playerTypes'
 
 const PlayerPage: React.FC = () => {
     const playerInfo = useAppSelector((state) => state.player.playerInfo)
     const [matches, setMatches] = useState<MatchData[]>([])
+    const [heroes, setHeroes] = useState<PlayerHeroesI[]>([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
 
@@ -15,8 +19,14 @@ const PlayerPage: React.FC = () => {
         const fetchMatches = async () => {
             try {
                 setLoading(true)
-                const data = await getMatches(playerInfo?.profile?.account_id)
-                setMatches(data)
+                const matchesData = await getMatches(
+                    playerInfo?.profile?.account_id
+                )
+                const heroesData = await getPlayerHeroes(
+                    playerInfo?.profile?.account_id
+                )
+                setMatches(matchesData)
+                setHeroes(heroesData)
                 setLoading(false)
             } catch (err: any) {
                 setError(err.message)
@@ -32,6 +42,7 @@ const PlayerPage: React.FC = () => {
     return (
         <>
             <PlayerPromo />
+            <PlayerHeroes heroes={heroes} loading={loading} />
             <MatchList error={error} matches={matches} loading={loading} />
         </>
     )

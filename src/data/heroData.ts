@@ -168,7 +168,7 @@ export const heroData: HeroData[] = [
     {
         id: 34,
         name: 'Tinker',
-        img: 'https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/enigma.png',
+        img: 'https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/tinker.png',
     },
     {
         id: 35,
