@@ -1,0 +1,28 @@
+.favorites__title {
+    margin-top: 30px;
+    font-weight: 600;
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+
+.favorites__list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+
+@media (max-width: 768px) {
+    .favorites__title {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 425px) {
+    .favorites__title {
+        font-size: 22px;
+    }
+
+    .favorites__list {
+        row-gap: 10px;
+    }
+}

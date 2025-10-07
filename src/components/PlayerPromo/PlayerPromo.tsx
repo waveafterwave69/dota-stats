@@ -1,9 +1,30 @@
-import { NavLink } from 'react-router'
+import { NavLink, useParams } from 'react-router'
 import useRank from '../../hooks/useRank'
 import styles from './PlayerPromo.module.css'
+import { useAppSelector } from '../../hooks/hooks'
+import { useDispatch } from 'react-redux'
+import {
+    addFavorites,
+    deleteFavorites,
+} from '../../store/favorites/favoritesSlice'
 
 const PlayerPromo: React.FC = () => {
+    const params = useParams()
     const { profile, rankMedal, rankName, winRate, winLose } = useRank()
+    const favorites = useAppSelector((state) => state.favorites.favorites)
+    const dispatch = useDispatch()
+
+    let isFavorite = favorites.filter(
+        (el) => el.account_id === Number(params.id)
+    )
+
+    const handleFavorite = () => {
+        dispatch(addFavorites(profile))
+    }
+
+    const handleDelete = () => {
+        dispatch(deleteFavorites(profile))
+    }
 
     return (
         <>
@@ -85,6 +106,21 @@ const PlayerPromo: React.FC = () => {
                             </NavLink>
                         </li>
                     </ul>
+                    {isFavorite.length > 0 ? (
+                        <button
+                            className={styles.promo__button}
+                            onClick={handleDelete}
+                        >
+                            Удалить из избранных
+                        </button>
+                    ) : (
+                        <button
+                            className={styles.promo__button}
+                            onClick={handleFavorite}
+                        >
+                            Добавить в избранное
+                        </button>
+                    )}
                 </div>
             </section>
         </>

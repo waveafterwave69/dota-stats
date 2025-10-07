@@ -43,6 +43,13 @@ const BurgerMenu: React.FC<BurgerMenuProps> = ({
                     </button>
                     <nav className={styles.burger__menu}>
                         <Link
+                            to="/favorites"
+                            className={styles.burger__item}
+                            onClick={() => setIsMenuOpen(false)}
+                        >
+                            <p>Избранные</p>
+                        </Link>
+                        <Link
                             to="/"
                             className={styles.burger__item}
                             onClick={() => setIsMenuOpen(false)}

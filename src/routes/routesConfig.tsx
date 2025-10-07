@@ -4,6 +4,7 @@ import PlayerPageMatches from '../pages/PlayerPageMatches/PlayerPageMatches'
 import ProPage from '../pages/ProPage/ProPage'
 import SearchPage from '../pages/SearchPage/SearchPage'
 import SearchMatchesPage from '../pages/SearchMatchesPage/SearchMatchesPage'
+import FavoritesPage from '../pages/FavoritesPage/FavoritesPage'
 
 export const routesConfig = [
     {
@@ -29,5 +30,9 @@ export const routesConfig = [
     {
         page: <ProPage />,
         url: '/pro',
+    },
+    {
+        page: <FavoritesPage />,
+        url: '/favorites',
     },
 ]
