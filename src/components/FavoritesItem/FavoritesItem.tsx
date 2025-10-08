@@ -1,28 +1,41 @@
-import { useDispatch } from 'react-redux'
 import type { PlayerProfile } from '../../types/playerTypes'
 import styles from './FavoritesItem.module.css'
 import { deleteFavorites } from '../../store/favorites/favoritesSlice'
-import { Link } from 'react-router'
+import { useNavigate } from 'react-router'
 import deleteImg from '../../assets/bin.png'
+import { fetchPlayerInfo } from '../../store/player/playerSlice'
+import { useAppDispatch } from '../../hooks/hooks'
 
 interface FavoritesItemProps {
     favItem: PlayerProfile
 }
 
 const FavoritesItem: React.FC<FavoritesItemProps> = ({ favItem }) => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate()
 
     const handleDelete = () => {
         dispatch(deleteFavorites(favItem))
     }
 
+    const onClick = async (
+        e: React.MouseEvent<HTMLParagraphElement, MouseEvent>
+    ) => {
+        e.preventDefault()
+
+        const success = await dispatch(
+            fetchPlayerInfo(String(favItem.account_id))
+        )
+
+        if (success && favItem.personaname) {
+            navigate(`/player/${favItem.account_id}`)
+        }
+    }
+
     return (
         <>
             <li className={styles.item}>
-                <Link
-                    to={`/player/${favItem.account_id}`}
-                    className={styles.item__content}
-                >
+                <div onClick={onClick} className={styles.item__content}>
                     <img
                         src={favItem.avatarfull}
                         alt={favItem.personaname}
@@ -39,7 +52,7 @@ const FavoritesItem: React.FC<FavoritesItemProps> = ({ favItem }) => {
                             <p>Регион: {favItem.loccountrycode}</p>
                         )}
                     </div>
-                </Link>
+                </div>
                 <button onClick={handleDelete} className={styles.item__button}>
                     <img src={deleteImg} alt="Удалить" />
                 </button>

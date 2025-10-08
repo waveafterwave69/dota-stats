@@ -34,7 +34,7 @@ const PlayerMatchItem: React.FC<PlayerMatchItemProps> = ({ player }) => {
             fetchPlayerInfo(String(player.account_id))
         )
 
-        if (success) {
+        if (success && player.personaname) {
             navigate(`/player/${player.account_id}`)
         }
     }
