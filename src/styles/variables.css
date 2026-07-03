@@ -6,12 +6,15 @@
     --font-family: 'Inter', sans-serif;
 
     --color-white: #ffffff;
-    --color-red-dark: #A31010;
-    --color-red: #FE3030;
+    --color-red-dark: #a31010;
+    --color-red: #ff4500;
     --color-grey: #262626;
-    --color-green: #3EC347;
+    --color-green: #3ec347;
     --color-black-light: #101010;
     --color-black: #090909;
+
+    --primary-bg: rgba(20, 20, 22, 0.4);
+    --primary-border: 1px solid rgba(255, 255, 255, 0.05);
 
     --transition-duration: 0.2s;
 }

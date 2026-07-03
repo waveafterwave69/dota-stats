@@ -1,11 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-
-import BurgerMenu from '../BurgerMenu/BurgerMenu'
-import { useAppSelector } from '../../hooks/hooks'
-
 import dotaLogo from '../../assets/dota-logo.svg'
-import favoritesImg from '../../assets/favoritesImg.png'
 import styles from './Header.module.css'
 
 const NAV_ITEMS = [
@@ -16,31 +11,71 @@ const NAV_ITEMS = [
 
 const Header: React.FC = () => {
     const location = useLocation()
-    const favorites = useAppSelector((state) => state.favorites.favorites)
-    const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+    const dropdownRef = useRef<HTMLDivElement>(null)
 
-    const closeMenu = () => setIsMenuOpen(false)
+    const currentItem =
+        NAV_ITEMS.find((item) => item.path === location.pathname) ||
+        NAV_ITEMS[0]
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target as Node)
+            ) {
+                setIsDropdownOpen(false)
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside)
+        return () =>
+            document.removeEventListener('mousedown', handleClickOutside)
+    }, [])
 
     return (
-        <>
-            {isMenuOpen && (
-                <div className={styles.overlay} onClick={closeMenu} />
-            )}
+        <header className={styles.header}>
+            <div className="container">
+                <div className={styles.header__main}>
+                    <Link to="/" className={styles.header__logo}>
+                        <div className={styles.logoWrapper}>
+                            <img
+                                src={dotaLogo}
+                                alt="dota2"
+                                className={styles.logoImg}
+                            />
+                            <div className={styles.logoText}>
+                                <span className={styles.logoText__dota}>
+                                    DOTA
+                                </span>
+                                <p className={styles.logoText__stats}>STATS</p>
+                            </div>
+                        </div>
+                    </Link>
 
-            <header className={styles.header}>
-                {!isMenuOpen && (
-                    <>
-                        <div className={styles.header__content}>
-                            <Link
-                                to="/"
-                                className={styles.header__logo}
-                                onClick={closeMenu}
+                    <div className={styles.dropdownContainer} ref={dropdownRef}>
+                        <button
+                            className={`${styles.dropdownButton} ${isDropdownOpen ? styles.dropdownButton_active : ''}`}
+                            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                        >
+                            <span>Искать: {currentItem.label}</span>
+                            <svg
+                                className={`${styles.arrow} ${isDropdownOpen ? styles.arrow_open : ''}`}
+                                width="12"
+                                height="8"
+                                viewBox="0 0 12 8"
+                                fill="none"
                             >
-                                <p>DOTA STATS</p>
-                                <img src={dotaLogo} alt="dota2" />
-                            </Link>
+                                <path
+                                    d="M1 1L6 6L11 1"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                />
+                            </svg>
+                        </button>
 
-                            <nav className={styles.nav}>
+                        {isDropdownOpen && (
+                            <div className={styles.dropdownMenu}>
                                 {NAV_ITEMS.map((item) => {
                                     const isActive =
                                         location.pathname === item.path
@@ -48,35 +83,21 @@ const Header: React.FC = () => {
                                         <Link
                                             key={item.path}
                                             to={item.path}
-                                            className={`${styles.header__item} ${isActive ? styles.header__item_active : ''}`}
-                                            onClick={closeMenu}
+                                            className={`${styles.dropdownLink} ${isActive ? styles.dropdownLink_active : ''}`}
+                                            onClick={() =>
+                                                setIsDropdownOpen(false)
+                                            }
                                         >
                                             {item.label}
                                         </Link>
                                     )
                                 })}
-                            </nav>
-                        </div>
-
-                        <Link to="/favorites" className={styles.fav}>
-                            <img
-                                src={favoritesImg}
-                                alt="избранные"
-                                className={styles.fav__img}
-                            />
-                            {favorites.length > 0 && (
-                                <span>{favorites.length}</span>
-                            )}
-                        </Link>
-                    </>
-                )}
-
-                <BurgerMenu
-                    isMenuOpen={isMenuOpen}
-                    setIsMenuOpen={setIsMenuOpen}
-                />
-            </header>
-        </>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </div>
+        </header>
     )
 }
 
