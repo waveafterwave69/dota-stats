@@ -1,10 +1,10 @@
-import { useCallback } from 'react'
+import React, { useCallback } from 'react'
 import type { MatchData } from '../../types/matchTypes'
 import MatchItem from '../MatchItem/MatchItem'
-import styles from './MatchList.module.css'
 import Spinner from '../../UI/Spinner/Spinner'
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
 import { setWinLose } from '../../store/player/playerSlice'
+import styles from './MatchList.module.css'
 
 interface MatchListProps {
     error: string | null
@@ -39,37 +39,39 @@ const MatchList: React.FC<MatchListProps> = ({
     return (
         <section className={styles.list}>
             <h2 className={styles.list__title}>{title}</h2>
+
             {winOrLose && (
-                <ul className={styles.winlose__list}>
-                    <li>
-                        <button
-                            className={`${styles.winlose__item} ${styles.win} ${
-                                winLose === 1 && styles.active
-                            }`}
-                            onClick={handleWin}
-                        >
-                            Победы
-                        </button>
-                    </li>
-                    <li>
-                        <button
-                            className={`${styles.winlose__item} ${
-                                styles.lose
-                            } ${winLose === 0 && styles.active}`}
-                            onClick={handleLose}
-                        >
-                            Поражения
-                        </button>
-                    </li>
-                </ul>
+                <div className={styles.winlose__filters}>
+                    <button
+                        type="button"
+                        className={`${styles.winlose__button} ${styles.win} ${winLose === 1 ? styles.active : ''}`}
+                        onClick={handleWin}
+                    >
+                        Победы
+                    </button>
+                    <button
+                        type="button"
+                        className={`${styles.winlose__button} ${styles.lose} ${winLose === 0 ? styles.active : ''}`}
+                        onClick={handleLose}
+                    >
+                        Поражения
+                    </button>
+                </div>
             )}
-            {error && error}
+
+            {error && (
+                <div className={styles.error_message} role="alert">
+                    {error}
+                </div>
+            )}
+
             <ul className={styles.list__games}>
                 {themeLoading ? (
-                    <Spinner />
+                    <div className={styles.spinner_container}>
+                        <Spinner />
+                    </div>
                 ) : (
-                    matches &&
-                    matches.map((match, index) => (
+                    matches?.map((match, index) => (
                         <li
                             key={match.match_id}
                             ref={
@@ -77,13 +79,20 @@ const MatchList: React.FC<MatchListProps> = ({
                                     ? lastMatchElementRef
                                     : null
                             }
+                            className={styles.list__gameItem}
                         >
                             <MatchItem match={match} />
                         </li>
                     ))
                 )}
             </ul>
-            {loading && !themeLoading && <p>Загрузка...</p>}
+
+            {loading && !themeLoading && (
+                <div className={styles.loading_more}>
+                    <Spinner />
+                    <span>Загрузка матчей...</span>
+                </div>
+            )}
         </section>
     )
 }

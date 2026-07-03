@@ -1,180 +1,190 @@
 .match {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr; /* Дублирует сетку шапки таблицы */
     align-items: center;
     color: var(--color-white);
-    background-color: var(--color-black);
-    padding: 30px 35px;
-    border-radius: 3px;
+    background-color: #1a1a1c;
+    padding: 16px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    border-left: 5px solid transparent;
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+/* Стилизация карточки в зависимости от исхода игры */
+.match_win {
+    border-left-color: #10b981; /* Изумрудный для победы */
+    background: linear-gradient(
+        90deg,
+        rgba(16, 185, 129, 0.03) 0%,
+        rgba(26, 26, 28, 1) 20%
+    );
+}
+
+.match_lose {
+    border-left-color: #ef4444; /* Красный для поражения */
+    background: linear-gradient(
+        90deg,
+        rgba(239, 68, 68, 0.03) 0%,
+        rgba(26, 26, 28, 1) 20%
+    );
+}
+
+.match:hover {
+    background-color: #222225;
 }
 
 .match__hero {
     display: flex;
-    align-items: flex-start;
-    column-gap: 20px;
+    align-items: center;
+    gap: 20px;
 }
 
-.green {
-    color: #3EC347;
+.match__heroImgWrapper {
+    width: 120px;
+    height: 68px;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    background-color: #121214;
 }
 
-.red {
-    color: #FE3030;
-}
-
-.match__hero img {
-    width: 180px;
+.hero__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .text__content {
     display: flex;
     flex-direction: column;
-    row-gap: 10px;
-}
-
-.text__content p {
-    font-size: 18px;
+    gap: 4px;
 }
 
 .hero__name {
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--color-white);
+}
+
+.match__status {
+    font-size: 14px;
     font-weight: 600;
-    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.text_green {
+    color: #10b981;
+}
+.text_red {
+    color: #ef4444;
+}
+
+.match__mode {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* Блок KDA */
+.match__res {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.kda__label {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.3);
+    text-transform: uppercase;
+    margin-bottom: 2px;
 }
 
 .match__kda {
-    font-size: 24px;
-    font-weight: 500;
+    font-size: 18px;
+    font-weight: 700;
+    color: #e4e4e7;
+    letter-spacing: 0.5px;
 }
 
+.kda__slash {
+    color: rgba(255, 255, 255, 0.15);
+    margin: 0 2px;
+}
+
+/* Блок среднего ранга матча */
 .match__rank {
-    column-gap: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.rank__title {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.3);
+    text-transform: uppercase;
+    margin-bottom: 2px;
+}
+
+.rank__medalWrapper {
+    width: 52px;
+    height: 52px;
     display: flex;
     align-items: center;
-    font-size: 19px;
+    justify-content: center;
 }
 
-.match__rank img {
-    width: 100px;
+.rank__medalWrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
 }
 
-@media (max-width: 1024px) {
-    .match {
-        padding: 20px 25px;
-    }
-
-    .match__hero {
-        flex-wrap: wrap;
-        column-gap: 15px;
-        display: flex;
-        align-items: center;
-    }
-
-    .match__hero img {
-        width: 100px;
-    }
-
-    .text__content {
-        row-gap: 8px;
-    }
-
-    .text__content p {
-        display: none;
-        font-size: 18px;
-    }
-
-    .hero__name {
-        font-size: 20px;
-        font-weight: 500;
-    }
-
-    .match__kda {
-        font-size: 18px;
-    }
-
-    .match__rank {
-        column-gap: 10px;
-        font-size: 19px;
-    }
-
-    .match__rank img {
-        width: 50px;
-    }
-}
-
+/* АДАПТИВНОСТЬ БЕЗ СЛОМОВ СЕМАНТИКИ */
 @media (max-width: 768px) {
     .match {
-        padding: 0px 0px;
-        background-color: #1313135b;
+        padding: 12px 16px;
     }
 
-    .match__hero {
-        flex-wrap: wrap;
-        column-gap: 0px;
-        display: flex;
-        align-items: center;
-    }
-
-    .match__hero img {
-        width: 75px;
-    }
-
-    .text__content {
-        row-gap: 8px;
-    }
-
-    .text__content p {
-        display: none;
-        font-size: 16px;
+    .match__heroImgWrapper {
+        width: 80px;
+        height: 45px;
     }
 
     .hero__name {
-        font-size: 20px;
-        display: none;
+        font-size: 16px;
     }
 
     .match__kda {
-        font-size: 16px;
+        font-size: 15px;
     }
 
-    .match__rank {
-        column-gap: 10px;
-        font-size: 16px;
-    }
-
-    .match__rank img {
-        width: 30px;
+    .rank__medalWrapper {
+        width: 42px;
+        height: 42px;
     }
 }
 
-@media (max-width: 425px) {
-    .match__hero img {
-        width: 65px;
+@media (max-width: 550px) {
+    .match {
+        grid-template-columns: 2fr 1.2fr 0.8fr; /* Сужаем колонку героя, расширяем KDA */
+        gap: 8px;
     }
 
-    .text__content {
-        row-gap: 8px;
+    .match__mode,
+    .rank__title,
+    .kda__label {
+        display: none; /* Скрываем второстепенные текстовые подписи на мобилках */
     }
 
-    .text__content p {
-        display: none;
-        font-size: 16px;
-    }
-
-    .hero__name {
-        font-size: 20px;
-        display: none;
-    }
-
-    .match__kda {
-        font-size: 16px;
-    }
-
-    .match__rank {
-        column-gap: 2px;
-        font-size: 14px;
-    }
-
-    .match__rank img {
-        width: 40px;
+    .match__heroImgWrapper {
+        display: none; /* Убираем тяжелые картинки героев, оставляя только текст */
     }
 }

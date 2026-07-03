@@ -129,11 +129,19 @@
 }
 
 @media (max-width: 425px) {
-
     .gpm,
     .xpm,
     .creeps,
     .gold {
         display: none;
+    }
+
+    .player__kda {
+        width: 30px;
+    }
+
+    .player__card {
+        justify-content: flex-start;
+        column-gap: 90px;
     }
 }

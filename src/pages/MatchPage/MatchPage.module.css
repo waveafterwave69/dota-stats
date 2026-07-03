@@ -1,149 +1,159 @@
 .match {
-    margin-top: 20px;
-    margin-bottom: 200px;
+    max-width: 1400px;
+    margin: 40px auto 120px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.match__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(20, 20, 22, 0.4);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    margin-bottom: 40px;
 }
 
 .win__text {
-    text-align: center;
-    font-weight: 400;
-    font-size: 36px;
-    margin-bottom: 32px;
-}
-
-.red {
-    color: #fc2f2f;
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .green {
-    color: #5ffc2f;
+    color: #10b981; /* Приятный современный изумрудный Сил Света */
 }
 
-.match__info {
+.red {
+    color: #ef4444; /* Сочный красный Сил Тьмы */
+}
+
+/* Стилизация табло счета */
+.match__scoreBoard {
     display: flex;
-    justify-content: center;
     align-items: center;
-    column-gap: 40px;
+    justify-content: center;
+    gap: 48px;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 12px 40px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.02);
 }
 
 .radian__score {
-    font-weight: 400;
-    font-size: 26px;
-    color: #46e44e;
+    font-weight: 700;
+    font-size: 36px;
+    color: #10b981;
 }
 
 .dire__score {
-    font-weight: 400;
-    font-size: 26px;
-    color: #d84242;
+    font-weight: 700;
+    font-size: 36px;
+    color: #ef4444;
 }
 
 .duration {
-    font-weight: 400;
-    font-size: 28px;
+    font-weight: 600;
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.8);
+    font-variant-numeric: tabular-nums; /* Предотвращает прыжки цифр времени */
 }
 
 .sides {
-    margin-top: 40px;
     display: flex;
     flex-direction: column;
-    row-gap: 60px;
+    row-gap: 40px;
 }
 
+/* Вспомогательные контейнеры состояний */
+.centered_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+}
+
+.error_text {
+    color: #ef4444;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* МЕДИА-ЗАПРОСЫ (удалено дублирование, исправлены брейкпоинты) */
 @media (max-width: 1024px) {
+    .win__text {
+        font-size: 26px;
+    }
+
+    .match__scoreBoard {
+        gap: 32px;
+        padding: 10px 30px;
+    }
+
+    .radian__score,
+    .dire__score {
+        font-size: 30px;
+    }
+
+    .duration {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
     .match {
         margin-top: 20px;
-        margin-bottom: 100px;
+        margin-bottom: 60px;
     }
 
     .win__text {
-        font-size: 30px;
-        margin-bottom: 25px;
-    }
-
-    .match__info {
-        column-gap: 30px;
-    }
-
-    .radian__score {
         font-size: 22px;
+        letter-spacing: 1px;
     }
 
+    .match__scoreBoard {
+        gap: 24px;
+    }
+
+    .radian__score,
     .dire__score {
-        font-size: 22px;
-    }
-
-    .duration {
-        font-size: 22px;
-    }
-
-    .sides {
-        margin-top: 40px;
-        row-gap: 60px;
+        font-size: 24px;
     }
 }
 
-@media (max-width: 768px) {
-    .match {
-        margin-top: 15px;
-        margin-bottom: 50px;
+@media (max-width: 425px) {
+    .match__header {
+        padding: 20px 16px;
     }
 
     .win__text {
+        font-size: 18px;
+        margin-bottom: 16px;
+    }
+
+    .match__scoreBoard {
+        gap: 16px;
+        padding: 8px 20px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .radian__score,
+    .dire__score {
         font-size: 22px;
-        margin-bottom: 15px;
-    }
-
-    .match__info {
-        column-gap: 20px;
-    }
-
-    .radian__score {
-        font-size: 20px;
-    }
-
-    .dire__score {
-        font-size: 20px;
     }
 
     .duration {
-        font-size: 20px;
+        font-size: 16px;
     }
 
     .sides {
-        margin-top: 30px;
-        row-gap: 50px;
-    }
-}
-
-@media (max-width: 768px) {
-    .match {
-        margin-top: 15px;
-        margin-bottom: 50px;
-    }
-
-    .win__text {
-        font-size: 20px;
-        margin-bottom: 10px;
-    }
-
-    .match__info {
-        column-gap: 18px;
-    }
-
-    .radian__score {
-        font-size: 18px;
-    }
-
-    .dire__score {
-        font-size: 18px;
-    }
-
-    .duration {
-        font-size: 18px;
-    }
-
-    .sides {
-        margin-top: 25px;
-        row-gap: 30px;
+        row-gap: 24px;
     }
 }

@@ -7,6 +7,7 @@ export interface MatchData {
     game_mode: number
     hero_id: number
     average_rank: number | null
+    player_slot: number
 }
 
 export interface Player {

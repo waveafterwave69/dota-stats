@@ -1,125 +1,123 @@
+.table__wrapper {
+    width: 100%;
+    overflow-x: auto; /* Добавляет скроллбар, если таблица не влезает на мелкий экран */
+    background-color: rgba(20, 20, 22, 0.4);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
 .side {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.items {
-    width: 325px;
-}
-
-
-.table__item {
-    width: 30px;
+    width: 100%;
+    border-collapse: collapse;
 }
 
 .table__header {
-    display: flex;
+    display: grid;
+    grid-template-columns: 200px 220px 90px 200px 80px 200px 4fr;
     align-items: center;
-    justify-content: space-between;
+    padding: 16px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .side__title {
-    font-weight: 400;
-    font-size: 32px;
-    margin-bottom: 10px;
+    font-weight: 800;
+    font-size: 24px;
+    letter-spacing: 1px;
+    text-align: left;
 }
 
 .green {
-    color: #70e446;
+    color: #10b981;
 }
-
 .red {
-    color: #d84242;
+    color: #ef4444;
 }
 
+.table__item {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+    width: auto; /* Сбрасываем старый инлайн-фикс */
+}
+
+.items {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: right;
+    padding-right: 16px;
+}
+
+/* Контейнеры команд с красивой Dota-стилистикой */
 .side__content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    row-gap: 30px;
-    padding: 25px;
+    padding: 16px 24px;
+    gap: 20px;
 }
 
 .radiant__content {
-    background-color: #394735;
+    background: linear-gradient(
+        180deg,
+        rgba(16, 185, 129, 0.03) 0%,
+        rgba(0, 0, 0, 0) 100%
+    );
 }
 
 .dire__content {
-    background-color: #473535;
+    background: linear-gradient(
+        180deg,
+        rgba(239, 68, 68, 0.03) 0%,
+        rgba(0, 0, 0, 0) 100%
+    );
 }
 
+/* МЕДИА-ЗАПРОСЫ (Удалено дублирование, только адаптивное скрытие колонок) */
 @media (max-width: 1024px) {
-    .items {
-        width: 135px;
-    }
-
     .table__header {
-        font-size: 14px;
-    }
-
-    .table__item {
-        width: 25px;
-    }
-
-    .side__title {
-        font-weight: 400;
-        width: 200px;
-        text-align: left;
-        font-size: 22px;
-        margin-bottom: 10px;
+        grid-template-columns: 150px 150px 90px 150px 80px 150px 4fr;
+        padding: 12px 16px;
     }
 
     .side__content {
-        row-gap: 25px;
-        padding: 20px;
+        padding: 12px 16px;
+    }
+
+    .side__title {
+        font-size: 18px;
     }
 }
 
 @media (max-width: 768px) {
-    .items {
-        width: 105px;
-    }
-
+    /* Прячем з/м и о/м, перестраиваем пропорции сетки */
     .table__header {
-        font-size: 12px;
+        grid-template-columns: 4.5fr 120px 180px 150px 3.5fr;
     }
 
-    .table__xp,
-    .table__gpm {
+    .table__gpm,
+    .table__xp {
         display: none;
-    }
-
-    .table__item {
-        width: 15px;
-    }
-
-    .side__title {
-        width: 100px;
-        font-size: 18px;
-        margin-bottom: 10px;
-    }
-
-    .side__content {
-        row-gap: 15px;
-        padding: 10px;
     }
 }
 
-@media (max-width: 425px) {
+@media (max-width: 485px) {
+    /* Дополнительно прячем золото и крипов на смартфонах */
+    .table__header {
+        grid-template-columns: 200px 60px 170px;
+    }
 
-    .items {
-        width: 115px;
+    .table__gold,
+    .table__creeps {
+        display: none;
     }
 
     .side__title {
-        width: 120px;
-    }
-
-    .table__xp,
-    .table__gpm,
-    .table__creeps,
-    .table__gold {
-        display: none;
+        font-size: 15px;
     }
 }

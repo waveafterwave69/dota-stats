@@ -1,3 +1,4 @@
+import React, { useMemo } from 'react'
 import type { OneMatch } from '../../types/matchTypes'
 import PlayerMatchItem from '../PlayerMatchItem/PlayerMatchItem'
 import styles from './MatchSide.module.css'
@@ -10,23 +11,22 @@ interface MatchSideProps {
 const MatchSide: React.FC<MatchSideProps> = ({ match, side }) => {
     const isRadiant = side === 'radiant'
 
-    const radiantPlayers = match.players.filter((player) => {
-        return player.isRadiant === true
-    })
+    // Фильтруем игроков один раз за рендер пропсов
+    const radiantPlayers = useMemo(() => {
+        return match.players.filter((player) => player.isRadiant === true)
+    }, [match.players])
 
-    const direPlayers = match.players.filter((player) => {
-        return player.isRadiant === false
-    })
+    const direPlayers = useMemo(() => {
+        return match.players.filter((player) => player.isRadiant === false)
+    }, [match.players])
 
     return (
-        <>
+        <div className={styles.table__wrapper}>
             <table className={styles.side}>
                 <thead>
                     <tr className={styles.table__header}>
                         <th
-                            className={`${styles.side__title} ${
-                                isRadiant ? styles.green : styles.red
-                            }`}
+                            className={`${styles.side__title} ${isRadiant ? styles.green : styles.red}`}
                         >
                             {isRadiant ? 'СИЛЫ СВЕТА' : 'СИЛЫ ТЬМЫ'}
                         </th>
@@ -59,11 +59,7 @@ const MatchSide: React.FC<MatchSideProps> = ({ match, side }) => {
                     </tr>
                 </thead>
                 <tbody
-                    className={`${styles.side__content} ${
-                        isRadiant
-                            ? styles.radiant__content
-                            : styles.dire__content
-                    }`}
+                    className={`${styles.side__content} ${isRadiant ? styles.radiant__content : styles.dire__content}`}
                 >
                     {isRadiant
                         ? radiantPlayers.map((player) => (
@@ -80,7 +76,7 @@ const MatchSide: React.FC<MatchSideProps> = ({ match, side }) => {
                           ))}
                 </tbody>
             </table>
-        </>
+        </div>
     )
 }
 

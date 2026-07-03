@@ -1,71 +1,81 @@
-import styles from './SearchPage.module.css'
-import dotaLogo from '../../assets/dota-logo.svg'
-import searchImg from '../../assets/search.svg'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
+
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
 import { fetchPlayerInfo, setError } from '../../store/player/playerSlice'
 
+import dotaLogo from '../../assets/dota-logo.svg'
+import searchImg from '../../assets/search.svg'
+import styles from './SearchPage.module.css'
+
 const SearchPage: React.FC = () => {
     const [searchValue, setSearchValue] = useState<string>('')
-    const dispatch = useAppDispatch()
-    const error = useAppSelector((state) => state.player.error)
-    const navigate = useNavigate()
 
-    const handleValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate()
+    const error = useAppSelector((state) => state.player.error)
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.target.value)
+        if (error) dispatch(setError(null))
     }
 
-    const onSubmit = async (
-        e:
-            | React.FormEvent<HTMLFormElement>
-            | React.MouseEvent<HTMLButtonElement, MouseEvent>
-    ) => {
+    const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        if (!/^\d+$/.test(searchValue)) {
+        const trimmedValue = searchValue.trim()
+
+        if (!/^\d+$/.test(trimmedValue)) {
             dispatch(setError('Пожалуйста, введите числовой Steam ID.'))
             return
         }
 
-        const success = await dispatch(fetchPlayerInfo(searchValue))
-
+        const success = await dispatch(fetchPlayerInfo(trimmedValue))
         if (success) {
-            navigate(`/player/${searchValue}`)
+            navigate(`/player/${trimmedValue}`)
         }
     }
 
     return (
-        <>
-            <section className={styles.search}>
-                <div className={styles.search__logo}>
-                    <h1>DOTA STATS</h1>
-                    <img src={dotaLogo} alt="dota2" />
-                </div>
-                <form className={styles.search__form} onSubmit={onSubmit}>
-                    <div className={styles.search__input}>
-                        <input
-                            type="text"
-                            placeholder="найти игрока(steam id)"
-                            value={searchValue}
-                            onChange={handleValue}
-                        />
-                        <button type="button" onClick={onSubmit}>
-                            <img src={searchImg} alt="поиск" />
-                        </button>
-                    </div>
+        <section className={styles.search}>
+            <div className={styles.search__logo}>
+                <h1>DOTA STATS</h1>
+                <img src={dotaLogo} alt="Dota 2 Logo" />
+            </div>
+
+            <form className={styles.search__form} onSubmit={handleFormSubmit}>
+                <div className={styles.search__fieldWrapper}>
+                    <input
+                        type="text"
+                        placeholder="Найти игрока (Steam ID)"
+                        value={searchValue}
+                        onChange={handleInputChange}
+                        className={styles.search__input}
+                    />
                     <button
-                        disabled={searchValue.length < 1}
-                        type="button"
-                        onClick={onSubmit}
-                        className={styles.search__button}
+                        type="submit"
+                        className={styles.search__iconButton}
+                        aria-label="Поиск"
                     >
-                        найти
+                        <img src={searchImg} alt="" />
                     </button>
-                    {error && <div className={styles.error}>{error}</div>}{' '}
-                </form>
-            </section>
-        </>
+                </div>
+
+                <button
+                    type="submit"
+                    disabled={!searchValue.trim()}
+                    className={styles.search__submitButton}
+                >
+                    Найти
+                </button>
+
+                {error && (
+                    <div className={styles.error} role="alert">
+                        {error}
+                    </div>
+                )}
+            </form>
+        </section>
     )
 }
 

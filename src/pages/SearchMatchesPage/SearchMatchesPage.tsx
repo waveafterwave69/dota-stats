@@ -18,7 +18,7 @@ const SearchMatchesPage: React.FC = () => {
     const onSubmit = async (
         e:
             | React.FormEvent<HTMLFormElement>
-            | React.MouseEvent<HTMLButtonElement, MouseEvent>
+            | React.MouseEvent<HTMLButtonElement, MouseEvent>,
     ) => {
         e.preventDefault()
 

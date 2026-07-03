@@ -1,108 +1,134 @@
 .list {
-    margin-top: 20px;
-    background-color: rgba(38, 38, 38, 0.356);
-    padding: 30px 50px 50px;
+    margin-top: 24px;
+    background-color: rgba(20, 20, 22, 0.4);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 32px 40px;
+    margin-bottom: 30px;
+}
+
+.list__title {
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--color-white);
+    margin-bottom: 24px;
+}
+
+/* Контейнер фильтров в виде табов */
+.winlose__filters {
+    display: inline-flex;
+    background-color: rgba(0, 0, 0, 0.25);
+    padding: 4px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.winlose__button {
+    background: transparent;
+    border: none;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    opacity: 0.4;
+    transition: all 0.2s ease;
+}
+
+.winlose__button:hover {
+    opacity: 0.8;
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Активные состояния кнопок с мягким фоновым свечением */
+.winlose__button.win.active {
+    opacity: 1;
+    color: var(--color-green);
+    background-color: rgba(16, 185, 129, 0.1); /* Прозрачный зеленый */
+}
+
+.winlose__button.lose.active {
+    opacity: 1;
+    color: var(--color-red);
+    background-color: rgba(239, 110, 110, 0.1); /* Прозрачный красный */
 }
 
 .list__games {
     display: flex;
     flex-direction: column;
-    row-gap: 15px;
+    gap: 12px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-.list__title {
-    font-weight: 600;
-    font-size: 32px;
-    margin-bottom: 30px;
+.list__gameItem {
+    transition: transform 0.2s ease;
 }
 
-.winlose__list {
+/* Эффект легкого приподнимания карточки матча при наведении */
+.list__gameItem:hover {
+    transform: translateX(4px);
+}
+
+.spinner_container {
     display: flex;
-    column-gap: 10px;
-    margin-bottom: 30px;
-
+    justify-content: center;
+    padding: 40px 0;
 }
 
-.winlose__item {
-    background-color: #0c0c0c;
-    padding: 10px 15px;
-    opacity: 0.6;
+.loading_more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 500;
 }
 
-.active {
-    opacity: 1;
+.error_message {
+    padding: 12px 16px;
+    background-color: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    color: #f87171;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 15px;
 }
 
-.win {
-    color: var(--color-green);
-}
-
-.lose {
-    color: var(--color-red);
-}
-
-@media (max-width: 1024px) {
-    .list {
-        margin-top: 20px;
-        background-color: rgba(38, 38, 38, 0.356);
-        padding: 30px 20px;
-    }
-
-    .list__games {
-        display: flex;
-        flex-direction: column;
-        row-gap: 15px;
-    }
-
-    .list__title {
-        font-weight: 600;
-        font-size: 32px;
-        margin-bottom: 30px;
-    }
-}
-
+/* МЕДИА-ЗАПРОСЫ (только то, что реально меняется) */
 @media (max-width: 768px) {
     .list {
-        margin-top: 15px;
-        padding: 20px 20px;
-    }
-
-    .list__games {
-        display: flex;
-        flex-direction: column;
-        row-gap: 15px;
+        padding: 24px 20px;
     }
 
     .list__title {
-        font-size: 28px;
+        font-size: 24px;
         margin-bottom: 20px;
     }
 }
 
 @media (max-width: 425px) {
-    .winlose__list {
-        margin-bottom: 30px;
-    }
-
-    .winlose__item {
-        padding: 8px 12px;
-        font-size: 14px;
-    }
-
     .list {
-        margin-top: 15px;
-        padding: 20px 10px;
-    }
-
-    .list__games {
-        display: flex;
-        flex-direction: column;
-        row-gap: 20px;
+        padding: 20px 12px;
     }
 
     .list__title {
-        font-size: 22px;
-        font-weight: 500;
-        margin-bottom: 20px;
+        font-size: 20px;
+    }
+
+    .winlose__filters {
+        width: 100%;
+        display: flex;
+    }
+
+    .winlose__button {
+        flex: 1;
+        padding: 8px 12px;
+        font-size: 14px;
+        text-align: center;
     }
 }
