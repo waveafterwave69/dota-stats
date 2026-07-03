@@ -1,253 +1,221 @@
 .search {
     margin-top: 40px;
     position: relative;
+    display: inline-block;
+    width: 100%;
 }
 
 .search__flex {
     display: flex;
     align-items: center;
-    column-gap: 10px;
+    gap: 12px;
 }
 
 .search__text {
-    font-weight: 500;
-    font-size: 22px;
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--color-white);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .search__input {
     background-color: var(--color-grey);
-    padding: 15px 20px;
-    border-radius: 5px;
-    width: 300px;
-    font-size: 18px;
+    color: var(--color-white);
+    padding: 14px 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 320px;
+    font-size: 16px;
+    border: 1px solid transparent;
+    outline: none;
+    transition: border-color 0.2s ease;
 }
 
+.search__input:focus {
+    border-color: rgba(255, 69, 0, 0.4);
+}
+
+/* Кнопка вызова меню */
 .team__button {
-    width: 52px;
-    height: 52px;
+    width: 50px;
+    height: 50px;
     background-color: var(--color-grey);
-    border-radius: 10px;
-    font-size: 24px;
-    font-weight: 500;
-}
-
-.team__button img {
-    width: 100%;
-}
-
-.search__content {
-    background-color: var(--color-grey);
-    width: 400px;
-    height: 400px;
-    overflow: auto;
-    padding: 20px;
-    border-radius: 10px;
-    position: absolute;
-    left: 0;
-    top: 70px;
-}
-
-.search__content::-webkit-scrollbar {
-    width: 8px;
-}
-
-.search__content::-webkit-scrollbar-track {
-    background: rgb(82, 82, 82);
-}
-
-.search__content::-webkit-scrollbar-thumb {
-    background: rgb(204, 204, 204);
-    border-radius: 4px;
-    height: 30px;
-}
-
-.search__content::-webkit-scrollbar-thumb:hover {
-    background: rgb(172, 172, 172);
-}
-
-.team__input {
-    background-color: var(--color-black);
-    width: 100%;
-    padding: 10px 15px;
-    border-radius: 10px;
-    font-size: 17px;
-    margin-bottom: 15px;
-}
-
-.list__item {
-    font-size: 18px;
-}
-
-.team__list {
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 15px;
-    row-gap: 15px;
-}
-
-.list__item {
-    width: 75px;
-    height: 75px;
-    background-color: var(--color-black);
-    border-radius: 10px;
-    padding: 3px;
+    color: rgba(255, 255, 255, 0.4);
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 1px solid transparent;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.team__button:hover {
+    border-color: rgba(255, 69, 0, 0.4);
+    color: var(--color-white);
+}
+
+.team__button_active {
+    border-color: #ff4500;
+    background-color: rgba(255, 69, 0, 0.1);
+}
+
+.team__buttonImg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 4px;
+}
+
+/* Выпадающее окно фильтрации */
+.search__content {
+    background-color: #1e1e22;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    width: 100vw;
+    max-width: 400px;
+    max-height: 380px;
+    overflow-y: auto;
+    padding: 16px;
+    border-radius: 12px;
+    position: absolute;
+    left: 0;
+    top: 64px;
+    z-index: 50;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Кастомизация скроллбара */
+.search__content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.search__content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.search__content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+.search__content::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.team__input {
+    background-color: #0c0c0e;
+    color: var(--color-white);
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    margin-bottom: 16px;
+    border: 1px solid transparent;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.team__input:focus {
+    border-color: rgba(255, 69, 0, 0.4);
+}
+
+.team__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(68px, 1fr));
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.list__item {
+    aspect-ratio: 1 / 1;
+    background-color: #0c0c0e;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    overflow: hidden;
+    transition:
+        transform 0.15s ease,
+        border-color 0.15s ease;
+}
+
+.list__item:hover {
+    transform: scale(1.04);
+    border-color: rgba(255, 69, 0, 0.3);
+}
+
+.team__selectButton {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 700;
+    font-size: 14px;
+    padding: 6px;
+}
+
+.team__selectButton:hover {
+    color: var(--color-white);
 }
 
 .team__img {
     width: 100%;
     height: 100%;
+    object-fit: contain; /* Логотипы больше не растягиваются и сохраняют пропорции */
 }
 
-@media (max-width: 1024px) {
-    .search {
-        margin-top: 30px;
-    }
-
-    .search__flex {
-        column-gap: 8px;
-    }
-
-    .search__text {
-        font-size: 21px;
-    }
-
-    .search__input {
-        padding: 12px 18px;
-        width: 300px;
-        font-size: 18px;
-    }
-
-    .team__button {
-        width: 47px;
-        height: 47px;
-        font-size: 24px;
-    }
-
-    .search__content {
-        width: 400px;
-        height: 350px;
-        padding: 15px;
-        top: 60px;
-    }
-
-    .team__input {
-        padding: 9px 14px;
-        font-size: 16px;
-        margin-bottom: 12px;
-    }
-
-    .team__list {
-        column-gap: 8px;
-        row-gap: 8px;
-    }
-
-    .list__item {
-        width: 65px;
-        height: 65px;
-        padding: 2px;
-    }
+.spinner_container {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
 }
 
+/* УМНАЯ АДАПТИВНОСТЬ ЧЕРЕЗ РЕЗИНОВЫЕ МАКСИМУМЫ */
 @media (max-width: 768px) {
     .search {
-        margin-top: 25px;
-    }
-
-    .search__flex {
-        column-gap: 6px;
+        margin-top: 24px;
     }
 
     .search__text {
-        font-size: 20px;
-    }
-
-    .search__input {
-        padding: 12px 15px;
-        width: 250px;
         font-size: 18px;
     }
 
+    .search__input {
+        padding: 12px 16px;
+        max-width: 260px;
+    }
+
     .team__button {
-        width: 47px;
-        height: 47px;
-        font-size: 24px;
-    }
-
-    .search__content {
-        width: 370px;
-        height: 350px;
-        padding: 15px;
-        top: 60px;
-    }
-
-    .team__input {
-        padding: 9px 14px;
-        font-size: 16px;
-        margin-bottom: 12px;
-    }
-
-    .team__list {
-        column-gap: 8px;
-        row-gap: 8px;
-    }
-
-    .list__item {
-        width: 75px;
-        height: 75px;
-        padding: 2px;
+        width: 46px;
+        height: 46px;
     }
 }
 
-@media (max-width: 425px) {
-    .search {
-        margin-top: 20px;
-    }
-
+@media (max-width: 480px) {
     .search__flex {
-        column-gap: 6px;
-    }
-
-    .search__text {
-        font-size: 20px;
+        width: 100%;
     }
 
     .search__input {
-        padding: 12px 15px;
-        width: 200px;
-        font-size: 16px;
-    }
-
-    .team__button {
-        width: 42px;
-        height: 42px;
-        font-size: 20px;
+        max-width: none;
+        flex: 1; /* Инпут займет всё свободное место на мобилке */
     }
 
     .search__content {
-        width: 310px;
-        height: 300px;
-        padding: 15px;
-        top: 55px;
-    }
-
-    .team__input {
-        padding: 9px 14px;
-        font-size: 16px;
-        margin-bottom: 12px;
-    }
-
-    .team__list {
-        column-gap: 5px;
-        row-gap: 5px;
-    }
-
-    .list__item {
-        width: 64px;
-        height: 64px;
-        padding: 2px;
+        max-width: calc(
+            100vw - 32px
+        ); /* Окно не выйдет за рамки экрана смартфона */
+        top: 56px;
     }
 }

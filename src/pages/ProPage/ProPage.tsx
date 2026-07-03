@@ -1,51 +1,58 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import { getPro, getTeams } from '../../helpers/proHelpers'
 import SearchPro from '../../components/SearchPro/SearchPro'
+import ListPro from '../../components/ListPro/ListPro'
 import type { ProPlayer, Team } from '../../types/proTypes'
 import styles from './ProPage.module.css'
-import ListPro from '../../components/ListPro/ListPro'
 
 const ProPage: React.FC = () => {
     const [teams, setTeams] = useState<Team[]>([])
     const [players, setPlayers] = useState<ProPlayer[]>([])
     const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [isError, setIsError] = useState<boolean>(false)
+
     const [searchPlayer, setSearchPlayer] = useState<string>('')
     const [currTeams, setCurrTeams] = useState<Team | null>(null)
-    const [searchTeam, setSearchTeam] = useState<ProPlayer[] | any>(null)
 
     useEffect(() => {
-        const fetchTeams = async () => {
-            setIsLoading(true)
-            const teamsData = await getTeams()
-            const playersData = await getPro()
+        const fetchInitialData = async () => {
+            try {
+                setIsLoading(true)
+                setIsError(false)
 
-            const namesTeam: Team[] = teamsData.filter(
-                (team: Team) => team.name !== ''
-            )
+                // Запускаем запросы параллельно через Promise.all, чтобы сэкономить время загрузки
+                const [teamsData, playersData] = await Promise.all([
+                    getTeams(),
+                    getPro(),
+                ])
 
-            setTeams(namesTeam)
-            setPlayers(playersData)
-            setIsLoading(false)
+                const validTeams = teamsData.filter(
+                    (team: Team) => team.name?.trim() !== '',
+                )
+
+                setTeams(validTeams)
+                setPlayers(playersData || [])
+            } catch (error) {
+                setIsError(true)
+                console.error('Ошибка при загрузке про-игроков:', error)
+            } finally {
+                setIsLoading(false)
+            }
         }
 
-        fetchTeams()
+        fetchInitialData()
     }, [])
 
-    useEffect(() => {
-        if (currTeams) {
-            const filteredPlayersByTeam = players.filter(
-                (player) => player.team_id === currTeams.team_id
-            )
-
-            setSearchTeam(filteredPlayersByTeam)
-        } else {
-            setSearchTeam(null)
-        }
-    }, [currTeams])
+    // Фильтруем игроков по команде на лету без лишних эффектов и стейтов
+    const filteredPlayersByTeam = useMemo(() => {
+        if (!currTeams) return null
+        return players.filter((player) => player.team_id === currTeams.team_id)
+    }, [players, currTeams])
 
     return (
-        <>
-            <h2 className={styles.pro__title}>Про-Игроки</h2>
+        <main className={styles.proPage}>
+            <h1 className={styles.pro__title}>Про-Игроки</h1>
+
             <SearchPro
                 currTeams={currTeams}
                 teams={teams}
@@ -53,15 +60,22 @@ const ProPage: React.FC = () => {
                 setSearchPlayer={setSearchPlayer}
                 setCurrTeams={setCurrTeams}
             />
-            <ListPro
-                players={players}
-                teams={teams}
-                searchPlayer={searchPlayer}
-                isLoading={isLoading}
-                searchTeam={searchTeam}
-                setSearchTeam={setSearchTeam}
-            />
-        </>
+
+            {isError ? (
+                <div className={styles.error_banner} role="alert">
+                    Не удалось загрузить списки игроков. Пожалуйста, обновите
+                    страницу.
+                </div>
+            ) : (
+                <ListPro
+                    players={players}
+                    teams={teams}
+                    searchPlayer={searchPlayer}
+                    isLoading={isLoading}
+                    searchTeam={filteredPlayersByTeam}
+                />
+            )}
+        </main>
     )
 }
 

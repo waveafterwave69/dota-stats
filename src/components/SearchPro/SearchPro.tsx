@@ -1,7 +1,7 @@
-import { useEffect, useState, useRef } from 'react'
+import React, { useState, useMemo, useRef, useEffect } from 'react'
 import type { Team } from '../../types/proTypes'
-import styles from './SearchPro.module.css'
 import Spinner from '../../UI/Spinner/Spinner'
+import styles from './SearchPro.module.css'
 
 interface SearchProProps {
     teams: Team[]
@@ -18,49 +18,37 @@ const SearchPro: React.FC<SearchProProps> = ({
     setCurrTeams,
     currTeams,
 }) => {
-    const [team, setTeam] = useState<Team[]>(teams)
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [searchValue, setSearchValue] = useState<string>('')
 
     const searchContentRef = useRef<HTMLDivElement>(null)
     const teamButtonRef = useRef<HTMLButtonElement>(null)
 
-    const handleTeam = (team: Team | null) => {
+    const handleTeamSelect = (team: Team | null) => {
         setCurrTeams(team)
         setIsOpen(false)
+        setSearchValue('') // Очищаем строку поиска команд при закрытии
     }
 
-    useEffect(() => {
-        setTeam(teams)
-    }, [teams])
+    // Фильтруем команды на лету без useEffect и лишних стейтов
+    const filteredTeams = useMemo(() => {
+        const cleanQuery = searchValue.trim().toLowerCase()
+        if (!cleanQuery) return teams
 
-    const teamFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchValue(e.target.value)
-    }
-
-    useEffect(() => {
-        if (searchValue) {
-            const needTeams = teams.filter((team) =>
-                team.name
-                    .trim()
-                    .toLocaleLowerCase()
-                    .includes(searchValue.trim().toLocaleLowerCase())
-            )
-
-            setTeam(needTeams)
-        } else {
-            setTeam(teams)
-        }
+        return teams.filter((team) =>
+            team.name?.trim().toLowerCase().includes(cleanQuery),
+        )
     }, [searchValue, teams])
 
+    // Закрытие выпадающего списка при клике снаружи
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            if (
-                searchContentRef.current &&
-                !searchContentRef.current.contains(event.target as Node) &&
-                teamButtonRef.current &&
-                !teamButtonRef.current.contains(event.target as Node)
-            ) {
+            const target = event.target as Node
+            const clickedInsideContent =
+                searchContentRef.current?.contains(target)
+            const clickedInsideButton = teamButtonRef.current?.contains(target)
+
+            if (!clickedInsideContent && !clickedInsideButton) {
                 setIsOpen(false)
             }
         }
@@ -75,74 +63,93 @@ const SearchPro: React.FC<SearchProProps> = ({
     }, [isOpen])
 
     return (
-        <>
-            <section className={styles.search}>
-                <div className={styles.search__flex}>
-                    <span className={styles.search__text}>поиск:</span>
-                    <input
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                            setSearchPlayer(e.target.value)
-                        }
-                        type="text"
-                        placeholder="ник игрока"
-                        className={styles.search__input}
-                    />
-                    <button
-                        className={styles.team__button}
-                        onClick={() => setIsOpen((prev) => !prev)}
-                        ref={teamButtonRef}
-                    >
-                        {currTeams ? (
-                            <img src={currTeams.logo_url} alt={currTeams.tag} />
-                        ) : (
-                            <p>?</p>
-                        )}
-                    </button>
-                </div>
-                {isOpen && (
-                    <div
-                        className={styles.search__content}
-                        ref={searchContentRef}
-                    >
-                        <input
-                            onChange={teamFilter}
-                            type="text"
-                            value={searchValue}
-                            placeholder="команда"
-                            className={styles.team__input}
+        <section className={styles.search}>
+            <div className={styles.search__flex}>
+                <label htmlFor="player-search" className={styles.search__text}>
+                    Поиск:
+                </label>
+                <input
+                    id="player-search"
+                    type="text"
+                    placeholder="Ник игрока"
+                    className={styles.search__input}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setSearchPlayer(e.target.value)
+                    }
+                />
+                <button
+                    type="button"
+                    ref={teamButtonRef}
+                    className={`${styles.team__button} ${currTeams ? styles.team__button_active : ''}`}
+                    onClick={() => setIsOpen((prev) => !prev)}
+                    title="Фильтр по команде"
+                >
+                    {currTeams ? (
+                        <img
+                            src={currTeams.logo_url}
+                            alt={currTeams.tag}
+                            className={styles.team__buttonImg}
                         />
-                        <ul className={styles.team__list}>
+                    ) : (
+                        '?'
+                    )}
+                </button>
+            </div>
+
+            {isOpen && (
+                <div className={styles.search__content} ref={searchContentRef}>
+                    <input
+                        type="text"
+                        value={searchValue}
+                        placeholder="Поиск команды..."
+                        className={styles.team__input}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                            setSearchValue(e.target.value)
+                        }
+                    />
+
+                    <ul className={styles.team__list}>
+                        {/* Кнопка сброса теперь находится внутри валидного тега li */}
+                        <li className={styles.list__item}>
                             <button
-                                className={styles.list__item}
-                                onClick={() => handleTeam(null)}
+                                type="button"
+                                className={styles.team__selectButton}
+                                onClick={() => handleTeamSelect(null)}
+                                title="Все команды"
                             >
-                                ?
+                                Все
                             </button>
-                            {isLoading ? (
+                        </li>
+
+                        {isLoading ? (
+                            <div className={styles.spinner_container}>
                                 <Spinner />
-                            ) : (
-                                team.map((team) => (
-                                    <li
-                                        className={styles.list__item}
-                                        key={team.team_id}
+                            </div>
+                        ) : (
+                            filteredTeams.map((team) => (
+                                <li
+                                    className={styles.list__item}
+                                    key={team.team_id}
+                                >
+                                    <button
+                                        type="button"
+                                        className={styles.team__selectButton}
+                                        onClick={() => handleTeamSelect(team)}
+                                        title={team.name}
                                     >
-                                        <button
-                                            onClick={() => handleTeam(team)}
-                                        >
-                                            <img
-                                                className={styles.team__img}
-                                                src={team.logo_url}
-                                                alt={team.tag}
-                                            />
-                                        </button>
-                                    </li>
-                                ))
-                            )}
-                        </ul>
-                    </div>
-                )}
-            </section>
-        </>
+                                        <img
+                                            className={styles.team__img}
+                                            src={team.logo_url}
+                                            alt={team.tag}
+                                        />
+                                    </button>
+                                </li>
+                            ))
+                        )}
+                    </ul>
+                </div>
+            )}
+        </section>
     )
 }
 
