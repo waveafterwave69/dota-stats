@@ -1,38 +1,43 @@
-import MatchPage from '../pages/MatchPage/MatchPage'
-import PlayerPage from '../pages/PlayerPage/PlayerPage'
-import PlayerPageMatches from '../pages/PlayerPageMatches/PlayerPageMatches'
-import ProPage from '../pages/ProPage/ProPage'
+import { lazy } from 'react'
+
 import SearchPage from '../pages/SearchPage/SearchPage'
 import SearchMatchesPage from '../pages/SearchMatchesPage/SearchMatchesPage'
-import FavoritesPage from '../pages/FavoritesPage/FavoritesPage'
+
+const ProPage = lazy(() => import('../pages/ProPage/ProPage'))
+const PlayerPage = lazy(() => import('../pages/PlayerPage/PlayerPage'))
+const MatchPage = lazy(() => import('../pages/MatchPage/MatchPage'))
+const PlayerPageMatches = lazy(
+    () => import('../pages/PlayerPageMatches/PlayerPageMatches'),
+)
+const FavoritesPage = lazy(() => import('../pages/FavoritesPage/FavoritesPage'))
 
 export const routesConfig = [
     {
-        page: <SearchPage />,
+        page: SearchPage,
         url: '/',
     },
     {
-        page: <SearchMatchesPage />,
+        page: SearchMatchesPage,
         url: '/searchMatches',
     },
     {
-        page: <PlayerPage />,
+        page: PlayerPage,
         url: '/player/:id',
     },
     {
-        page: <MatchPage />,
+        page: MatchPage,
         url: '/match/:id',
     },
     {
-        page: <PlayerPageMatches />,
+        page: PlayerPageMatches,
         url: '/matches/:id',
     },
     {
-        page: <ProPage />,
+        page: ProPage,
         url: '/pro',
     },
     {
-        page: <FavoritesPage />,
+        page: FavoritesPage,
         url: '/favorites',
     },
 ]
