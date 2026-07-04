@@ -2,10 +2,19 @@ import styles from './Spinner.module.css'
 
 import spinner from '../../assets/spinner.svg'
 
-const Spinner: React.FC = () => {
+interface SpinnerProps {
+    width?: number
+}
+
+const Spinner: React.FC<SpinnerProps> = ({ width }) => {
     return (
         <>
-            <img src={spinner} alt="loading..." className={styles.spinner} />
+            <img
+                src={spinner}
+                style={{ width: width }}
+                alt="loading..."
+                className={styles.spinner}
+            />
         </>
     )
 }
