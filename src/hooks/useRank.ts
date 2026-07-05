@@ -1,7 +1,7 @@
+import { useEffect, useState, useMemo } from 'react'
 import type { WinLose } from '../types/playerTypes'
-import { useEffect, useState } from 'react'
 import { getWinAndLose } from '../helpers/playerHelpers'
-import { medals, unrankedMedal } from '../data/medalsData'
+import { medalsConfig, unrankedMedal, type MedalInfo } from '../data/medalsData'
 import { useAppSelector } from './hooks'
 
 interface PlayerContextValue {
@@ -21,53 +21,66 @@ interface PlayerContextValue {
 
 const useRank = (): PlayerContextValue => {
     const playerInfo = useAppSelector((state) => state.player.playerInfo)
-    const [winLose, setWinLose] = useState<WinLose>()
-    const [winRate, setWinRate] = useState<number>()
-    const [tier, setTier] = useState<number>(0)
-    const [stars, setStars] = useState<number>(0)
-    const [rankMedal, setRankMedal] = useState<string>('')
-    const [rankName, setRankName] = useState<string>('')
+    const [winLose, setWinLose] = useState<WinLose | undefined>(undefined)
 
     const profile = playerInfo?.profile
-    const rankTier: number | null | undefined = playerInfo?.rank_tier
+    const rankTier = playerInfo?.rank_tier
+    const leaderboardRank = playerInfo?.leaderboard_rank
 
     useEffect(() => {
-        const winAndLose = async () => {
-            const data = await getWinAndLose(profile?.account_id)
-
-            setWinLose(data)
+        if (!profile?.account_id) {
+            setWinLose(undefined)
+            return
         }
 
-        winAndLose()
+        setWinLose(undefined)
 
-        if (rankTier) {
-            setTier(Math.floor(rankTier / 10) - 1)
-            setStars(Math.floor(rankTier % 10))
+        const fetchWinLoseData = async () => {
+            try {
+                const data = await getWinAndLose(profile.account_id)
+                setWinLose(data)
+            } catch (error) {
+                console.error('Не удалось загрузить статистику матчей:', error)
+            }
         }
-    }, [])
 
-    useEffect(() => {
-        if (tier === 0) {
-            setRankName(unrankedMedal.name)
-            setRankMedal(unrankedMedal.img)
-        } else {
-            setRankName(medals[tier][stars]?.name)
-            setRankMedal(medals[tier][stars]?.img)
-        }
-    }, [tier, stars])
+        fetchWinLoseData()
+    }, [profile?.account_id])
 
-    useEffect(() => {
-        if (winLose) {
-            const currWinRate =
-                (winLose.win / (winLose.win + winLose.lose)) * 100
-            setWinRate(Number(String(currWinRate).slice(0, 5)))
+    const medalInfo = useMemo<MedalInfo>(() => {
+        if (!rankTier) return unrankedMedal
+
+        const tierGroup = Math.floor(rankTier / 10)
+        const starLevel = rankTier % 10
+
+        const foundMedal = medalsConfig[tierGroup]?.[starLevel]
+
+        if (!foundMedal) return unrankedMedal
+
+        if (tierGroup === 8 && leaderboardRank) {
+            return {
+                ...foundMedal,
+                name: `Титан #${leaderboardRank}`,
+            }
         }
+
+        return foundMedal
+    }, [rankTier, leaderboardRank])
+
+    const winRate = useMemo<number | undefined>(() => {
+        if (!winLose || (winLose.win === 0 && winLose.lose === 0))
+            return undefined
+
+        const totalMatches = winLose.win + winLose.lose
+        const rate = (winLose.win / totalMatches) * 100
+
+        return Number(rate.toFixed(2))
     }, [winLose])
 
     return {
         profile,
-        rankMedal,
-        rankName,
+        rankMedal: medalInfo.img,
+        rankName: medalInfo.name,
         winRate,
         winLose,
     }

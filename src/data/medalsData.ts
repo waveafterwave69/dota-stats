@@ -1,3 +1,4 @@
+// data/medalsData.ts
 import unranked from '../assets/unranked.png'
 import herald1 from '../assets/herald1.png'
 import herald2 from '../assets/herald2.png'
@@ -34,201 +35,70 @@ import divine2 from '../assets/divine2.png'
 import divine3 from '../assets/divine3.png'
 import divine4 from '../assets/divine4.png'
 import divine5 from '../assets/divine5.png'
-import immortal1 from '../assets/immortal1.png'
-import immortal2 from '../assets/immortal2.png'
-import immortal3 from '../assets/immortal3.png'
-import immortal4 from '../assets/immortal4.png'
-import immortal5 from '../assets/immortal5.png'
+import immortal from '../assets/immortal1.png' // У Титана одна базовая медаль
 
-interface MedalInfo {
+export interface MedalInfo {
     img: string
     name: string
 }
 
-interface Medals {
-    [key: number]: MedalInfo
-}
-
-export const unrankedMedal = {
+export const unrankedMedal: MedalInfo = {
     img: unranked,
     name: 'Не откалиброван',
 }
 
-export const medals: Medals[] = [
-    {
-        1: {
-            img: herald1,
-            name: 'Рекрут 1',
-        },
-        2: {
-            img: herald2,
-            name: 'Рекрут 2',
-        },
-        3: {
-            img: herald3,
-            name: 'Рекрут 3',
-        },
-        4: {
-            img: herald4,
-            name: 'Рекрут 4',
-        },
-        5: {
-            img: herald5,
-            name: 'Страж 5',
-        },
+// Ключ — это первая цифра из rank_tier (Math.floor(rank_tier / 10))
+export const medalsConfig: Record<number, Record<number, MedalInfo>> = {
+    1: {
+        1: { img: herald1, name: 'Рекрут 1' },
+        2: { img: herald2, name: 'Рекрут 2' },
+        3: { img: herald3, name: 'Рекрут 3' },
+        4: { img: herald4, name: 'Рекрут 4' },
+        5: { img: herald5, name: 'Рекрут 5' }, // Исправлен баг "Страж 5"
     },
-    {
-        1: {
-            img: guardian1,
-            name: 'Страж 1',
-        },
-        2: {
-            img: guardian2,
-            name: 'Страж 2',
-        },
-        3: {
-            img: guardian3,
-            name: 'Страж 3',
-        },
-        4: {
-            img: guardian4,
-            name: 'Страж 4',
-        },
-        5: {
-            img: guardian5,
-            name: 'Страж 5',
-        },
+    2: {
+        1: { img: guardian1, name: 'Страж 1' },
+        2: { img: guardian2, name: 'Страж 2' },
+        3: { img: guardian3, name: 'Страж 3' },
+        4: { img: guardian4, name: 'Страж 4' },
+        5: { img: guardian5, name: 'Страж 5' },
     },
-    {
-        1: {
-            img: crusader1,
-            name: 'Рыцарь 1',
-        },
-        2: {
-            img: crusader2,
-            name: 'Рыцарь 2',
-        },
-        3: {
-            img: crusader3,
-            name: 'Рыцарь 3',
-        },
-        4: {
-            img: crusader4,
-            name: 'Рыцарь 4',
-        },
-        5: {
-            img: crusader5,
-            name: 'Рыцарь 5',
-        },
+    3: {
+        1: { img: crusader1, name: 'Рыцарь 1' },
+        2: { img: crusader2, name: 'Рыцарь 2' },
+        3: { img: crusader3, name: 'Рыцарь 3' },
+        4: { img: crusader4, name: 'Рыцарь 4' },
+        5: { img: crusader5, name: 'Рыцарь 5' },
     },
-    {
-        1: {
-            img: archon1,
-            name: 'Герой 1',
-        },
-        2: {
-            img: archon2,
-            name: 'Герой 2',
-        },
-        3: {
-            img: archon3,
-            name: 'Герой 3',
-        },
-        4: {
-            img: archon4,
-            name: 'Герой 4',
-        },
-        5: {
-            img: archon5,
-            name: 'Герой 5',
-        },
+    4: {
+        1: { img: archon1, name: 'Герой 1' },
+        2: { img: archon2, name: 'Герой 2' },
+        3: { img: archon3, name: 'Герой 3' },
+        4: { img: archon4, name: 'Герой 4' },
+        5: { img: archon5, name: 'Герой 5' },
     },
-    {
-        1: {
-            img: legend1,
-            name: 'Легенда 1',
-        },
-        2: {
-            img: legend2,
-            name: 'Легенда 2',
-        },
-        3: {
-            img: legend3,
-            name: 'Легенда 3',
-        },
-        4: {
-            img: legend4,
-            name: 'Легенда 4',
-        },
-        5: {
-            img: legend5,
-            name: 'Легенда 5',
-        },
+    5: {
+        1: { img: legend1, name: 'Легенда 1' },
+        2: { img: legend2, name: 'Легенда 2' },
+        3: { img: legend3, name: 'Легенда 3' },
+        4: { img: legend4, name: 'Легенда 4' },
+        5: { img: legend5, name: 'Легенда 5' },
     },
-    {
-        1: {
-            img: ancient1,
-            name: 'Властелин 1',
-        },
-        2: {
-            img: ancient2,
-            name: 'Властелин 2',
-        },
-        3: {
-            img: ancient3,
-            name: 'Властелин 3',
-        },
-        4: {
-            img: ancient4,
-            name: 'Властелин 4',
-        },
-        5: {
-            img: ancient5,
-            name: 'Властелин 5',
-        },
+    6: {
+        1: { img: ancient1, name: 'Властелин 1' },
+        2: { img: ancient2, name: 'Властелин 2' },
+        3: { img: ancient3, name: 'Властелин 3' },
+        4: { img: ancient4, name: 'Властелин 4' },
+        5: { img: ancient5, name: 'Властелин 5' },
     },
-    {
-        1: {
-            img: divine1,
-            name: 'Божество 1',
-        },
-        2: {
-            img: divine2,
-            name: 'Божество 2',
-        },
-        3: {
-            img: divine3,
-            name: 'Божество 3',
-        },
-        4: {
-            img: divine4,
-            name: 'Божество 4',
-        },
-        5: {
-            img: divine5,
-            name: 'Божество 5',
-        },
+    7: {
+        1: { img: divine1, name: 'Божество 1' },
+        2: { img: divine2, name: 'Божество 2' },
+        3: { img: divine3, name: 'Божество 3' },
+        4: { img: divine4, name: 'Божество 4' },
+        5: { img: divine5, name: 'Божество 5' },
     },
-    {
-        0: {
-            img: immortal1,
-            name: 'Титан',
-        },
-        1: {
-            img: immortal2,
-            name: 'Титан',
-        },
-        2: {
-            img: immortal3,
-            name: 'Титан',
-        },
-        3: {
-            img: immortal4,
-            name: 'Титан',
-        },
-        4: {
-            img: immortal5,
-            name: 'Титан',
-        },
+    8: {
+        0: { img: immortal, name: 'Титан' },
     },
-]
+}

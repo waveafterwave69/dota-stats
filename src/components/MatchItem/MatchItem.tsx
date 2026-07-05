@@ -4,7 +4,6 @@ import type { MatchData } from '../../types/matchTypes'
 import { getHeroImage, getHeroName, getMedal } from '../../utils/utils'
 import styles from './MatchItem.module.css'
 
-// Маппинг игровых режимов Dota 2 для быстрой и чистой работы без switch-case
 const GAME_MODES: Record<number, string> = {
     0: 'Unknown',
     1: 'All Pick',
@@ -27,7 +26,7 @@ const GAME_MODES: Record<number, string> = {
     20: 'All Random Deathmatch',
     21: '1v1 Solo Mid',
     22: 'All Pick (Ranked)',
-    23: 'Turbo', // Тот самый режим Турбо
+    23: 'Turbo',
     24: 'Mutation',
 }
 
@@ -38,11 +37,6 @@ interface MatchItemProps {
 const MatchItem: React.FC<MatchItemProps> = ({ match }) => {
     const heroName = getHeroName(match.hero_id)
 
-    /* 
-    Вычисляем, за какую команду играл юзер. 
-    В OpenDota API первые 5 игроков (0-4) — это Radiant, остальные (128-132) — Dire.
-    Если player_slot < 128, игрок за Сил Света (Radiant).
-  */
     const isRadiantPlayer = match.player_slot < 128
     const isUserWin = isRadiantPlayer === match.radiant_win
 

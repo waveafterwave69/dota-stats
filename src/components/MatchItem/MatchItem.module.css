@@ -13,6 +13,10 @@
         transform 0.2s ease;
 }
 
+.rank__medalImg {
+    width: 70px;
+}
+
 /* Стилизация карточки в зависимости от исхода игры */
 .match_win {
     border-left-color: #10b981; /* Изумрудный для победы */

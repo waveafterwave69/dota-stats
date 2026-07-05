@@ -10,6 +10,7 @@ export interface PlayerInfo {
     rank_tier: number | null
     computed_rating: number
     account_id: number
+    leaderboard_rank: number
 }
 
 export interface WinLose {
