@@ -1,7 +1,9 @@
 import React, { useMemo } from 'react'
-import type { OneMatch } from '../../types/matchTypes'
-import PlayerMatchItem from '../PlayerMatchItem/PlayerMatchItem'
+
 import styles from './MatchSide.module.css'
+
+import { OneMatch } from '../../model/types'
+import PlayerMatchItem from '@/entities/player/ui/PlayerMatchItem/PlayerMatchItem'
 
 interface MatchSideProps {
     match: OneMatch
@@ -11,7 +13,6 @@ interface MatchSideProps {
 const MatchSide: React.FC<MatchSideProps> = ({ match, side }) => {
     const isRadiant = side === 'radiant'
 
-    // Фильтруем игроков один раз за рендер пропсов
     const radiantPlayers = useMemo(() => {
         return match.players.filter((player) => player.isRadiant === true)
     }, [match.players])

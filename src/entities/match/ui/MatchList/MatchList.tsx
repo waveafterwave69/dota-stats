@@ -1,10 +1,12 @@
 import React, { useCallback } from 'react'
-import type { MatchData } from '../../types/matchTypes'
-import MatchItem from '../MatchItem/MatchItem'
-import Spinner from '../../UI/Spinner/Spinner'
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
-import { setWinLose } from '../../store/player/playerSlice'
+
 import styles from './MatchList.module.css'
+
+import { useAppDispatch, useAppSelector } from '@/app/providers/store/types'
+import { MatchData } from '../../model/types'
+import { setWinLose } from '@/entities/player/model/playerSlice'
+import { Spinner } from '@/shared/ui'
+import MatchItem from '../MatchItem/MatchItem'
 
 interface MatchListProps {
     error: string | null

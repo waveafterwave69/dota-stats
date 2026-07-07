@@ -1,10 +1,12 @@
 import { useNavigate } from 'react-router'
-import type { Player } from '../../types/matchTypes'
-import { getHeroImage, getHeroName } from '../../utils/utils'
+
 import styles from './PlayerMatchItem.module.css'
-import useDota from '../../hooks/useDota'
-import { useAppDispatch } from '../../hooks/hooks'
-import { fetchPlayerInfo } from '../../store/player/playerSlice'
+
+import { Player } from '@/entities/match/model/types'
+import useDota from '@/app/providers/with-dota/useDota'
+import { useAppDispatch } from '@/app/providers/store/types'
+import { fetchPlayerInfo } from '../../model/playerSlice'
+import { getHeroImage, getHeroName } from '@/shared/lib/utils/hero'
 
 interface PlayerMatchItemProps {
     player: Player
@@ -26,12 +28,12 @@ const PlayerMatchItem: React.FC<PlayerMatchItemProps> = ({ player }) => {
     const navigate = useNavigate()
 
     const onClick = async (
-        e: React.MouseEvent<HTMLParagraphElement, MouseEvent>
+        e: React.MouseEvent<HTMLParagraphElement, MouseEvent>,
     ) => {
         e.preventDefault()
 
         const success = await dispatch(
-            fetchPlayerInfo(String(player.account_id))
+            fetchPlayerInfo(String(player.account_id)),
         )
 
         if (success && player.personaname) {
@@ -66,7 +68,7 @@ const PlayerMatchItem: React.FC<PlayerMatchItemProps> = ({ player }) => {
                     {items &&
                         itemIds.map((itemId, index) => {
                             const needItem = items.filter(
-                                (item) => item.id === itemId
+                                (item) => item.id === itemId,
                             )
                             return (
                                 <img

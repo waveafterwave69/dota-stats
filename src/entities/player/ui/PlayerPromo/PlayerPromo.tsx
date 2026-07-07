@@ -1,13 +1,13 @@
 import React from 'react'
 import { NavLink, useParams } from 'react-router-dom'
 
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
+import styles from './PlayerPromo.module.css'
+import { useAppDispatch, useAppSelector } from '@/app/providers/store/types'
+import useRank from '@/entities/medal/lib/useRank'
 import {
     addFavorites,
     deleteFavorites,
-} from '../../store/favorites/favoritesSlice'
-import useRank from '../../hooks/useRank'
-import styles from './PlayerPromo.module.css'
+} from '@/features/toggle-favorite/model/favoritesSlice'
 
 const PlayerPromo: React.FC = () => {
     const { id } = useParams<{ id: string }>()

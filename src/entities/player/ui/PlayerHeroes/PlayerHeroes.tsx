@@ -1,7 +1,9 @@
 import React, { useState, useMemo } from 'react'
-import type { PlayerHeroesI } from '../../types/playerTypes'
-import HeroItem from '../HeroItem/HeroItem'
+
 import styles from './PlayerHeroes.module.css'
+
+import { PlayerHeroesI } from '../../model/types'
+import HeroItem from '@/entities/hero/ui/HeroItem/HeroItem'
 
 interface PlayerHeroesProps {
     heroes: PlayerHeroesI[]
