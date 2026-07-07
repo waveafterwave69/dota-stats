@@ -1,10 +1,9 @@
+import { openDotaApi } from '@/shared/api/base'
 import axios from 'axios'
 
 export const getHeroes = async (): Promise<unknown> => {
     try {
-        const response = await axios.get(
-            'https://api.opendota.com/api/constants/heroes',
-        )
+        const response = await openDotaApi.get('/constants/heroes')
 
         return response.data
     } catch (error: unknown) {

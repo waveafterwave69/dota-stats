@@ -18,7 +18,7 @@ const PlayerPromo: React.FC = () => {
 
     const isFavorite = favorites.some((el) => el.account_id === Number(id))
 
-    const toggleFavorite = () => {
+    const handleToggleFavorite = () => {
         if (!profile) return
         if (isFavorite) {
             dispatch(deleteFavorites(profile))
@@ -106,7 +106,7 @@ const PlayerPromo: React.FC = () => {
 
                 <button
                     className={`${styles.promo__button} ${isFavorite ? styles.promo__button_delete : ''}`}
-                    onClick={toggleFavorite}
+                    onClick={handleToggleFavorite}
                     disabled={!profile}
                 >
                     {isFavorite ? 'Удалить из избранного' : 'В избранное'}
