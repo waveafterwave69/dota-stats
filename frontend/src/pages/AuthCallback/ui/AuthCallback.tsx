@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '@/entities/user/model/AuthContext'
 
-const AuthCallback: React.FC = () => {
+const AuthCallback = () => {
     const navigate = useNavigate()
     const location = useLocation()
     const { login } = useAuth()
@@ -18,12 +18,16 @@ const AuthCallback: React.FC = () => {
 
             if (token) {
                 login(token)
-                    .then(() => navigate('/'))
-                    .catch(() =>
+                    .then(() => {
+                        console.log('✅ Login successful, navigating to home')
+                        navigate('/')
+                    })
+                    .catch((error) => {
+                        console.error('❌ Login failed:', error)
                         navigate('/auth/error', {
                             state: { error: 'login_failed' },
-                        }),
-                    )
+                        })
+                    })
                 return
             }
         }

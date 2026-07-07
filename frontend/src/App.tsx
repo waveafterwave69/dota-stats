@@ -18,12 +18,10 @@ const App: React.FC = () => {
                     }
                 >
                     <Routes>
-                        {/* Основные маршруты из routesConfig */}
                         {routesConfig.map(({ page: Page, url }) => (
                             <Route key={url} path={url} element={<Page />} />
                         ))}
 
-                        {/* Маршруты для авторизации */}
                         <Route
                             path="/auth/callback"
                             element={<AuthCallback />}
