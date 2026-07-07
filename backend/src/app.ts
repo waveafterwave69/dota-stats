@@ -11,7 +11,7 @@ const PORT: number = parseInt(process.env.PORT || '5000', 10)
 
 const allowedOrigins: string[] = [
     process.env.FRONTEND_URL,
-    'https://dota-stats-navy.vercel.app',
+    'https://dota-statsnavy.vercel.app',
     'http://localhost:5173',
 ].filter((origin): origin is string => origin !== undefined && origin !== '')
 
