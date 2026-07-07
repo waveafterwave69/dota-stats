@@ -1,8 +1,9 @@
+import { openDotaApi } from '@/shared/api/base'
 import axios from 'axios'
 
 export const getTeams = async () => {
     try {
-        const response = await axios.get(`https://api.opendota.com/api/teams`)
+        const response = await openDotaApi.get(`/teams`)
 
         if (response.status !== 200) {
             throw new Error('Аккаунт не найден!')
@@ -29,9 +30,7 @@ export const getTeams = async () => {
 
 export const getPro = async () => {
     try {
-        const response = await axios.get(
-            `https://api.opendota.com/api/proPlayers`,
-        )
+        const response = await openDotaApi.get(`/proPlayers`)
 
         if (response.status !== 200) {
             throw new Error('Аккаунт не найден!')

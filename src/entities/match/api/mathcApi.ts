@@ -1,3 +1,4 @@
+import { openDotaApi } from '@/shared/api/base'
 import axios from 'axios'
 
 export const getAllMatches = async (
@@ -7,14 +8,14 @@ export const getAllMatches = async (
 ) => {
     try {
         if (win != null) {
-            const response = await axios.get(
-                `https://api.opendota.com/api/players/${playerId}/matches?limit=${limit}&win=${win}`,
+            const response = await openDotaApi.get(
+                `/players/${playerId}/matches?limit=${limit}&win=${win}`,
             )
 
             return response.data
         }
-        const response = await axios.get(
-            `https://api.opendota.com/api/players/${playerId}/matches?limit=${limit}`,
+        const response = await openDotaApi.get(
+            `/players/${playerId}/matches?limit=${limit}`,
         )
 
         return response.data
@@ -36,8 +37,8 @@ export const getAllMatches = async (
 
 export const getMatches = async (playerId: number | undefined) => {
     try {
-        const response = await axios.get(
-            `https://api.opendota.com/api/players/${playerId}/recentMatches`,
+        const response = await openDotaApi.get(
+            `/players/${playerId}/recentMatches`,
         )
 
         return response.data
@@ -59,9 +60,7 @@ export const getMatches = async (playerId: number | undefined) => {
 
 export const getOneMatch = async (matchId: string | undefined) => {
     try {
-        const response = await axios.get(
-            `https://api.opendota.com/api/matches/${matchId}`,
-        )
+        const response = await openDotaApi.get(`/matches/${matchId}`)
 
         return response.data
     } catch (error: unknown) {
