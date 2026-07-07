@@ -1,6 +1,6 @@
 services:
     - type: web
-      name: dota-stats
+      name: dota-stats-backend
       env: node
       region: oregon
       rootDir: backend
@@ -14,7 +14,7 @@ services:
           - key: BACKEND_URL
             value: https://dota-stats.onrender.com
           - key: FRONTEND_URL
-            value: https://dota-statsnavy.vercel.app
+            value: https://dota-stats-navy.vercel.app
           - key: JWT_SECRET
             generateValue: true
           - key: STEAM_API_KEY
