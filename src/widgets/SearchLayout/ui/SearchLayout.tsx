@@ -1,7 +1,8 @@
 import React, { useState, type FC, type PropsWithChildren } from 'react'
 
-import dotaLogo from '@/shared/assets/dota-logo.svg'
+import dotaLogo from '@/shared/assets/dota-logo.png'
 import searchImg from '@/shared/assets/search.svg'
+import dotaBg from '../assets/dota_bg.jpeg'
 
 import styles from './SearchLayout.module.css'
 
@@ -45,6 +46,7 @@ const SearchLayout: FC<PropsWithChildren<SearchLayoutProps>> = ({
 
     return (
         <section className={styles.search}>
+            <img src={dotaBg} className={styles.bg} alt="background" />
             <div className={styles.search__logo}>
                 <h1>DOTA STATS</h1>
                 <img src={dotaLogo} alt="Dota 2 Logo" />

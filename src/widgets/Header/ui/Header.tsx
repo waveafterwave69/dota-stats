@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 
 import styles from './Header.module.css'
 
-import dotaLogo from '@/shared/assets/dota-logo.svg'
+import dotaLogo from '@/shared/assets/dota-logo.png'
 
 const NAV_ITEMS = [
     { path: '/', label: 'Игроки' },
