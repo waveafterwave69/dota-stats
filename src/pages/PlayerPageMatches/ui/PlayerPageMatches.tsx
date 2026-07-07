@@ -1,0 +1,97 @@
+import { useEffect, useState, useRef, useCallback } from 'react'
+import { useParams } from 'react-router'
+
+import { useAppSelector } from '@/app/providers/store/types'
+import { MatchData } from '@/entities/match/model/types'
+
+import { getAllMatches } from '@/entities/match/api/mathcApi'
+
+import PlayerPromo from '@/entities/player/ui/PlayerPromo/PlayerPromo'
+import MatchList from '@/entities/match/ui/MatchList/MatchList'
+
+const PlayerPageMatches: React.FC = () => {
+    const winLose = useAppSelector((state) => state.player.winLose)
+    const [matches, setMatches] = useState<MatchData[]>([])
+    const [loading, setLoading] = useState<boolean>(false)
+    const [themeLoading, setThemeLoading] = useState<boolean>(false)
+    const [limit, setLimit] = useState<number>(20)
+    const params = useParams()
+
+    const observer = useRef<IntersectionObserver | null>(null)
+    const lastMatchElementRef = useCallback(
+        (node: HTMLLIElement | null) => {
+            if (loading) return
+            if (observer.current) observer.current.disconnect()
+
+            observer.current = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    setLimit((prevLimit) => prevLimit + 20)
+                }
+            })
+
+            if (node) observer.current.observe(node)
+        },
+        [loading],
+    )
+
+    useEffect(() => {
+        const fetchMatches = async () => {
+            setLoading(true)
+            if (winLose != null) {
+                const mathcesData = await getAllMatches(
+                    params.id,
+                    limit,
+                    winLose,
+                )
+
+                setMatches(mathcesData)
+            } else {
+                const mathcesData = await getAllMatches(params.id, limit)
+
+                setMatches(mathcesData)
+            }
+            setLoading(false)
+        }
+
+        fetchMatches()
+    }, [limit])
+
+    useEffect(() => {
+        const fetchMatches = async () => {
+            setThemeLoading(true)
+            if (winLose != null) {
+                const mathcesData = await getAllMatches(
+                    params.id,
+                    limit,
+                    winLose,
+                )
+
+                setMatches(mathcesData)
+            } else {
+                const mathcesData = await getAllMatches(params.id, limit)
+
+                setMatches(mathcesData)
+            }
+            setThemeLoading(false)
+        }
+
+        fetchMatches()
+    }, [winLose])
+
+    return (
+        <>
+            <PlayerPromo />
+            <MatchList
+                matches={matches}
+                loading={loading}
+                error={null}
+                title="Матчи"
+                winOrLose={true}
+                lastMatchElementRef={lastMatchElementRef}
+                themeLoading={themeLoading}
+            />
+        </>
+    )
+}
+
+export default PlayerPageMatches

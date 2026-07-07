@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router'
 import { Suspense } from 'react'
-import { routesConfig } from './routes/routesConfig'
-import Header from './components/Header/Header'
+import { routesConfig } from './app/routes/routesConfig'
+import Header from './widgets/Header/ui/Header'
 
 const App: React.FC = () => {
     return (
