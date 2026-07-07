@@ -7,6 +7,7 @@ import axios from 'axios'
 
 import { PlayerState } from '@/app/providers/store/types'
 import { PlayerInfo } from './types'
+import { openDotaApi } from '@/shared/api/base'
 
 const initialState: PlayerState = {
     playerInfo: null,
@@ -19,8 +20,8 @@ export const fetchPlayerInfo = createAsyncThunk(
     'player/fetchPlayerInfo',
     async (playerId: string, { rejectWithValue }) => {
         try {
-            const response = await axios.get<PlayerInfo>(
-                `https://api.opendota.com/api/players/${playerId}`,
+            const response = await openDotaApi.get<PlayerInfo>(
+                `/players/${playerId}`,
             )
 
             if (response.status !== 200) {

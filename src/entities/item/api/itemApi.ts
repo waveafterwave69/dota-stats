@@ -1,10 +1,9 @@
+import { openDotaApi } from '@/shared/api/base'
 import axios from 'axios'
 
 export const getItems = async () => {
     try {
-        const response = await axios.get(
-            'https://api.opendota.com/api/constants/items',
-        )
+        const response = await openDotaApi.get('/constants/items')
 
         return response.data
     } catch (error: unknown) {

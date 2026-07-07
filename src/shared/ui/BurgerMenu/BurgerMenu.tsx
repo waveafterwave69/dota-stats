@@ -14,14 +14,17 @@ const BurgerMenu: React.FC<BurgerMenuProps> = ({
     setIsMenuOpen,
     isMenuOpen,
 }) => {
-    const toggleMenu = () => {
+    const handleToggleMenu = () => {
         setIsMenuOpen(!isMenuOpen)
     }
 
     return (
         <>
             <div className={styles.burger}>
-                <button className={styles.burger__button} onClick={toggleMenu}>
+                <button
+                    className={styles.burger__button}
+                    onClick={handleToggleMenu}
+                >
                     <img
                         src={burgerImg}
                         alt="открыть"
@@ -34,7 +37,7 @@ const BurgerMenu: React.FC<BurgerMenuProps> = ({
                     }`}
                 >
                     <button
-                        onClick={toggleMenu}
+                        onClick={handleToggleMenu}
                         className={styles.burger__close__button}
                     >
                         <img
