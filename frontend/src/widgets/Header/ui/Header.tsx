@@ -4,7 +4,7 @@ import { useAuth } from '@/entities/user/model/AuthContext'
 import styles from './Header.module.css'
 import dotaLogo from '@/shared/assets/dota-logo.png'
 import { UserProfile } from '@/features/user-profile/UserProfile'
-import LoginButton from '@/features/auth-by-steam/ui/LoginButton'
+import { LoginButton } from '@/features/auth-by-steam'
 
 const NAV_ITEMS = [
     { path: '/', label: 'Игроки' },
