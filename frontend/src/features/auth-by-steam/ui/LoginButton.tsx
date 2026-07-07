@@ -2,7 +2,9 @@ import React from 'react'
 
 const LoginButton: React.FC = () => {
     const handleLogin = () => {
-        window.location.href = 'http://localhost:5000/api/auth/steam'
+        const BACKEND_URL =
+            import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
+        window.location.href = `${BACKEND_URL}/api/auth/steam`
     }
 
     return (

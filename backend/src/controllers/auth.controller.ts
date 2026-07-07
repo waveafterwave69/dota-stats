@@ -1,3 +1,4 @@
+// backend/src/controllers/auth.controller.ts
 import { Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
 import axios from 'axios'
@@ -34,6 +35,8 @@ export const redirectToSteam = (req: Request, res: Response) => {
         const steamUrl = `https://steamcommunity.com/openid/login?${queryString}`
 
         console.log('🔄 Redirecting to Steam...')
+        console.log('📡 BACKEND_URL:', BACKEND_URL)
+        console.log('📡 STEAM_RETURN:', STEAM_RETURN)
         res.redirect(steamUrl)
     } catch (error) {
         console.error('❌ Steam redirect error:', error)
