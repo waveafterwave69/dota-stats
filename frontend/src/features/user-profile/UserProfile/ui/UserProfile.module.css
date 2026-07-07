@@ -1,0 +1,92 @@
+/* features/user-profile/ui/UserProfile/UserProfile.module.css */
+
+.userProfile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.userAvatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.userAvatar:hover {
+    border-color: var(--color-red, #ff4500);
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 69, 0, 0.3);
+}
+
+.userName {
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    cursor: pointer;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.userName:hover {
+    color: var(--color-red, #ff4500);
+}
+
+.logoutBtn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.logoutBtn:hover {
+    background: rgba(255, 0, 0, 0.15);
+    border-color: var(--color-red, #ff4500);
+    color: var(--color-red, #ff4500);
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+    .userAvatar {
+        width: 32px;
+        height: 32px;
+    }
+
+    .userName {
+        font-size: 13px;
+        max-width: 80px;
+    }
+
+    .logoutBtn {
+        padding: 4px 10px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 425px) {
+    .userName {
+        display: none;
+    }
+
+    .logoutBtn {
+        padding: 4px 8px;
+        font-size: 11px;
+    }
+
+    .userProfile {
+        gap: 8px;
+    }
+}
