@@ -2,6 +2,8 @@ services:
     - type: web
       name: dota-stats-backend
       env: node
+      region: oregon
+      rootDir: backend
       buildCommand: npm install && npm run build
       startCommand: npm start
       envVars:
@@ -10,13 +12,12 @@ services:
           - key: PORT
             value: 5000
           - key: BACKEND_URL
-            fromService:
-                name: dota-stats-backend
-                type: web
-                property: host
+            value: https://dota-stats-backend.onrender.com
           - key: FRONTEND_URL
-            value: https://your-frontend.vercel.app
+            value: https://dota-stats-navy.vercel.app
           - key: JWT_SECRET
             generateValue: true
           - key: STEAM_API_KEY
             sync: false
+          - key: STEAM_RETURN_URL
+            value: https://dota-stats-backend.onrender.com/api/auth/steam/return
