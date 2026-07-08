@@ -11,7 +11,7 @@ const PlayerPageMatches = lazy(() => import('@/pages/PlayerPageMatches'))
 const ProPage = lazy(() => import('@/pages/ProPage'))
 const FavoritesPage = lazy(() => import('@/pages/FavoritesPage'))
 
-export enum PAGES {
+export const enum PAGES {
     SEARCH = '/',
     SEARCH_MATCHES = '/searchMatches',
     PLAYER = '/player/:id',
