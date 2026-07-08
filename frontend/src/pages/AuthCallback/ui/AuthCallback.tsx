@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '@/entities/user/model/AuthContext'
+import { Spinner } from '@/shared/ui'
 
 const AuthCallback = () => {
     const navigate = useNavigate()
@@ -45,17 +46,8 @@ const AuthCallback = () => {
     }, [location, navigate, login])
 
     return (
-        <div
-            style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: '100vh',
-                flexDirection: 'column',
-            }}
-        >
-            <h2>🔄 Обработка авторизации...</h2>
-            <p>Пожалуйста, подождите</p>
+        <div>
+            <Spinner width={80} />
         </div>
     )
 }

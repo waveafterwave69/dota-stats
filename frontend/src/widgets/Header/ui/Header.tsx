@@ -57,7 +57,6 @@ const Header: React.FC = () => {
                         </div>
                     </Link>
 
-                    {/* Выпадающее меню */}
                     <div className={styles.dropdownContainer} ref={dropdownRef}>
                         <button
                             className={`${styles.dropdownButton} ${
@@ -106,7 +105,6 @@ const Header: React.FC = () => {
                         )}
                     </div>
 
-                    {/* Блок авторизации */}
                     <div className={styles.authBlock}>
                         {loading ? (
                             <span className={styles.loadingText}>

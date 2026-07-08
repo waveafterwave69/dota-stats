@@ -15,6 +15,7 @@
 
     --primary-bg: rgba(20, 20, 22, 0.4);
     --primary-border: 1px solid rgba(255, 255, 255, 0.05);
+    --border-radius: 6px;
 
     --transition-duration: 0.2s;
 }

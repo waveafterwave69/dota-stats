@@ -2,6 +2,8 @@ import { lazy } from 'react'
 
 import { SearchPage } from '@/pages/SearchPage'
 import { SearchMatchesPage } from '@/pages/SearchMatchesPage'
+import AuthCallback from '@/pages/AuthCallback'
+import AuthError from '@/pages/AuthError'
 
 const PlayerPage = lazy(() => import('@/pages/PlayerPage'))
 const MatchPage = lazy(() => import('@/pages/MatchPage'))
@@ -37,5 +39,13 @@ export const routesConfig = [
     {
         page: FavoritesPage,
         url: '/favorites',
+    },
+    {
+        page: AuthCallback,
+        url: '/auth/callback',
+    },
+    {
+        page: AuthError,
+        url: '/auth/error',
     },
 ]
