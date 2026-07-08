@@ -12,12 +12,8 @@ import { getAllMatches } from '@/entities/match/api/mathcApi'
 
 import PlayerPromo from '@/entities/player/ui/PlayerPromo/PlayerPromo'
 import MatchList from '@/entities/match/ui/MatchList/MatchList'
-import { Spinner } from '@/shared/ui'
-import { useScrollTop } from '@/shared/lib/hooks/useScrollTop'
 
 const PlayerPageMatches: React.FC = () => {
-    useScrollTop()
-
     const dispatch = useDispatch()
     const params = useParams()
     const playerId = params.id
@@ -78,24 +74,18 @@ const PlayerPageMatches: React.FC = () => {
         }
     }, [limit, winLose, playerId, cachedPlayerId, dispatch])
 
-    const showSpinner = loading && matches.length === 0
-
     return (
         <>
             <PlayerPromo />
-            {showSpinner ? (
-                <Spinner width={100} />
-            ) : (
-                <MatchList
-                    matches={matches}
-                    loading={loading}
-                    error={null}
-                    title="Матчи"
-                    winOrLose={true}
-                    lastMatchElementRef={lastMatchElementRef}
-                    themeLoading={loading}
-                />
-            )}
+            <MatchList
+                matches={matches}
+                loading={loading}
+                error={null}
+                title="Матчи"
+                winOrLose={true}
+                lastMatchElementRef={lastMatchElementRef}
+                themeLoading={loading}
+            />
         </>
     )
 }

@@ -70,7 +70,7 @@ const MatchList: React.FC<MatchListProps> = ({
             <div className={styles.games_container}>
                 {themeLoading && (
                     <div className={styles.spinner_overlay}>
-                        <Spinner width={60} />
+                        <Spinner width={100} />
                     </div>
                 )}
 
