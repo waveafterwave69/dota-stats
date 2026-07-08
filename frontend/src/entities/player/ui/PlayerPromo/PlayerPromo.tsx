@@ -9,21 +9,16 @@ import {
     addFavorites,
     deleteFavorites,
 } from '@/features/toggle-favorite/model/favoritesSlice'
-import { Spinner } from '@/shared/ui'
 
 const PlayerPromo: React.FC = () => {
     const { id } = useParams<{ id: string }>()
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
 
-    const { profile, rankMedal, rankName, winRate, winLose, loading, error } =
-        useRank()
+    const { profile, rankMedal, rankName, winRate, winLose, error } = useRank()
     const favorites = useAppSelector((state) => state.favorites.favorites)
 
     const isValidId = id && /^\d+$/.test(id)
-    const accountId = isValidId ? Number(id) : null
-
-    const isProfileLoaded = profile && accountId === profile.account_id
 
     const isFavorite = favorites.some((el) => el.account_id === Number(id))
 
