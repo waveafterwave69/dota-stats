@@ -35,22 +35,19 @@ const UserProfile: React.FC<UserProfileProps> = ({
     }
 
     return (
-        <div className={`${styles.userProfile} ${className}`}>
-            <img
-                src={user.avatar}
-                alt={user.username}
-                onClick={handleProfileClick}
-                className={styles.userAvatar}
-                title="Перейти в профиль"
-            />
+        <div className={`${styles.userContent} ${className}`}>
+            <button className={styles.userProfile} onClick={handleProfileClick}>
+                <img
+                    src={user.avatar}
+                    alt={user.username}
+                    className={styles.userAvatar}
+                    title="Перейти в профиль"
+                />
 
-            <span
-                onClick={handleProfileClick}
-                className={styles.userName}
-                title="Перейти в профиль"
-            >
-                {user.username}
-            </span>
+                <span className={styles.userName} title="Перейти в профиль">
+                    {user.username}
+                </span>
+            </button>
 
             {showLogout && (
                 <button onClick={handleLogout} className={styles.logoutBtn}>

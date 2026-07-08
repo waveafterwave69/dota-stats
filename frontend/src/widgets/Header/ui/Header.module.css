@@ -50,10 +50,6 @@
     margin: 0;
 }
 
-.header__logo {
-    text-decoration: none;
-}
-
 .header__logo:hover .logoImg {
     filter: drop-shadow(0 0 10px rgba(255, 69, 0, 0.7));
 }
@@ -92,10 +88,30 @@
     transform: rotate(180deg);
 }
 
+.header__main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 40px;
+    position: relative;
+}
+
+.header__logo {
+    text-decoration: none;
+    position: absolute;
+    left: 0;
+}
+
+.authBlock {
+    position: absolute;
+    right: 0;
+}
+
 .dropdownMenu {
     position: absolute;
     top: calc(100% + 8px);
-    right: 0;
+    left: 50%;
+    transform: translateX(-50%);
     min-width: 180px;
     background: #111111;
     border: 1px solid rgba(255, 255, 255, 0.1);

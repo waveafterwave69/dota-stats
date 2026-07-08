@@ -104,7 +104,6 @@ const Header: React.FC = () => {
                             </div>
                         )}
                     </div>
-
                     <div className={styles.authBlock}>
                         {loading ? (
                             <span className={styles.loadingText}>

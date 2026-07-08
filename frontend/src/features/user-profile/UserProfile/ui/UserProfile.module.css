@@ -1,9 +1,13 @@
-/* features/user-profile/ui/UserProfile/UserProfile.module.css */
+.userContent {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
 
 .userProfile {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
 }
 
 .userAvatar {
@@ -11,32 +15,16 @@
     height: 36px;
     border-radius: 50%;
     border: 2px solid rgba(255, 255, 255, 0.15);
-    cursor: pointer;
-    transition: all 0.3s ease;
     object-fit: cover;
     flex-shrink: 0;
 }
 
-.userAvatar:hover {
-    border-color: var(--color-red, #ff4500);
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(255, 69, 0, 0.3);
-}
-
 .userName {
-    font-size: 15px;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.85);
-    cursor: pointer;
-    transition: color 0.3s ease;
+    font-size: 16px;
     white-space: nowrap;
     max-width: 120px;
     overflow: hidden;
     text-overflow: ellipsis;
-}
-
-.userName:hover {
-    color: var(--color-red, #ff4500);
 }
 
 .logoutBtn {

@@ -8,6 +8,7 @@ import { getAllMatches } from '@/entities/match/api/mathcApi'
 
 import PlayerPromo from '@/entities/player/ui/PlayerPromo/PlayerPromo'
 import MatchList from '@/entities/match/ui/MatchList/MatchList'
+import { Spinner } from '@/shared/ui'
 
 const PlayerPageMatches: React.FC = () => {
     const winLose = useAppSelector((state) => state.player.winLose)
@@ -81,15 +82,19 @@ const PlayerPageMatches: React.FC = () => {
     return (
         <>
             <PlayerPromo />
-            <MatchList
-                matches={matches}
-                loading={loading}
-                error={null}
-                title="Матчи"
-                winOrLose={true}
-                lastMatchElementRef={lastMatchElementRef}
-                themeLoading={themeLoading}
-            />
+            {loading ? (
+                <Spinner width={100} />
+            ) : (
+                <MatchList
+                    matches={matches}
+                    loading={loading}
+                    error={null}
+                    title="Матчи"
+                    winOrLose={true}
+                    lastMatchElementRef={lastMatchElementRef}
+                    themeLoading={themeLoading}
+                />
+            )}
         </>
     )
 }

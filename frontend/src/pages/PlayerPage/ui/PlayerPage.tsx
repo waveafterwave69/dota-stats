@@ -9,6 +9,7 @@ import { PlayerHeroesI } from '@/entities/player/model/types'
 import { MatchData } from '@/entities/match/model/types'
 import { getMatches } from '@/entities/match/api/mathcApi'
 import { getPlayerHeroes } from '@/entities/player/api/playerApi'
+import { Spinner } from '@/shared/ui'
 
 const PlayerPage: React.FC = () => {
     const playerInfo = useAppSelector((state) => state.player.playerInfo)
@@ -44,8 +45,18 @@ const PlayerPage: React.FC = () => {
     return (
         <>
             <PlayerPromo />
-            <PlayerHeroes heroes={heroes} loading={loading} />
-            <MatchList error={error} matches={matches} loading={loading} />
+            {loading ? (
+                <Spinner width={110} />
+            ) : (
+                <>
+                    <PlayerHeroes heroes={heroes} loading={loading} />
+                    <MatchList
+                        error={error}
+                        matches={matches}
+                        loading={loading}
+                    />
+                </>
+            )}
         </>
     )
 }

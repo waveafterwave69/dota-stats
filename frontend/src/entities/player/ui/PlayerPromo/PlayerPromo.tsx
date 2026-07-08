@@ -9,6 +9,7 @@ import {
     addFavorites,
     deleteFavorites,
 } from '@/features/toggle-favorite/model/favoritesSlice'
+import { Spinner } from '@/shared/ui'
 
 const PlayerPromo: React.FC = () => {
     const { id } = useParams<{ id: string }>()
@@ -62,17 +63,6 @@ const PlayerPromo: React.FC = () => {
                     >
                         Вернуться на главную
                     </button>
-                </div>
-            </section>
-        )
-    }
-
-    if (loading || !isProfileLoaded) {
-        return (
-            <section className={styles.promo}>
-                <div className={styles.promo__loading}>
-                    <p>⏳ Загрузка профиля игрока...</p>
-                    <div className={styles.loader} />
                 </div>
             </section>
         )
