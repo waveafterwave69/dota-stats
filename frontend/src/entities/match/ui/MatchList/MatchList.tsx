@@ -67,13 +67,17 @@ const MatchList: React.FC<MatchListProps> = ({
                 </div>
             )}
 
-            <ul className={styles.list__games}>
-                {themeLoading ? (
-                    <div className={styles.spinner_container}>
-                        <Spinner />
+            <div className={styles.games_container}>
+                {themeLoading && (
+                    <div className={styles.spinner_overlay}>
+                        <Spinner width={60} />
                     </div>
-                ) : (
-                    matches?.map((match, index) => (
+                )}
+
+                <ul
+                    className={`${styles.list__games} ${themeLoading ? styles.list__games_blur : ''}`}
+                >
+                    {matches?.map((match, index) => (
                         <li
                             key={match.match_id}
                             ref={
@@ -85,13 +89,13 @@ const MatchList: React.FC<MatchListProps> = ({
                         >
                             <MatchItem match={match} />
                         </li>
-                    ))
-                )}
-            </ul>
+                    ))}
+                </ul>
+            </div>
 
             {loading && !themeLoading && (
                 <div className={styles.loading_more}>
-                    <Spinner />
+                    <Spinner width={30} />
                     <span>Загрузка матчей...</span>
                 </div>
             )}

@@ -5,8 +5,11 @@ import { ProPlayer, Team } from '@/entities/pro/model/types'
 import { getPro, getTeams } from '@/entities/pro/api/proApi'
 import SearchPro from '@/entities/pro/ui/SearchPro/SearchPro'
 import ListPro from '@/entities/pro/ui/ListPro/ListPro'
+import { useScrollTop } from '@/shared/lib/hooks/useScrollTop'
 
 const ProPage: React.FC = () => {
+    useScrollTop()
+
     const [teams, setTeams] = useState<Team[]>([])
     const [players, setPlayers] = useState<ProPlayer[]>([])
     const [isLoading, setIsLoading] = useState<boolean>(false)

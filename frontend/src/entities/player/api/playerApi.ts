@@ -55,7 +55,7 @@ export const getWinAndLose = async (playerId: number | undefined) => {
     }
 }
 
-export const getPlayerHeroes = async (playerId: number | undefined) => {
+export const getPlayerHeroes = async (playerId: string | undefined) => {
     try {
         const response = await openDotaApi.get(`/players/${playerId}/heroes`)
 

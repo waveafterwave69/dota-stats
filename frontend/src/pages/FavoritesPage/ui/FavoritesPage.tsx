@@ -2,8 +2,11 @@ import styles from './FavoritesPage.module.css'
 
 import { useAppSelector } from '@/app/providers/store/types'
 import FavoritesItem from '@/entities/item/ui/FavoritesItem/FavoritesItem'
+import { useScrollTop } from '@/shared/lib/hooks/useScrollTop'
 
 const FavoritesPage: React.FC = () => {
+    useScrollTop()
+
     const favorites = useAppSelector((state) => state.favorites.favorites)
 
     return (

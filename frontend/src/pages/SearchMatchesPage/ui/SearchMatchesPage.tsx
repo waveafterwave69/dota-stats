@@ -5,8 +5,11 @@ import { useAppDispatch } from '@/app/providers/store/types'
 import { setError } from '@/entities/player/model/playerSlice'
 import { getOneMatch } from '@/entities/match/api/mathcApi'
 import { SearchLayout } from '@/widgets/SearchLayout'
+import { useScrollTop } from '@/shared/lib/hooks/useScrollTop'
 
 const SearchMatchesPage: React.FC = () => {
+    useScrollTop()
+
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 

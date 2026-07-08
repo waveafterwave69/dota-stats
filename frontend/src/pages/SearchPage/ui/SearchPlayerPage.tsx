@@ -4,8 +4,11 @@ import { useNavigate } from 'react-router'
 import { useAppDispatch } from '@/app/providers/store/types'
 import { fetchPlayerInfo, setError } from '@/entities/player/model/playerSlice'
 import { SearchLayout } from '@/widgets/SearchLayout'
+import { useScrollTop } from '@/shared/lib/hooks/useScrollTop'
 
 const SearchPlayerPage: React.FC = () => {
+    useScrollTop()
+
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 

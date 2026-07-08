@@ -8,8 +8,11 @@ import { getOneMatch } from '@/entities/match/api/mathcApi'
 import { Spinner } from '@/shared/ui'
 import { secondsToHMS } from '@/shared/lib/utils/formatters'
 import MatchSide from '@/entities/match/ui/MatchSide/MatchSide'
+import { useScrollTop } from '@/shared/lib/hooks/useScrollTop'
 
 const MatchPage: React.FC = () => {
+    useScrollTop()
+
     const { id } = useParams<{ id: string }>()
     const [match, setMatch] = useState<OneMatch | null>(null)
     const [loading, setLoading] = useState<boolean>(true)

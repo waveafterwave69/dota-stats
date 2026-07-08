@@ -8,12 +8,20 @@ import axios from 'axios'
 import { PlayerState } from '@/app/providers/store/types'
 import { PlayerInfo } from './types'
 import { openDotaApi } from '@/shared/api/base'
+import { MatchData } from '@/entities/match/model/types'
+import { PlayerHeroesI, WinLose } from '@/entities/player/model/types'
 
 const initialState: PlayerState = {
     playerInfo: null,
     loading: false,
     error: null,
     winLose: null,
+    winLoseData: null,
+    cachedPlayerId: null,
+    mainMatches: [],
+    heroes: [],
+    allMatches: [],
+    currentLimit: 20,
 }
 
 export const fetchPlayerInfo = createAsyncThunk(
@@ -55,6 +63,37 @@ export const playerSlice = createSlice({
         },
         setWinLose: (state, action: PayloadAction<number | null>) => {
             state.winLose = action.payload
+            state.allMatches = []
+            state.currentLimit = 20
+        },
+        setWinLoseData: (state, action: PayloadAction<WinLose | null>) => {
+            state.winLoseData = action.payload
+        },
+        setPlayerId: (state, action: PayloadAction<string>) => {
+            if (state.cachedPlayerId !== action.payload) {
+                state.cachedPlayerId = action.payload
+                state.mainMatches = []
+                state.heroes = []
+                state.allMatches = []
+                state.currentLimit = 20
+                state.winLoseData = null
+            }
+        },
+        setMainPageData: (
+            state,
+            action: PayloadAction<{
+                matches: MatchData[]
+                heroes: PlayerHeroesI[]
+            }>,
+        ) => {
+            state.mainMatches = action.payload.matches
+            state.heroes = action.payload.heroes
+        },
+        setAllMatchesData: (state, action: PayloadAction<MatchData[]>) => {
+            state.allMatches = action.payload
+        },
+        setLimit: (state, action: PayloadAction<number>) => {
+            state.currentLimit = action.payload
         },
     },
     extraReducers: (builder) => {
@@ -68,6 +107,16 @@ export const playerSlice = createSlice({
                 (state, action: PayloadAction<PlayerInfo>) => {
                     state.loading = false
                     state.playerInfo = action.payload
+
+                    const newId = action.payload.profile?.account_id?.toString()
+                    if (newId && state.cachedPlayerId !== newId) {
+                        state.cachedPlayerId = newId
+                        state.mainMatches = []
+                        state.heroes = []
+                        state.allMatches = []
+                        state.currentLimit = 20
+                        state.winLoseData = null
+                    }
                 },
             )
             .addCase(fetchPlayerInfo.rejected, (state, action) => {
@@ -78,5 +127,14 @@ export const playerSlice = createSlice({
     },
 })
 
-export const { setError, setWinLose } = playerSlice.actions
+export const {
+    setError,
+    setWinLose,
+    setWinLoseData,
+    setPlayerId,
+    setMainPageData,
+    setAllMatchesData,
+    setLimit,
+} = playerSlice.actions
+
 export const playerReducer = playerSlice.reducer

@@ -1,7 +1,13 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
 import { AppDispatch, RootState } from './store'
-import { PlayerInfo, PlayerProfile } from '@/entities/player/model/types'
+import {
+    PlayerHeroesI,
+    PlayerInfo,
+    PlayerProfile,
+    WinLose,
+} from '@/entities/player/model/types'
+import { MatchData } from '@/entities/match/model/types'
 
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
@@ -15,4 +21,10 @@ export interface PlayerState {
     loading: boolean
     error: string | null
     winLose: number | null
+    winLoseData: WinLose | null
+    cachedPlayerId: string | null
+    mainMatches: MatchData[]
+    heroes: PlayerHeroesI[]
+    allMatches: MatchData[]
+    currentLimit: number
 }

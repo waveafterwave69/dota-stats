@@ -35,7 +35,7 @@ export const getAllMatches = async (
     }
 }
 
-export const getMatches = async (playerId: number | undefined) => {
+export const getMatches = async (playerId: string | undefined) => {
     try {
         const response = await openDotaApi.get(
             `/players/${playerId}/recentMatches`,

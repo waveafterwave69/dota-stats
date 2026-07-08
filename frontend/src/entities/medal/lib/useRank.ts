@@ -6,7 +6,11 @@ import { getWinAndLose } from '@/entities/player/api/playerApi'
 import { WinLose } from '@/entities/player/model/types'
 import { MedalInfo } from '../model/types'
 import { medalsConfig, unrankedMedal } from '../model/constants'
-import { fetchPlayerInfo } from '@/entities/player/model/playerSlice'
+import {
+    fetchPlayerInfo,
+    setPlayerId,
+    setWinLoseData,
+} from '@/entities/player/model/playerSlice'
 
 interface Profile {
     personaname: string
@@ -34,7 +38,12 @@ const useRank = (): PlayerContextValue => {
     const dispatch = useAppDispatch()
 
     const playerInfo = useAppSelector((state) => state.player.playerInfo)
-    const [winLose, setWinLose] = useState<WinLose | undefined>(undefined)
+    const cachedPlayerId = useAppSelector(
+        (state) => state.player.cachedPlayerId,
+    )
+    const winLose =
+        useAppSelector((state) => state.player.winLoseData) || undefined
+
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
 
@@ -60,16 +69,16 @@ const useRank = (): PlayerContextValue => {
                 setLoading(true)
                 setError(null)
 
-                console.log('📡 Fetching player data for ID:', id)
-
-                if (playerInfo?.profile?.account_id === Number(id)) {
-                    console.log('✅ Player already loaded')
+                if (
+                    cachedPlayerId === id &&
+                    playerInfo?.profile?.account_id === Number(id)
+                ) {
                     setLoading(false)
                     return
                 }
 
+                dispatch(setPlayerId(id))
                 await dispatch(fetchPlayerInfo(id)).unwrap()
-                console.log('✅ Player data loaded')
             } catch (err) {
                 const error = err as FetchError
                 console.error('❌ Error loading player:', error)
@@ -80,28 +89,27 @@ const useRank = (): PlayerContextValue => {
         }
 
         loadPlayer()
-    }, [id, dispatch, playerInfo?.profile?.account_id])
+    }, [id, dispatch, cachedPlayerId, playerInfo?.profile?.account_id])
 
     useEffect(() => {
-        if (!profile?.account_id) {
-            setWinLose(undefined)
-            return
-        }
+        if (!profile?.account_id) return
 
-        setWinLose(undefined)
+        const accountIdStr = profile.account_id.toString()
 
         const fetchWinLoseData = async () => {
             try {
                 const data = await getWinAndLose(profile.account_id)
-                setWinLose(data)
+                dispatch(setWinLoseData(data))
             } catch (err) {
                 const error = err as FetchError
                 console.error('Не удалось загрузить статистику матчей:', error)
             }
         }
 
-        fetchWinLoseData()
-    }, [profile?.account_id])
+        if (cachedPlayerId !== accountIdStr || !winLose) {
+            fetchWinLoseData()
+        }
+    }, [profile?.account_id, cachedPlayerId, winLose, dispatch])
 
     const medalInfo = useMemo<MedalInfo>(() => {
         if (!rankTier) return unrankedMedal
