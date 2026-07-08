@@ -5,6 +5,7 @@ import styles from './Header.module.css'
 import dotaLogo from '@/shared/assets/dota-logo.png'
 import { UserProfile } from '@/features/user-profile/UserProfile'
 import { LoginButton } from '@/features/auth-by-steam'
+import BurgerMenu from '@/shared/ui/BurgerMenu/BurgerMenu'
 
 const NAV_ITEMS = [
     { path: '/', label: 'Игроки' },
@@ -15,6 +16,7 @@ const NAV_ITEMS = [
 const Header: React.FC = () => {
     const location = useLocation()
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
     const dropdownRef = useRef<HTMLDivElement>(null)
     const { isAuthenticated, loading } = useAuth()
 
@@ -40,7 +42,6 @@ const Header: React.FC = () => {
         <header className={styles.header}>
             <div className="container">
                 <div className={styles.header__main}>
-                    {/* Логотип */}
                     <Link to="/" className={styles.header__logo}>
                         <div className={styles.logoWrapper}>
                             <img
@@ -104,6 +105,7 @@ const Header: React.FC = () => {
                             </div>
                         )}
                     </div>
+
                     <div className={styles.authBlock}>
                         {loading ? (
                             <span className={styles.loadingText}>
@@ -114,6 +116,13 @@ const Header: React.FC = () => {
                         ) : (
                             <UserProfile />
                         )}
+                    </div>
+
+                    <div className={styles.burger}>
+                        <BurgerMenu
+                            isMenuOpen={isMenuOpen}
+                            setIsMenuOpen={setIsMenuOpen}
+                        />
                     </div>
                 </div>
             </div>

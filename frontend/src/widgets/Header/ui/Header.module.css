@@ -10,8 +10,8 @@
 .header__main {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    column-gap: 40px;
+    justify-content: space-between; /* Расставляет элементы по краям автоматически */
+    width: 100%;
 }
 
 .logoWrapper {
@@ -24,7 +24,6 @@
 .logoImg {
     width: 38px;
     height: auto;
-    filter: drop-shadow(0 0 0px transparent);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -40,7 +39,6 @@
 
 .logoText__dota {
     color: var(--color-white);
-    transition: color 0.3s ease;
 }
 
 .logoText__stats {
@@ -50,12 +48,20 @@
     margin: 0;
 }
 
+.header__logo {
+    text-decoration: none;
+    display: inline-block;
+}
+
 .header__logo:hover .logoImg {
     filter: drop-shadow(0 0 10px rgba(255, 69, 0, 0.7));
 }
 
+/* Идеальное центрирование кнопки без абсолютных координат */
 .dropdownContainer {
     position: relative;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .dropdownButton {
@@ -88,23 +94,9 @@
     transform: rotate(180deg);
 }
 
-.header__main {
+.authBlock {
     display: flex;
     align-items: center;
-    justify-content: center;
-    column-gap: 40px;
-    position: relative;
-}
-
-.header__logo {
-    text-decoration: none;
-    position: absolute;
-    left: 0;
-}
-
-.authBlock {
-    position: absolute;
-    right: 0;
 }
 
 .dropdownMenu {
@@ -142,19 +134,32 @@
     background: rgba(255, 255, 255, 0.02);
 }
 
+.burger {
+    display: none;
+}
+
+/* Адаптивные стили */
 @media (max-width: 768px) {
+    .dropdownContainer,
+    .authBlock {
+        display: none !important; /* Полностью убираем десктопные элементы */
+    }
+
+    /* Бургер автоматически улетит в правый край за счет justify-content: space-between */
+    .burger {
+        display: block;
+    }
+
     .header {
         padding: 16px 0;
     }
+
     .logoText {
         font-size: 20px;
     }
+
     .logoImg {
         width: 32px;
-    }
-    .dropdownButton {
-        padding: 8px 14px;
-        font-size: 14px;
     }
 }
 
@@ -162,15 +167,11 @@
     .logoText {
         font-size: 18px;
     }
+
     .logoImg {
         width: 30px;
     }
-    .dropdownButton span {
-        display: none;
-    }
-    .dropdownButton::before {
-        content: 'Искать';
-    }
+
     .logoWrapper {
         column-gap: 8px;
     }
