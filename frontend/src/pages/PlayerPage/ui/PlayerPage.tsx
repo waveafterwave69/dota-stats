@@ -46,7 +46,7 @@ const PlayerPage: React.FC = () => {
         <>
             <PlayerPromo />
             {loading ? (
-                <Spinner width={110} />
+                <Spinner width={100} />
             ) : (
                 <>
                     <PlayerHeroes heroes={heroes} loading={loading} />
