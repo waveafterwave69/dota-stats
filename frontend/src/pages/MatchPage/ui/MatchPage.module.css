@@ -31,7 +31,7 @@
 }
 
 .red {
-    color: #ef4444; /* Сочный красный Сил Тьмы */
+    color: var(--color-error); /* Сочный красный Сил Тьмы */
 }
 
 /* Стилизация табло счета */
@@ -55,7 +55,7 @@
 .dire__score {
     font-weight: 700;
     font-size: 36px;
-    color: #ef4444;
+    color: var(--color-error);
 }
 
 .duration {
@@ -80,7 +80,7 @@
 }
 
 .error_text {
-    color: #ef4444;
+    color: var(--color-error);
     font-size: 18px;
     font-weight: 500;
 }

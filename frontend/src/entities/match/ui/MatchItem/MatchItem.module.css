@@ -28,7 +28,7 @@
 }
 
 .match_lose {
-    border-left-color: #ef4444; /* Красный для поражения */
+    border-left-color: var(--color-error); /* Красный для поражения */
     background: linear-gradient(
         90deg,
         rgba(239, 68, 68, 0.03) 0%,
@@ -84,7 +84,7 @@
     color: #10b981;
 }
 .text_red {
-    color: #ef4444;
+    color: var(--color-error);
 }
 
 .match__mode {

@@ -100,7 +100,7 @@
     color: #10b981;
 }
 .lose {
-    color: #ef4444;
+    color: var(--color-error);
 }
 .divider {
     color: rgba(255, 255, 255, 0.2);
@@ -162,7 +162,7 @@
 }
 
 .promo__button_delete:hover:not(:disabled) {
-    background-color: #ef4444;
+    background-color: var(--color-error);
 }
 
 .promo__button:disabled {
