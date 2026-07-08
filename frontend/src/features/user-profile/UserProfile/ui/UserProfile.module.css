@@ -10,11 +10,12 @@
     gap: 8px;
     padding: 5px 13px;
     border-radius: var(--border-radius);
+    border: 1px solid transparent;
 }
 
 .userProfile:hover {
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.1);
 }
 
 .userAvatar {
