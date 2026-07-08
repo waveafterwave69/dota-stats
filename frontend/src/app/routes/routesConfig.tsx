@@ -11,41 +11,53 @@ const PlayerPageMatches = lazy(() => import('@/pages/PlayerPageMatches'))
 const ProPage = lazy(() => import('@/pages/ProPage'))
 const FavoritesPage = lazy(() => import('@/pages/FavoritesPage'))
 
+export enum PAGES {
+    SEARCH = '/',
+    SEARCH_MATCHES = '/searchMatches',
+    PLAYER = '/player/:id',
+    MATCH = '/match/:id',
+    PLAYER_MATCHES = '/matches/:id',
+    PRO = '/pro',
+    FAVORITES = '/favorites',
+    AUTH_CALLBACK = '/auth/callback',
+    AUTH_ERROR = '/auth/error',
+}
+
 export const routesConfig = [
     {
         page: SearchPage,
-        url: '/',
+        url: PAGES.SEARCH,
     },
     {
         page: SearchMatchesPage,
-        url: '/searchMatches',
+        url: PAGES.SEARCH_MATCHES,
     },
     {
         page: PlayerPage,
-        url: '/player/:id',
+        url: PAGES.PLAYER,
     },
     {
         page: MatchPage,
-        url: '/match/:id',
+        url: PAGES.MATCH,
     },
     {
         page: PlayerPageMatches,
-        url: '/matches/:id',
+        url: PAGES.PLAYER_MATCHES,
     },
     {
         page: ProPage,
-        url: '/pro',
+        url: PAGES.PRO,
     },
     {
         page: FavoritesPage,
-        url: '/favorites',
+        url: PAGES.FAVORITES,
     },
     {
         page: AuthCallback,
-        url: '/auth/callback',
+        url: PAGES.AUTH_CALLBACK,
     },
     {
         page: AuthError,
-        url: '/auth/error',
+        url: PAGES.AUTH_ERROR,
     },
 ]

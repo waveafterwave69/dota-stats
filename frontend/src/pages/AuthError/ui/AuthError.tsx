@@ -1,3 +1,4 @@
+import { PAGES } from '@/app/routes/routesConfig'
 import React from 'react'
 import { useLocation, Link } from 'react-router-dom'
 
@@ -32,7 +33,7 @@ const AuthError: React.FC = () => {
                 {errorMessages[error] || 'Неизвестная ошибка'}
             </p>
             <Link
-                to="/"
+                to={PAGES.SEARCH}
                 style={{
                     padding: '10px 20px',
                     backgroundColor: '#007bff',

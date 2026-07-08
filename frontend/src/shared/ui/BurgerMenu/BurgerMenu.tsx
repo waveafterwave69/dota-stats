@@ -5,6 +5,7 @@ import { LoginButton } from '@/features/auth-by-steam'
 import styles from './BurgerMenu.module.css'
 import burgerImg from '@/shared/assets/burgerImg.png'
 import { useEffect } from 'react'
+import { PAGES } from '@/app/routes/routesConfig'
 
 interface BurgerMenuProps {
     setIsMenuOpen: (menu: boolean) => void
@@ -12,9 +13,9 @@ interface BurgerMenuProps {
 }
 
 const NAV_ITEMS = [
-    { path: '/', label: 'Игроки' },
-    { path: '/searchMatches', label: 'Матчи' },
-    { path: '/pro', label: 'Про-Игроки' },
+    { path: PAGES.SEARCH, label: 'Игроки' },
+    { path: PAGES.SEARCH_MATCHES, label: 'Матчи' },
+    { path: PAGES.PRO, label: 'Про-Игроки' },
 ]
 
 const BurgerMenu: React.FC<BurgerMenuProps> = ({
@@ -42,7 +43,7 @@ const BurgerMenu: React.FC<BurgerMenuProps> = ({
 
     const renderIcon = (path: string) => {
         switch (path) {
-            case '/':
+            case PAGES.SEARCH:
                 return (
                     <svg
                         width="20"
@@ -58,7 +59,7 @@ const BurgerMenu: React.FC<BurgerMenuProps> = ({
                         <circle cx="12" cy="7" r="4" />
                     </svg>
                 )
-            case '/searchMatches':
+            case PAGES.SEARCH_MATCHES:
                 return (
                     <svg
                         width="20"
@@ -76,7 +77,7 @@ const BurgerMenu: React.FC<BurgerMenuProps> = ({
                         <line x1="3" y1="21" x2="6.5" y2="17.5" />
                     </svg>
                 )
-            case '/pro':
+            case PAGES.PRO:
                 return (
                     <svg
                         width="20"
@@ -169,9 +170,9 @@ const BurgerMenu: React.FC<BurgerMenuProps> = ({
 
                     <nav className={styles.burger__navigation}>
                         <Link
-                            to="/favorites"
+                            to={PAGES.FAVORITES}
                             className={`${styles.burger__item} ${
-                                location.pathname === '/favorites'
+                                location.pathname === PAGES.FAVORITES
                                     ? styles.burger__item_active
                                     : ''
                             }`}

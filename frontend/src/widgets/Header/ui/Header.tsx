@@ -6,11 +6,12 @@ import dotaLogo from '@/shared/assets/dota-logo.png'
 import { UserProfile } from '@/features/user-profile/UserProfile'
 import { LoginButton } from '@/features/auth-by-steam'
 import BurgerMenu from '@/shared/ui/BurgerMenu/BurgerMenu'
+import { PAGES } from '@/app/routes/routesConfig'
 
 const NAV_ITEMS = [
-    { path: '/', label: 'Игроки' },
-    { path: '/searchMatches', label: 'Матчи' },
-    { path: '/pro', label: 'Про-Игроки' },
+    { path: PAGES.SEARCH, label: 'Игроки' },
+    { path: PAGES.SEARCH_MATCHES, label: 'Матчи' },
+    { path: PAGES.PRO, label: 'Про-Игроки' },
 ]
 
 const Header: React.FC = () => {
@@ -42,7 +43,7 @@ const Header: React.FC = () => {
         <header className={styles.header}>
             <div className="container">
                 <div className={styles.header__main}>
-                    <Link to="/" className={styles.header__logo}>
+                    <Link to={PAGES.SEARCH} className={styles.header__logo}>
                         <div className={styles.logoWrapper}>
                             <img
                                 src={dotaLogo}
