@@ -156,7 +156,9 @@ const BurgerMenu: React.FC<BurgerMenuProps> = ({
                                 <LoginButton />
                             </div>
                         ) : (
-                            <UserProfile />
+                            <div onClick={handleToggleMenu}>
+                                <UserProfile />
+                            </div>
                         )}
                     </div>
 

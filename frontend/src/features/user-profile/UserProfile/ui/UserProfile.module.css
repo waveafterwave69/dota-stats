@@ -54,7 +54,6 @@
     color: var(--color-red, #ff4500);
 }
 
-/* Адаптив */
 @media (max-width: 768px) {
     .userAvatar {
         width: 32px;
@@ -69,20 +68,5 @@
     .logoutBtn {
         padding: 4px 10px;
         font-size: 12px;
-    }
-}
-
-@media (max-width: 425px) {
-    .userName {
-        display: none;
-    }
-
-    .logoutBtn {
-        padding: 4px 8px;
-        font-size: 11px;
-    }
-
-    .userProfile {
-        gap: 8px;
     }
 }
