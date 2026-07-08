@@ -5,7 +5,7 @@ import { LoginButton } from '@/features/auth-by-steam'
 import styles from './BurgerMenu.module.css'
 import burgerImg from '@/shared/assets/burgerImg.png'
 import { useEffect } from 'react'
-import { PAGES } from '@/app/routes/routesConfig'
+import { PAGES } from '@/app/routes/pages'
 
 interface BurgerMenuProps {
     setIsMenuOpen: (menu: boolean) => void

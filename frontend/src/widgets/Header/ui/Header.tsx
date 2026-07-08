@@ -6,7 +6,7 @@ import dotaLogo from '@/shared/assets/dota-logo.png'
 import { UserProfile } from '@/features/user-profile/UserProfile'
 import { LoginButton } from '@/features/auth-by-steam'
 import BurgerMenu from '@/shared/ui/BurgerMenu/BurgerMenu'
-import { PAGES } from '@/app/routes/routesConfig'
+import { PAGES } from '@/app/routes/pages'
 
 const NAV_ITEMS = [
     { path: PAGES.SEARCH, label: 'Игроки' },

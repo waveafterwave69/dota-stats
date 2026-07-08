@@ -1,4 +1,4 @@
-import { PAGES } from '@/app/routes/routesConfig'
+import { PAGES } from '@/app/routes/pages'
 import React from 'react'
 import { useLocation, Link } from 'react-router-dom'
 

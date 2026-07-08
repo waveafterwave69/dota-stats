@@ -4,24 +4,13 @@ import { SearchPage } from '@/pages/SearchPage'
 import { SearchMatchesPage } from '@/pages/SearchMatchesPage'
 import AuthCallback from '@/pages/AuthCallback'
 import AuthError from '@/pages/AuthError'
+import { PAGES } from './pages'
 
 const PlayerPage = lazy(() => import('@/pages/PlayerPage'))
 const MatchPage = lazy(() => import('@/pages/MatchPage'))
 const PlayerPageMatches = lazy(() => import('@/pages/PlayerPageMatches'))
 const ProPage = lazy(() => import('@/pages/ProPage'))
 const FavoritesPage = lazy(() => import('@/pages/FavoritesPage'))
-
-export const enum PAGES {
-    SEARCH = '/',
-    SEARCH_MATCHES = '/searchMatches',
-    PLAYER = '/player/:id',
-    MATCH = '/match/:id',
-    PLAYER_MATCHES = '/matches/:id',
-    PRO = '/pro',
-    FAVORITES = '/favorites',
-    AUTH_CALLBACK = '/auth/callback',
-    AUTH_ERROR = '/auth/error',
-}
 
 export const routesConfig = [
     {
