@@ -32,8 +32,6 @@ export const fetchPlayerInfo = createAsyncThunk(
                 `/players/${playerId}`,
             )
 
-            console.log(response)
-
             if (response.status !== 200) {
                 return rejectWithValue('Аккаунт не найден!')
             }

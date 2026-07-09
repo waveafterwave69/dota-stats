@@ -1,7 +1,5 @@
 import React, { useState, useMemo } from 'react'
-
 import styles from './PlayerHeroes.module.css'
-
 import { PlayerHeroesI } from '../../model/types'
 import HeroItem from '@/entities/hero/ui/HeroItem/HeroItem'
 
@@ -33,12 +31,10 @@ const PlayerHeroes: React.FC<PlayerHeroesProps> = ({ heroes, loading }) => {
 
     return (
         <section className={styles.heroes}>
-            <div className={styles.heroes__titles}>
+            <div className={`${styles.heroes__titles} ${styles.heroes__grid}`}>
                 <h2 className={styles.title__main}>Лучшие герои</h2>
-                <div className={styles.heroes__statsTitles}>
-                    <span className={styles.title}>Матчи</span>
-                    <span className={styles.title}>Винрейт</span>
-                </div>
+                <span className={styles.title_center}>Матчи</span>
+                <span className={styles.title_center}>Винрейт</span>
             </div>
 
             {loading ? (
@@ -46,10 +42,9 @@ const PlayerHeroes: React.FC<PlayerHeroesProps> = ({ heroes, loading }) => {
             ) : (
                 <>
                     <ul className={styles.heroes__list}>
-                        {visibleHeroes &&
-                            visibleHeroes.map((hero) => (
-                                <HeroItem key={hero.hero_id} hero={hero} />
-                            ))}
+                        {visibleHeroes.map((hero) => (
+                            <HeroItem key={hero.hero_id} hero={hero} />
+                        ))}
                     </ul>
 
                     <div className={styles.buttons}>

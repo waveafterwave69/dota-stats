@@ -38,6 +38,8 @@ export const getPlayerHeroes = async (playerId: string | undefined) => {
             throw new Error('Аккаунт не найден!')
         }
 
+        console.log(response)
+
         return response.data
     } catch (error: unknown) {
         if (axios.isAxiosError(error)) {

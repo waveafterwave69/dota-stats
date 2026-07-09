@@ -1,16 +1,21 @@
 .heroes {
-    margin-top: 24px;
-    background-color: rgba(20, 20, 22, 0.4);
+    background-color: rgba(20, 20, 20, 0.6);
     backdrop-filter: blur(10px);
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 32px 40px;
+    overflow: hidden;
+    margin-top: 20px;
+    padding: 40px 30px;
+}
+
+.heroes__grid {
+    display: grid;
+    grid-template-columns: 4fr 1fr 1fr;
+    align-items: center;
+    gap: 24px;
 }
 
 .heroes__titles {
-    display: grid;
-    grid-template-columns: 2fr 6fr 1fr;
-    align-items: center;
     margin-bottom: 24px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     padding-bottom: 16px;
@@ -19,42 +24,24 @@
 .title__main {
     font-weight: 700;
     font-size: 24px;
-    color: var(--color-white);
     letter-spacing: 0.5px;
 }
 
-.heroes__statsTitles {
-    grid-column: 2 / 4;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    text-align: right;
-}
-
-.title {
-    font-size: 15px;
+.title_center {
+    font-size: 14px;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.4);
     text-transform: uppercase;
     letter-spacing: 1px;
+    text-align: center;
 }
 
 .heroes__list {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    gap: 8px;
 }
 
-.loading {
-    padding: 40px 0;
-    text-align: center;
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 16px;
-}
-
-/* Кнопки управления списком */
 .buttons {
     margin-top: 40px;
     display: flex;
@@ -76,19 +63,15 @@
 
 .heroes__button:hover:not(:disabled) {
     background-color: #27272c;
-    color: var(--color-white);
 }
 
-/* Акцентная кнопка "Показать еще" */
 .heroes__button_primary {
     background-color: #ff4500;
-    color: var(--color-white);
     border: none;
 }
 
 .heroes__button_primary:hover:not(:disabled) {
     background-color: #e03d00;
-    box-shadow: 0 4px 12px rgba(255, 69, 0, 0.2);
 }
 
 .heroes__button:disabled {
@@ -96,49 +79,75 @@
     cursor: not-allowed;
     background-color: #121214;
     color: rgba(255, 255, 255, 0.2);
-    box-shadow: none;
 }
 
-/* АДАПТИВНОСТЬ */
 @media (max-width: 768px) {
     .heroes {
-        padding: 24px 20px;
+        margin-top: 15px;
+        padding: 20px 30px;
+    }
+
+    .heroes__grid {
+        grid-template-columns: 3fr 1fr 1fr;
+    }
+
+    .heroes__titles {
+        margin-bottom: 13px;
+        padding-bottom: 10px;
     }
 
     .title__main {
-        font-size: 20px;
+        font-size: 22px;
     }
 
-    .title {
+    .title_center {
         font-size: 13px;
     }
 
+    .heroes__list {
+        gap: 5px;
+    }
+
+    .buttons {
+        margin-top: 20px;
+        gap: 13px;
+    }
+
     .heroes__button {
-        padding: 10px 28px;
+        padding: 10px 34px;
         font-size: 15px;
     }
 }
 
-@media (max-width: 480px) {
-    .heroes__titles {
-        grid-template-columns: 1.5fr 1fr 1fr;
+@media (max-width: 425px) {
+    .heroes {
+        margin-top: 15px;
+        padding: 15px;
+    }
+
+    .heroes__grid {
+        grid-template-columns: 150px 1fr 1fr;
     }
 
     .title__main {
         font-size: 18px;
     }
 
-    .title {
+    .title_center {
         font-size: 12px;
     }
 
+    .heroes__list {
+        gap: 13px;
+    }
+
     .buttons {
-        flex-direction: column-reverse; /* На мобилке кнопки встанут в стек, главная будет сверху */
-        gap: 10px;
+        margin-top: 15px;
+        gap: 13px;
     }
 
     .heroes__button {
-        width: 100%;
-        padding: 12px;
+        padding: 8px 32px;
+        font-size: 14px;
     }
 }
