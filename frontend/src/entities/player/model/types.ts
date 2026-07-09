@@ -3,6 +3,8 @@ export interface PlayerProfile {
     avatarfull: string
     loccountrycode: string
     account_id: number
+    plus: boolean
+    profileurl: string
 }
 
 export interface PlayerInfo {

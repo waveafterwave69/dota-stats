@@ -28,7 +28,7 @@
 }
 
 .green {
-    color: #10b981;
+    color: var(--color-success);
 }
 .red {
     color: var(--color-error);

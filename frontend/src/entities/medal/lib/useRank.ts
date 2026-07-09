@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 
 import { useAppSelector, useAppDispatch } from '@/app/providers/store/types'
 import { getWinAndLose } from '@/entities/player/api/playerApi'
-import { WinLose } from '@/entities/player/model/types'
+import { PlayerProfile, WinLose } from '@/entities/player/model/types'
 import { MedalInfo } from '../model/types'
 import { medalsConfig, unrankedMedal } from '../model/constants'
 import {
@@ -12,24 +12,18 @@ import {
     setWinLoseData,
 } from '@/entities/player/model/playerSlice'
 
-interface Profile {
-    personaname: string
-    avatarfull: string
-    loccountrycode: string
-    account_id: number
-}
-
 interface FetchError {
     message: string
 }
 
 interface PlayerContextValue {
-    profile: Profile | undefined
+    profile: PlayerProfile | undefined
     rankMedal: string
     rankName: string
     winRate: number | undefined
     winLose: WinLose | undefined
     loading: boolean
+
     error: string | null
 }
 

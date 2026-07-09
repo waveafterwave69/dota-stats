@@ -1,5 +1,5 @@
 :root {
-    --container-width: 1550px;
+    --container-width: 1450px;
     --container-padding-x: 24px;
     --container-padding-mobile-x: 16px;
 
@@ -9,6 +9,7 @@
     --color-red-dark: #a31010;
     --color-red: #ee3f00;
     --color-error: #ef4444;
+    --color-success: #10b981;
     --color-grey: #262626;
     --color-green: #3ec347;
     --color-black-light: #101010;

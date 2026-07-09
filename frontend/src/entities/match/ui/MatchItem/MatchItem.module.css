@@ -19,7 +19,7 @@
 
 /* Стилизация карточки в зависимости от исхода игры */
 .match_win {
-    border-left-color: #10b981; /* Изумрудный для победы */
+    border-left-color: var(--color-success); /* Изумрудный для победы */
     background: linear-gradient(
         90deg,
         rgba(16, 185, 129, 0.03) 0%,
@@ -81,7 +81,7 @@
 }
 
 .text_green {
-    color: #10b981;
+    color: var(--color-success);
 }
 .text_red {
     color: var(--color-error);

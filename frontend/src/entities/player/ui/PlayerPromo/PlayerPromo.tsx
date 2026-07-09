@@ -3,6 +3,7 @@ import { NavLink, useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router'
 
 import styles from './PlayerPromo.module.css'
+import dotaPlus from '../../assets/plus.webp'
 import { useAppDispatch, useAppSelector } from '@/app/providers/store/types'
 import useRank from '@/entities/medal/lib/useRank'
 import {
@@ -75,7 +76,23 @@ const PlayerPromo: React.FC = () => {
                     <div className={styles.text__content}>
                         <p className={styles.text__name}>
                             {profile?.personaname || 'Загрузка...'}
+
+                            {profile?.plus && (
+                                <img
+                                    className={styles.plus__image}
+                                    src={dotaPlus}
+                                    alt="Подписчик Dota Plus"
+                                    title="Подписчик Dota Plus"
+                                />
+                            )}
                         </p>
+                        <a
+                            className={`${styles.text} ${styles.link}`}
+                            href={profile?.profileurl}
+                            target="_blank"
+                        >
+                            Профиль Steam
+                        </a>
                         <p className={styles.text}>
                             Аккаунт ID: {profile?.account_id}
                         </p>
@@ -86,35 +103,38 @@ const PlayerPromo: React.FC = () => {
                         )}
                     </div>
                 </div>
-
                 <div className={styles.info}>
-                    <div className={styles.rank}>
-                        {rankMedal && (
-                            <img
-                                src={rankMedal}
-                                alt={rankName}
-                                className={styles.rank__img}
-                            />
-                        )}
-                        <p className={styles.rank__name}>
-                            {rankName || 'Без ранга'}
-                        </p>
-                    </div>
-
                     <div className={styles.stats}>
-                        {winRate ? (
-                            <p className={styles.winrate}>
-                                Винрейт: {winRate}%
+                        <div className={styles.rank}>
+                            {rankMedal && (
+                                <img
+                                    src={rankMedal}
+                                    alt={rankName}
+                                    className={styles.rank__img}
+                                />
+                            )}
+                            <p className={styles.rank__name}>
+                                {rankName || 'Без ранга'}
                             </p>
-                        ) : (
-                            <p className={styles.winrate}>Загрузка...</p>
-                        )}
-                        <div className={styles.win__lose}>
-                            <span className={styles.win}>{winLose?.win} W</span>
-                            <span className={styles.divider}>/</span>
-                            <span className={styles.lose}>
-                                {winLose?.lose} L
-                            </span>
+                        </div>
+
+                        <div className={styles.games}>
+                            <p className={styles.win__lose}>
+                                <span className={styles.win}>
+                                    {winLose?.win} W
+                                </span>
+                                <span className={styles.divider}>/</span>
+                                <span className={styles.lose}>
+                                    {winLose?.lose} L
+                                </span>
+                            </p>
+                            {winRate ? (
+                                <p className={styles.winrate}>
+                                    (WR: {winRate}%)
+                                </p>
+                            ) : (
+                                <p className={styles.winrate}>(Загрузка...)</p>
+                            )}
                         </div>
                     </div>
                 </div>
