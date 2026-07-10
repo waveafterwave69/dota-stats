@@ -1,21 +1,17 @@
 .list {
-    margin-top: 24px;
-    background-color: rgba(20, 20, 22, 0.4);
-    backdrop-filter: blur(10px);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 32px 40px;
+    margin-top: 20px;
     margin-bottom: 30px;
 }
 
 .list__title {
-    font-weight: 700;
-    font-size: 28px;
-    color: var(--color-white);
     margin-bottom: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 16px;
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: 0.5px;
 }
 
-/* Контейнер фильтров в виде табов */
 .winlose__filters {
     display: inline-flex;
     background-color: rgba(0, 0, 0, 0.25);
@@ -42,7 +38,6 @@
     background-color: rgba(255, 255, 255, 0.02);
 }
 
-/* Активные состояния кнопок с мягким фоновым свечением */
 .winlose__button.win.active {
     opacity: 1;
     color: var(--color-green);
@@ -68,7 +63,6 @@
     transition: transform 0.2s ease;
 }
 
-/* Эффект легкого приподнимания карточки матча при наведении */
 .list__gameItem:hover {
     transform: translateX(4px);
 }
@@ -99,25 +93,25 @@
     font-size: 15px;
 }
 
-/* МЕДИА-ЗАПРОСЫ (только то, что реально меняется) */
 @media (max-width: 768px) {
     .list {
-        padding: 24px 20px;
+        margin-top: 15px;
     }
 
-    .list__title {
-        font-size: 24px;
-        margin-bottom: 20px;
+    .title__main {
+        font-size: 22px;
     }
 }
 
 @media (max-width: 425px) {
     .list {
-        padding: 20px 12px;
+        margin-top: 15px;
     }
 
     .list__title {
-        font-size: 20px;
+        font-size: 18px;
+        padding-bottom: 10px;
+        margin-bottom: 13px;
     }
 
     .winlose__filters {

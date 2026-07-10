@@ -1,11 +1,5 @@
 .heroes {
-    background-color: rgba(20, 20, 20, 0.6);
-    backdrop-filter: blur(10px);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    overflow: hidden;
     margin-top: 20px;
-    padding: 40px 30px;
 }
 
 .heroes__grid {
@@ -84,7 +78,6 @@
 @media (max-width: 768px) {
     .heroes {
         margin-top: 15px;
-        padding: 20px 30px;
     }
 
     .heroes__grid {
@@ -122,11 +115,10 @@
 @media (max-width: 425px) {
     .heroes {
         margin-top: 15px;
-        padding: 15px;
     }
 
     .heroes__grid {
-        grid-template-columns: 150px 1fr 1fr;
+        grid-template-columns: 135px 1fr 1fr;
     }
 
     .title__main {

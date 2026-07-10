@@ -376,22 +376,6 @@
         flex-grow: 2;
     }
 
-    .list__item {
-        color: rgba(255, 255, 255, 0.6);
-        font-size: 16px;
-        font-weight: 600;
-        padding: 12px 10px;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex: 1;
-        white-space: nowrap;
-        transition:
-            color 0.2s ease,
-            background-color 0.2s ease;
-    }
-
     .promo__button {
         background-color: transparent;
         color: rgba(255, 255, 255, 0.8);

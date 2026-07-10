@@ -7,6 +7,7 @@ import { MatchData } from '../../model/types'
 import { setWinLose } from '@/entities/player/model/playerSlice'
 import { Spinner } from '@/shared/ui'
 import MatchItem from '../MatchItem/MatchItem'
+import { SectionLayout } from '@/widgets/SectionLayout'
 
 interface MatchListProps {
     error: string | null
@@ -40,65 +41,67 @@ const MatchList: React.FC<MatchListProps> = ({
 
     return (
         <section className={styles.list}>
-            <h2 className={styles.list__title}>{title}</h2>
+            <SectionLayout>
+                <h2 className={styles.list__title}>{title}</h2>
 
-            {winOrLose && (
-                <div className={styles.winlose__filters}>
-                    <button
-                        type="button"
-                        className={`${styles.winlose__button} ${styles.win} ${winLose === 1 ? styles.active : ''}`}
-                        onClick={handleWin}
-                    >
-                        Победы
-                    </button>
-                    <button
-                        type="button"
-                        className={`${styles.winlose__button} ${styles.lose} ${winLose === 0 ? styles.active : ''}`}
-                        onClick={handleLose}
-                    >
-                        Поражения
-                    </button>
-                </div>
-            )}
-
-            {error && (
-                <div className={styles.error_message} role="alert">
-                    {error}
-                </div>
-            )}
-
-            <div className={styles.games_container}>
-                {themeLoading && (
-                    <div className={styles.spinner_overlay}>
-                        <Spinner width={100} />
+                {winOrLose && (
+                    <div className={styles.winlose__filters}>
+                        <button
+                            type="button"
+                            className={`${styles.winlose__button} ${styles.win} ${winLose === 1 ? styles.active : ''}`}
+                            onClick={handleWin}
+                        >
+                            Победы
+                        </button>
+                        <button
+                            type="button"
+                            className={`${styles.winlose__button} ${styles.lose} ${winLose === 0 ? styles.active : ''}`}
+                            onClick={handleLose}
+                        >
+                            Поражения
+                        </button>
                     </div>
                 )}
 
-                <ul
-                    className={`${styles.list__games} ${themeLoading ? styles.list__games_blur : ''}`}
-                >
-                    {matches?.map((match, index) => (
-                        <li
-                            key={match.match_id}
-                            ref={
-                                index === matches.length - 1
-                                    ? lastMatchElementRef
-                                    : null
-                            }
-                            className={styles.list__gameItem}
-                        >
-                            <MatchItem match={match} />
-                        </li>
-                    ))}
-                </ul>
-            </div>
+                {error && (
+                    <div className={styles.error_message} role="alert">
+                        {error}
+                    </div>
+                )}
 
-            {loading && !themeLoading && (
-                <div className={styles.loading_more}>
-                    <Spinner width={30} />
-                    <span>Загрузка матчей...</span>
+                <div className={styles.games_container}>
+                    {themeLoading && (
+                        <div className={styles.spinner_overlay}>
+                            <Spinner width={100} />
+                        </div>
+                    )}
+
+                    <ul
+                        className={`${styles.list__games} ${themeLoading ? styles.list__games_blur : ''}`}
+                    >
+                        {matches?.map((match, index) => (
+                            <li
+                                key={match.match_id}
+                                ref={
+                                    index === matches.length - 1
+                                        ? lastMatchElementRef
+                                        : null
+                                }
+                                className={styles.list__gameItem}
+                            >
+                                <MatchItem match={match} />
+                            </li>
+                        ))}
+                    </ul>
                 </div>
-            )}
+
+                {loading && !themeLoading && (
+                    <div className={styles.loading_more}>
+                        <Spinner width={30} />
+                        <span>Загрузка матчей...</span>
+                    </div>
+                )}
+            </SectionLayout>
         </section>
     )
 }

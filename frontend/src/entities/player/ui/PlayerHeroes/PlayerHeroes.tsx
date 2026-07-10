@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react'
 import styles from './PlayerHeroes.module.css'
 import { PlayerHeroesI } from '../../model/types'
 import HeroItem from '@/entities/hero/ui/HeroItem/HeroItem'
+import { SectionLayout } from '@/widgets/SectionLayout'
 
 interface PlayerHeroesProps {
     heroes: PlayerHeroesI[]
@@ -31,40 +32,44 @@ const PlayerHeroes: React.FC<PlayerHeroesProps> = ({ heroes, loading }) => {
 
     return (
         <section className={styles.heroes}>
-            <div className={`${styles.heroes__titles} ${styles.heroes__grid}`}>
-                <h2 className={styles.title__main}>Лучшие герои</h2>
-                <span className={styles.title_center}>Матчи</span>
-                <span className={styles.title_center}>Винрейт</span>
-            </div>
+            <SectionLayout>
+                <div
+                    className={`${styles.heroes__titles} ${styles.heroes__grid}`}
+                >
+                    <h2 className={styles.title__main}>Лучшие герои</h2>
+                    <span className={styles.title_center}>Матчи</span>
+                    <span className={styles.title_center}>Винрейт</span>
+                </div>
 
-            {loading ? (
-                <div className={styles.loading}>Загрузка героев...</div>
-            ) : (
-                <>
-                    <ul className={styles.heroes__list}>
-                        {visibleHeroes.map((hero) => (
-                            <HeroItem key={hero.hero_id} hero={hero} />
-                        ))}
-                    </ul>
+                {loading ? (
+                    <div className={styles.loading}>Загрузка героев...</div>
+                ) : (
+                    <>
+                        <ul className={styles.heroes__list}>
+                            {visibleHeroes.map((hero) => (
+                                <HeroItem key={hero.hero_id} hero={hero} />
+                            ))}
+                        </ul>
 
-                    <div className={styles.buttons}>
-                        <button
-                            disabled={limit === INITIAL_LIMIT}
-                            onClick={handleClear}
-                            className={styles.heroes__button}
-                        >
-                            Скрыть
-                        </button>
-                        <button
-                            disabled={!hasMore}
-                            onClick={handleMore}
-                            className={`${styles.heroes__button} ${styles.heroes__button_primary}`}
-                        >
-                            Больше
-                        </button>
-                    </div>
-                </>
-            )}
+                        <div className={styles.buttons}>
+                            <button
+                                disabled={limit === INITIAL_LIMIT}
+                                onClick={handleClear}
+                                className={styles.heroes__button}
+                            >
+                                Скрыть
+                            </button>
+                            <button
+                                disabled={!hasMore}
+                                onClick={handleMore}
+                                className={`${styles.heroes__button} ${styles.heroes__button_primary}`}
+                            >
+                                Больше
+                            </button>
+                        </div>
+                    </>
+                )}
+            </SectionLayout>
         </section>
     )
 }

@@ -1,43 +1,35 @@
 .match {
     display: grid;
-    grid-template-columns: 3fr 1fr 1fr; /* Дублирует сетку шапки таблицы */
+    grid-template-columns: 3fr 1fr 1fr;
     align-items: center;
     color: var(--color-white);
-    background-color: #1a1a1c;
-    padding: 16px 24px;
     border-radius: var(--border-radius);
     text-decoration: none;
     border-left: 5px solid transparent;
     transition:
         background-color 0.2s ease,
         transform 0.2s ease;
+
+    padding: 14px 16px;
+    background-color: rgba(255, 255, 255, 0.01);
 }
 
-.rank__medalImg {
-    width: 70px;
-}
-
-/* Стилизация карточки в зависимости от исхода игры */
 .match_win {
-    border-left-color: var(--color-success); /* Изумрудный для победы */
+    border-left-color: var(--color-success);
     background: linear-gradient(
         90deg,
         rgba(16, 185, 129, 0.03) 0%,
-        rgba(26, 26, 28, 1) 20%
+        rgba(255, 255, 255, 0.01)
     );
 }
 
 .match_lose {
-    border-left-color: var(--color-error); /* Красный для поражения */
+    border-left-color: var(--color-error);
     background: linear-gradient(
         90deg,
         rgba(239, 68, 68, 0.03) 0%,
-        rgba(26, 26, 28, 1) 20%
+        rgba(255, 255, 255, 0.01)
     );
-}
-
-.match:hover {
-    background-color: #222225;
 }
 
 .match__hero {
@@ -47,8 +39,7 @@
 }
 
 .match__heroImgWrapper {
-    width: 120px;
-    height: 68px;
+    width: 110px;
     border-radius: 4px;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
@@ -69,7 +60,7 @@
 
 .hero__name {
     font-weight: 700;
-    font-size: 18px;
+    font-size: 17px;
     color: var(--color-white);
 }
 
@@ -88,11 +79,10 @@
 }
 
 .match__mode {
-    font-size: 13px;
+    font-size: 12px;
     color: rgba(255, 255, 255, 0.4);
 }
 
-/* Блок KDA */
 .match__res {
     display: flex;
     flex-direction: column;
@@ -120,7 +110,6 @@
     margin: 0 2px;
 }
 
-/* Блок среднего ранга матча */
 .match__rank {
     display: flex;
     flex-direction: column;
@@ -151,44 +140,105 @@
     filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
 }
 
-/* АДАПТИВНОСТЬ БЕЗ СЛОМОВ СЕМАНТИКИ */
 @media (max-width: 768px) {
     .match {
-        padding: 12px 16px;
+        grid-template-columns: 3fr 1fr 1fr;
+
+        border-left: 4px solid transparent;
+
+        padding: 10px 12px;
+    }
+
+    .match__hero {
+        gap: 10px;
     }
 
     .match__heroImgWrapper {
-        width: 80px;
-        height: 45px;
+        width: 90px;
+    }
+
+    .text__content {
+        gap: 3px;
     }
 
     .hero__name {
         font-size: 16px;
     }
 
+    .match__status {
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .match__mode {
+        font-size: 12px;
+    }
+
+    .kda__label {
+        font-size: 11px;
+    }
+
     .match__kda {
-        font-size: 15px;
+        font-size: 14px;
+    }
+
+    .rank__title {
+        display: none;
     }
 
     .rank__medalWrapper {
-        width: 42px;
-        height: 42px;
+        width: 47px;
+        height: 47px;
     }
 }
 
-@media (max-width: 550px) {
+@media (max-width: 425px) {
     .match {
-        grid-template-columns: 2fr 1.2fr 0.8fr; /* Сужаем колонку героя, расширяем KDA */
+        grid-template-columns: 2fr 1fr 1fr;
+
+        padding: 7px 8px;
+    }
+
+    .match__hero {
         gap: 8px;
     }
 
-    .match__mode,
-    .rank__title,
-    .kda__label {
-        display: none; /* Скрываем второстепенные текстовые подписи на мобилках */
+    .match__heroImgWrapper {
+        width: 65px;
     }
 
-    .match__heroImgWrapper {
-        display: none; /* Убираем тяжелые картинки героев, оставляя только текст */
+    .text__content {
+        gap: 1px;
+    }
+
+    .hero__name {
+        font-size: 16px;
+        display: none;
+    }
+
+    .match__status {
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .match__mode {
+        font-size: 11px;
+    }
+
+    .kda__label {
+        font-size: 11px;
+    }
+
+    .match__kda {
+        font-size: 12px;
+    }
+
+    .rank__title {
+        display: none;
+    }
+
+    .rank__medalWrapper {
+        width: 45px;
+        height: 45px;
     }
 }
