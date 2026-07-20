@@ -1,7 +1,9 @@
 import { useEffect, useState, type FC } from 'react'
-import styles from './ToggleTheme.module.css'
+// import styles from './ToggleTheme.module.css'
 
-interface ToggleThemeProps {}
+interface ToggleThemeProps {
+    da: 'da'
+}
 
 type Theme = 'dark' | 'light'
 
