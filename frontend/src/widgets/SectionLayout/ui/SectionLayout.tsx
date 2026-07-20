@@ -6,11 +6,7 @@ interface SectionLayoutProps {
 }
 
 const SectionLayout: FC<SectionLayoutProps> = ({ children }) => {
-    return (
-        <>
-            <div className={styles.layout}>{children}</div>
-        </>
-    )
+    return <div className={styles.layout}>{children}</div>
 }
 
 export default SectionLayout

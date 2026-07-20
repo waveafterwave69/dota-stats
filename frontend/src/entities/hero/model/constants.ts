@@ -636,4 +636,9 @@ export const heroData: HeroData[] = [
         name: 'Kez',
         img: 'https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/kez.png',
     },
+    {
+        id: 155,
+        name: 'Largo',
+        img: ' https://cdn.steamstatic.com/apps/dota2/images/dota_react/heroes/largo.png',
+    },
 ]

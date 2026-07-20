@@ -1,10 +1,22 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
-
 import { FavoritesState } from '@/app/providers/store/types'
 import { PlayerProfile } from '@/entities/player/model/types'
 
+export const LOCAL_STORAGE_KEY_FAV = 'favoritesPlayers'
+
+const loadState = (): PlayerProfile[] => {
+    try {
+        const data = localStorage.getItem(LOCAL_STORAGE_KEY_FAV)
+        if (data === null) return []
+        return JSON.parse(data)
+    } catch (err) {
+        console.error(err)
+        return []
+    }
+}
+
 const initialState: FavoritesState = {
-    favorites: [],
+    favorites: loadState(),
 }
 
 export const favoritesSlice = createSlice({
@@ -21,11 +33,9 @@ export const favoritesSlice = createSlice({
         },
         deleteFavorites: (state, action: PayloadAction<PlayerProfile>) => {
             if (action.payload) {
-                const newFavorites = state.favorites.filter(
+                state.favorites = state.favorites.filter(
                     (player) => player.account_id !== action.payload.account_id,
                 )
-
-                state.favorites = newFavorites
             }
         },
     },

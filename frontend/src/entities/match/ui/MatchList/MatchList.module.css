@@ -40,14 +40,14 @@
 
 .winlose__button.win.active {
     opacity: 1;
-    color: var(--color-green);
-    background-color: rgba(16, 185, 129, 0.1); /* Прозрачный зеленый */
+    color: #3ec347;
+    background-color: rgba(16, 185, 129, 0.1);
 }
 
 .winlose__button.lose.active {
     opacity: 1;
-    color: var(--color-red);
-    background-color: rgba(239, 110, 110, 0.1); /* Прозрачный красный */
+    color: var(--color-accent);
+    background-color: rgba(239, 110, 110, 0.1);
 }
 
 .list__games {

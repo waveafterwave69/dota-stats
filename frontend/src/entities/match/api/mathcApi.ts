@@ -9,13 +9,13 @@ export const getAllMatches = async (
     try {
         if (win != null) {
             const response = await openDotaApi.get(
-                `/players/${playerId}/matches?limit=${limit}&win=${win}`,
+                `/players/${playerId}/matches?limit=${limit}&win=${win}&significant=0`,
             )
 
             return response.data
         }
         const response = await openDotaApi.get(
-            `/players/${playerId}/matches?limit=${limit}`,
+            `/players/${playerId}/matches?limit=${limit}&significant=0`,
         )
 
         return response.data

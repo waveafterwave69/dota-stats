@@ -6,6 +6,13 @@ import AuthCallback from '@/pages/AuthCallback'
 import AuthError from '@/pages/AuthError'
 import { PAGES } from './pages'
 
+export const NAV_ITEMS = [
+    { path: PAGES.SEARCH, label: 'Игроки' },
+    { path: PAGES.SEARCH_MATCHES, label: 'Матчи' },
+    // { path: PAGES.PRO, label: 'Про-Игроки' },
+    { path: PAGES.FAVORITES, label: 'Избранные' },
+]
+
 const PlayerPage = lazy(() => import('@/pages/PlayerPage'))
 const MatchPage = lazy(() => import('@/pages/MatchPage'))
 const PlayerPageMatches = lazy(() => import('@/pages/PlayerPageMatches'))

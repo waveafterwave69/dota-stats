@@ -57,6 +57,8 @@ const PlayerPageMatches: React.FC = () => {
                         ? await getAllMatches(playerId, limit, winLose)
                         : await getAllMatches(playerId, limit)
 
+                console.log(mathcesData)
+
                 dispatch(setAllMatchesData(mathcesData))
             } catch (error) {
                 console.error('Ошибка загрузки матчей:', error)

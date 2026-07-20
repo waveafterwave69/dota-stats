@@ -1,11 +1,9 @@
-import { useNavigate } from 'react-router'
+import { Link } from 'react-router'
 
 import styles from './PlayerMatchItem.module.css'
 
 import { Player } from '@/entities/match/model/types'
 import useDota from '@/app/providers/with-dota/useDota'
-import { useAppDispatch } from '@/app/providers/store/types'
-import { fetchPlayerInfo } from '../../model/playerSlice'
 import { getHeroImage, getHeroName } from '@/shared/lib/utils/hero'
 
 interface PlayerMatchItemProps {
@@ -14,7 +12,6 @@ interface PlayerMatchItemProps {
 
 const PlayerMatchItem: React.FC<PlayerMatchItemProps> = ({ player }) => {
     const { items } = useDota()
-    const dispatch = useAppDispatch()
 
     const itemIds = [
         player.item_0,
@@ -25,22 +22,6 @@ const PlayerMatchItem: React.FC<PlayerMatchItemProps> = ({ player }) => {
         player.item_5,
     ]
 
-    const navigate = useNavigate()
-
-    const onClick = async (
-        e: React.MouseEvent<HTMLParagraphElement, MouseEvent>,
-    ) => {
-        e.preventDefault()
-
-        const success = await dispatch(
-            fetchPlayerInfo(String(player.account_id)),
-        )
-
-        if (success && player.personaname) {
-            navigate(`/player/${player.account_id}`)
-        }
-    }
-
     return (
         <tr className={styles.player__card}>
             <td className={styles.player__hero}>
@@ -48,8 +29,15 @@ const PlayerMatchItem: React.FC<PlayerMatchItemProps> = ({ player }) => {
                     src={getHeroImage(player.hero_id)}
                     alt={getHeroName(player.hero_id)}
                 />
-                <p onClick={onClick}>
-                    {player.personaname || (
+                <p>
+                    {player.personaname ? (
+                        <Link
+                            to={`/player/${player.account_id}`}
+                            className={styles.player__name}
+                        >
+                            {player.personaname}
+                        </Link>
+                    ) : (
                         <span className={styles.anon}>Аноним</span>
                     )}
                 </p>

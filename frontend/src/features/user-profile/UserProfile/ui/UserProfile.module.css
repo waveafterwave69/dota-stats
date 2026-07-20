@@ -50,8 +50,8 @@
 
 .logoutBtn:hover {
     background: rgba(255, 0, 0, 0.15);
-    border-color: var(--color-red, #ff4500);
-    color: var(--color-red, #ff4500);
+    border-color: var(--color-accent, #ff4500);
+    color: var(--color-accent, #ff4500);
 }
 
 @media (max-width: 768px) {

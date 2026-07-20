@@ -7,12 +7,7 @@ import { UserProfile } from '@/features/user-profile/UserProfile'
 import { LoginButton } from '@/features/auth-by-steam'
 import BurgerMenu from '@/shared/ui/BurgerMenu/BurgerMenu'
 import { PAGES } from '@/app/routes/pages'
-
-const NAV_ITEMS = [
-    { path: PAGES.SEARCH, label: 'Игроки' },
-    { path: PAGES.SEARCH_MATCHES, label: 'Матчи' },
-    { path: PAGES.PRO, label: 'Про-Игроки' },
-]
+import { NAV_ITEMS } from '@/app/routes/routesConfig'
 
 const Header: React.FC = () => {
     const location = useLocation()

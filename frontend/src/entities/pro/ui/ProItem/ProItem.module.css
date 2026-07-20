@@ -62,7 +62,7 @@
 .playerCard__nick {
     font-size: 22px;
     font-weight: 700;
-    color: var(--color-white);
+    color: var(--color-text);
     margin: 0;
     display: flex;
     align-items: center;

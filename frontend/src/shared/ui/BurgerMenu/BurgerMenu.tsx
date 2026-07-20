@@ -6,17 +6,12 @@ import styles from './BurgerMenu.module.css'
 import burgerImg from '@/shared/assets/burgerImg.png'
 import { useEffect } from 'react'
 import { PAGES } from '@/app/routes/pages'
+import { NAV_ITEMS } from '@/app/routes/routesConfig'
 
 interface BurgerMenuProps {
     setIsMenuOpen: (menu: boolean) => void
     isMenuOpen: boolean
 }
-
-const NAV_ITEMS = [
-    { path: PAGES.SEARCH, label: 'Игроки' },
-    { path: PAGES.SEARCH_MATCHES, label: 'Матчи' },
-    { path: PAGES.PRO, label: 'Про-Игроки' },
-]
 
 const BurgerMenu: React.FC<BurgerMenuProps> = ({
     setIsMenuOpen,
@@ -77,7 +72,7 @@ const BurgerMenu: React.FC<BurgerMenuProps> = ({
                         <line x1="3" y1="21" x2="6.5" y2="17.5" />
                     </svg>
                 )
-            case PAGES.PRO:
+            case PAGES.PRO && PAGES.FAVORITES:
                 return (
                     <svg
                         width="20"
@@ -165,20 +160,9 @@ const BurgerMenu: React.FC<BurgerMenuProps> = ({
 
                     <div className={styles.burger__divider} />
 
-                    {/* Блок «Искать: категории» */}
                     <div className={styles.burger__searchTitle}>Искать:</div>
 
                     <nav className={styles.burger__navigation}>
-                        <Link
-                            to={PAGES.FAVORITES}
-                            className={`${styles.burger__item} ${
-                                location.pathname === PAGES.FAVORITES
-                                    ? styles.burger__item_active
-                                    : ''
-                            }`}
-                            onClick={() => setIsMenuOpen(false)}
-                        ></Link>
-
                         {NAV_ITEMS.map((item) => (
                             <Link
                                 key={item.path}

@@ -6,11 +6,17 @@
     border: 1px solid #3e4146;
     border-radius: var(--border-radius);
     background: linear-gradient(90deg, #141f2f 0%, #1b2838 100%);
+    color: #ffffff;
 }
 
 .button:hover {
     background: linear-gradient(90deg, #101925 0%, #182331 100%);
     border-color: #486fa3;
+}
+
+:global(.light-theme) .button {
+    background: linear-gradient(90deg, #406091 0%, #577eaad8 100%);
+    border: 1px solid #708dbe;
 }
 
 .button__text {

@@ -5,8 +5,13 @@
 }
 
 .anon {
-    color: #cacaca;
+    color: #a8a8a8;
     cursor: auto;
+}
+
+.player__name {
+    border-bottom: 1px solid var(--color-text);
+    color: var(--color-text);
 }
 
 .player__hero {
