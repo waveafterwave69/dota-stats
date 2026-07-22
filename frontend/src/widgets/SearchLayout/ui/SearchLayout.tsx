@@ -1,4 +1,10 @@
-import React, { useState, type FC, type PropsWithChildren } from 'react'
+import {
+    useEffect,
+    useRef,
+    useState,
+    type FC,
+    type PropsWithChildren,
+} from 'react'
 
 import dotaLogo from '@/shared/assets/dota-logo.png'
 import searchImg from '@/shared/assets/search.svg'
@@ -24,9 +30,14 @@ const SearchLayout: FC<PropsWithChildren<SearchLayoutProps>> = ({
     onSearchSubmit,
     children,
 }) => {
+    const inputRef = useRef<HTMLInputElement>(null)
     const [searchValue, setSearchValue] = useState<string>('')
     const dispatch = useAppDispatch()
     const error = useAppSelector((state) => state.player.error)
+
+    useEffect(() => {
+        inputRef.current?.focus()
+    }, [])
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.target.value)
@@ -57,6 +68,7 @@ const SearchLayout: FC<PropsWithChildren<SearchLayoutProps>> = ({
                     className={`${styles.search__fieldWrapper} ${isLoading ? styles.search__fieldWrapper_disabled : ''}`}
                 >
                     <input
+                        ref={inputRef}
                         type="text"
                         placeholder={placeholder}
                         value={searchValue}
